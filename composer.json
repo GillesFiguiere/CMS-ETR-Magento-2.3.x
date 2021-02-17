@@ -15,5 +15,14 @@
     "psr-4": {
       "ETransactions\\Epayment\\": ""
     }
+  },
+  "repositories": [
+      {
+          "type": "vcs",
+          "url": "https://github.com/E-Transactions-CA/etransactions23"
+      }
+  ],
+  "require": {
+      "etransactions/epayment": "dev-bugfix"
   }
 }
