@@ -1,0 +1,88 @@
+<?php
+/**
+ * E-Transactions Epayment module for Magento
+ *
+ * Feel free to contact E-Transactions at support@e-transactions.fr for any
+ * question.
+ *
+ * LICENSE: This source file is subject to the version 3.0 of the Open
+ * Software License (OSL-3.0) that is available through the world-wide-web
+ * at the following URI: http://opensource.org/licenses/OSL-3.0. If
+ * you did not receive a copy of the OSL-3.0 license and are unable 
+ * to obtain it through the web, please send a note to
+ * support@e-transactions.fr so we can mail you a copy immediately.
+ *
+ *
+ * @version   1.0.5
+ * @author    E-Transactions <support@e-transactions.fr>
+ * @copyright 2012-2017 E-Transactions
+ * @license   http://opensource.org/licenses/OSL-3.0
+ * @link      http://www.e-transactions.fr/
+ */
+
+$values = $this->getFormFields();
+try {
+	if ($values['PBX_TYPEPAIEMENT'] == 'KWIXO') {
+		$url = $this->escapeUrl($this->getKwixoUrl());
+	}
+	else if ($this->helper('ETransactions\Epayment\Helper\Mobile')->isMobile()) {
+		$url = $this->escapeUrl($this->getMobileUrl());
+	}
+	else {
+		if(isset($values['PBX_SOURCE'])){
+			if($values['PBX_SOURCE'] == 'RWD'){
+				$url = $this->escapeUrl($this->getResponsiveUrl());
+			}else{
+				$url = $this->escapeUrl($this->getSystemUrl());
+			}
+		}
+		else{
+			$url = $this->escapeUrl($this->getSystemUrl());
+		}
+	}
+	$type = $this->escapeUrl($this->getInputType());
+}
+catch (\Exception $e) {
+	$error = $e;
+}
+
+if (isset($error)) {
+	?>
+	<p><center><?php echo $error->getMessage(); ?></center></p>
+	<?php
+}
+else {
+	?>
+	<form id="etep_form" method="post" action="<?php echo $url; ?>" enctype="application/x-www-form-urlencoded">
+		<?php if ($type != 'hidden'): ?>
+			<p>
+				<?php echo __('This is a debug view. Click continue to be redirected to Epayment payment page.'); ?>
+			</p>
+		<?php else: ?>
+			<p>
+				<?php echo __('You will be redirected to the Epayment payment page. If not, please use the button bellow.'); ?>
+			</p>
+		<?php endif; ?>
+		<center><button><?php echo __('Continue...'); ?></button></center>
+		<?php
+		foreach ($values as $name => $value):
+			$name = $this->escapeHtml($name);
+		$value = $this->escapeHtml($value);
+		if ($type != 'hidden'):
+			?>
+		<p><label for="<?php echo $name; ?>"><?php echo $name; ?></label>
+		<?php endif; ?>
+		<input type="<?php echo $type; ?>" id="<?php echo $name; ?>" name="<?php echo $name; ?>" value="<?php echo $value; ?>" />
+		<?php if ($type != 'hidden'): ?>
+		</p>
+	<?php endif; ?>
+<?php endforeach; ?>
+</form>
+<?php if ($type == 'hidden'): ?>
+	<script type="text/javascript">
+		window.setTimeout(function() {
+			document.getElementById('etep_form').submit();
+		}, 1);
+	</script>
+<?php endif;
+}

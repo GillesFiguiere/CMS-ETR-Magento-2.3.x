@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * E-Transactions Epayment module for Magento
+ *
+ * Feel free to contact E-Transactions at support@e-transactions.fr for any
+ * question.
+ *
+ * LICENSE: This source file is subject to the version 3.0 of the Open
+ * Software License (OSL-3.0) that is available through the world-wide-web
+ * at the following URI: http://opensource.org/licenses/OSL-3.0. If
+ * you did not receive a copy of the OSL-3.0 license and are unable
+ * to obtain it through the web, please send a note to
+ * support@e-transactions.fr so we can mail you a copy immediately.
+ *
+ * @version   1.0.0
+ * @author    E-Transactions <support@e-transactions.fr>
+ * @copyright 2012-2017 E-Transactions
+ * @license   http://opensource.org/licenses/OSL-3.0
+ * @link      http://www.e-transactions.fr/
+ */
+-->
+<payment xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Payment:etc/payment.xsd">
+    <credit_cards>
+        <type id="CB" order="60">
+            <label>CB</label>
+        </type>
+        <type id="VISA" order="61">
+            <label>Visa</label>
+        </type>
+        <type id="EUROCARD_MASTERCARD" order="62">
+            <label>Mastercard</label>
+        </type>
+        <type id="E_CARD" order="63">
+            <label>E-Carte Bleue</label>
+        </type>
+    </credit_cards>
+    <groups>
+        <group id="etep">
+            <label>etep</label>
+        </group>
+    </groups>
+    <methods>
+        <method name="etep_cb">
+            <allow_multiple_address>0</allow_multiple_address>
+        </method>
+        <method name="etep_threetime">
+            <allow_multiple_address>0</allow_multiple_address>
+        </method>
+        <method name="etep_prepaid">
+            <allow_multiple_address>0</allow_multiple_address>
+        </method>
+        <method name="etep_paypal">
+            <allow_multiple_address>0</allow_multiple_address>
+        </method>
+        <method name="etep_paybuttons">
+            <allow_multiple_address>0</allow_multiple_address>
+        </method>
+        <method name="etep_bcmc">
+            <allow_multiple_address>0</allow_multiple_address>
+        </method>
+        <method name="etep_maestro">
+            <allow_multiple_address>0</allow_multiple_address>
+        </method>
+        <method name="etep_financial">
+            <allow_multiple_address>0</allow_multiple_address>
+        </method>
+        <method name="etep_private">
+            <allow_multiple_address>0</allow_multiple_address>
+        </method>
+    </methods>
+</payment>

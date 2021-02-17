@@ -1,0 +1,317 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * E-Transactions Epayment module for Magento
+ *
+ * Feel free to contact E-Transactions at support@e-transactions.fr for any
+ * question.
+ *
+ * LICENSE: This source file is subject to the version 3.0 of the Open
+ * Software License (OSL-3.0) that is available through the world-wide-web
+ * at the following URI: http://opensource.org/licenses/OSL-3.0. If
+ * you did not receive a copy of the OSL-3.0 license and are unable
+ * to obtain it through the web, please send a note to
+ * support@e-transactions.fr so we can mail you a copy immediately.
+ *
+ * @version   1.0.11-hmac
+ * @author    E-Transactions <support@e-transactions.fr>
+ * @copyright 2012-2017 E-Transactions
+ * @license   http://opensource.org/licenses/OSL-3.0
+ * @link      http://www.e-transactions.fr/
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <etep>
+            <merchant>
+                <environment>TEST</environment>
+                <subscription>access</subscription>
+                <site>9999999</site>
+                <rank>95</rank>
+                <identifier>259207933</identifier>
+                <password backend_model="Magento\Config\Model\Config\Backend\Encrypted">1999888I</password>
+                <hmackey backend_model="Magento\Config\Model\Config\Backend\Encrypted">0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF</hmackey>
+                <hmacalgo>SHA512</hmacalgo>
+                <min_amount></min_amount>
+                <max_amount></max_amount>
+            </merchant>
+            <languages>
+                <fr>FRA</fr>
+                <es>ESP</es>
+                <it>ITA</it>
+                <de>DEU</de>
+                <nl>NLD</nl>
+                <sv>SWE</sv>
+                <pt>PRT</pt>
+                <default>GBR</default>
+            </languages>
+            <allowedips>194.2.122.158,195.25.7.166,195.101.99.76,10.48.2.254</allowedips>
+        </etep>
+        <payment>
+            <etep_cb>
+                <active>1</active>
+                <model>ETransactions\Epayment\Model\Payment\Cb</model>
+                <title>Pay by Bank Card</title>
+                <group>etep</group>
+                <is_gateway>1</is_gateway>
+                <can_order>1</can_order>
+                <can_use_checkout>1</can_use_checkout>
+                <can_capture>1</can_capture>
+                <can_use_for_multishipping>1</can_use_for_multishipping>
+                <allowspecific>0</allowspecific>
+                <cctypes>CB,VISA,EUROCARD_MASTERCARD,E_CARD</cctypes>
+                <status_paid>etep_paid</status_paid>
+                <status_authorized>etep_authorized</status_authorized>
+                <payment_action>immediate</payment_action>
+                <delay>1</delay>
+                <tds_version>2</tds_version>
+                <cards>
+                    <CB>
+                        <label>CB</label>
+                        <image>images/etep/cb.45.png</image>
+                        <payment>CARTE</payment>
+                        <card>CB</card>
+                    </CB>
+                    <VISA>
+                        <label>Visa</label>
+                        <image>images/etep/visa.45.png</image>
+                        <payment>CARTE</payment>
+                        <card>VISA</card>
+                    </VISA>
+                    <EUROCARD_MASTERCARD>
+                        <label>Mastercard</label>
+                        <image>images/etep/mastercard.45.png</image>
+                        <payment>CARTE</payment>
+                        <card>EUROCARD_MASTERCARD</card>
+                    </EUROCARD_MASTERCARD>
+                    <E_CARD>
+                        <label>E-Carte Bleue</label>
+                        <image>images/etep/ecartebleue.45.png</image>
+                        <payment>CARTE</payment>
+                        <card>E_CARD</card>
+                    </E_CARD>
+                </cards>
+            </etep_cb>
+            <etep_threetime>
+                <active>0</active>
+                <model>ETransactions\Epayment\Model\Payment\Threetime</model>
+                <title>Pay by Card Three Times</title>
+                <group>etep</group>
+                <allowspecific>0</allowspecific>
+                <cctypes>CB,VISA,EUROCARD_MASTERCARD,E_CARD</cctypes>
+                <status>
+                    <intermediary>etep_intermediary</intermediary>
+                    <paid>etep_paid</paid>
+                </status>
+                <action>immediate</action>
+                <tds_version>2</tds_version>
+                <cards>
+                    <CB>
+                        <label>CB</label>
+                        <image>images/etep/cb.45.png</image>
+                        <payment>CARTE</payment>
+                        <card>CB</card>
+                    </CB>
+                    <VISA>
+                        <label>Visa</label>
+                        <image>images/etep/visa.45.png</image>
+                        <payment>CARTE</payment>
+                        <card>VISA</card>
+                    </VISA>
+                    <EUROCARD_MASTERCARD>
+                        <label>Mastercard</label>
+                        <image>images/etep/mastercard.45.png</image>
+                        <payment>CARTE</payment>
+                        <card>EUROCARD_MASTERCARD</card>
+                    </EUROCARD_MASTERCARD>
+                    <E_CARD>
+                        <label>E-Carte Bleue</label>
+                        <image>images/etep/ecartebleue.45.png</image>
+                        <payment>CARTE</payment>
+                        <card>E_CARD</card>
+                    </E_CARD>
+                </cards>
+            </etep_threetime>
+            <etep_private>
+                <pv_active>0</pv_active>
+                <model>ETransactions\Epayment\Model\Payment\PrivateCard</model>
+                <title>Pay by Private Card</title>
+                <group>etep</group>
+                <pv_allowspecific>0</pv_allowspecific>
+                <pv_status>
+                    <authorized>etep_authorized</authorized>
+                    <paid>etep_paid</paid>
+                </pv_status>
+                <pv_action>immediate</pv_action>
+                <pv_delay>1</pv_delay>
+                <cards>
+                    <AMEX>
+                        <label>American Express</label>
+                        <image>images/etep/amex.45.png</image>
+                        <payment>CARTE</payment>
+                        <card>AMEX</card>
+                    </AMEX>
+                    <DINERS>
+                        <label>Diners</label>
+                        <image>images/etep/diners.45.png</image>
+                        <payment>CARTE</payment>
+                        <card>DINERS</card>
+                    </DINERS>
+                    <JCB>
+                        <label>JCB</label>
+                        <image>images/etep/jcb.45.png</image>
+                        <payment>CARTE</payment>
+                        <card>JCB</card>
+                    </JCB>
+                </cards>
+            </etep_private>
+            <etep_paypal>
+                <pp_active>0</pp_active>
+                <model>ETransactions\Epayment\Model\Payment\Paypal</model>
+                <title>Pay by Paypal</title>
+                <group>etep</group>
+                <pp_allowspecific>0</pp_allowspecific>
+                <pp_action>immediate</pp_action>
+                <pp_status>
+                    <authorized>etep_authorized</authorized>
+                    <paid>etep_paid</paid>
+                </pp_status>
+                <cards>
+                    <card1>
+                        <label>Paypal</label>
+                        <image>images/etep/paypal.45.png</image>
+                        <payment>PAYPAL</payment>
+                        <card>PAYPAL</card>
+                    </card1>
+                </cards>
+            </etep_paypal>
+            <etep_prepaid>
+                <pre_active>0</pre_active>
+                <model>ETransactions\Epayment\Model\Payment\Prepaid</model>
+                <title>Pay by Saving or Prepaid Ticket</title>
+                <group>etep</group>
+                <pre_allowspecific>0</pre_allowspecific>
+                <pre_action>immediate</pre_action>
+                <pre_status>
+                    <authorized>etep_authorized</authorized>
+                    <paid>etep_paid</paid>
+                </pre_status>
+                <cards>
+                    <LEETCHI>
+                        <label>Leetchi</label>
+                        <image>images/etep/leetchi.45.png</image>
+                        <payment>CARTE</payment>
+                        <card>LEETCHI</card>
+                    </LEETCHI>
+                    <PSC>
+                        <label>Paysafecard</label>
+                        <image>images/etep/psc.45.png</image>
+                        <payment>CARTE</payment>
+                        <card>PSC</card>
+                    </PSC>
+                </cards>
+            </etep_prepaid>
+            <etep_financial>
+                <active>0</active>
+                <model>ETransactions\Epayment\Model\Payment\Financial</model>
+                <title>Pay by Card and Means of Financing</title>
+                <group>etep</group>
+                <allowspecific>0</allowspecific>
+                <action>immediate</action>
+                <status>
+                    <authorized>etep_authorized</authorized>
+                    <paid>etep_paid</paid>
+                </status>
+                <cards>
+                    <COFINOGA>
+                        <label>Carte Cofinoga</label>
+                        <image>images/etep/cofinoga.45.png</image>
+                        <payment>CARTE</payment>
+                        <card>COFINOGA</card>
+                    </COFINOGA>
+                    <AURORE>
+                        <label>Carte Aurore</label>
+                        <image>images/etep/aurore.45.png</image>
+                        <payment>CARTE</payment>
+                        <card>AURORE</card>
+                    </AURORE>
+                    <UNEURO>
+                        <label>1euro.com</label>
+                        <image>images/etep/1euro.45.png</image>
+                        <payment>CREDIT</payment>
+                        <card>UNEURO</card>
+                    </UNEURO>
+                </cards>
+            </etep_financial>
+            <etep_bcmc>
+                <active>0</active>
+                <model>ETransactions\Epayment\Model\Payment\Bcmc</model>
+                <title>Pay by Bancontact Mister Cash</title>
+                <group>etep</group>
+                <allowspecific>0</allowspecific>
+                <action>immediate</action>
+                <status>
+                    <authorized>etep_authorized</authorized>
+                    <paid>etep_paid</paid>
+                </status>
+                <tds_version>2</tds_version>
+                <cards>
+                    <BCMC>
+                        <label>Bancontact/Mistercash</label>
+                        <image>images/etep/none.45.png</image>
+                        <payment>CARTE</payment>
+                        <card>BCMC</card>
+                    </BCMC>
+                </cards>
+            </etep_bcmc>
+            <etep_maestro>
+                <active>0</active>
+                <model>ETransactions\Epayment\Model\Payment\Maestro</model>
+                <title>Pay by Maestro</title>
+                <group>etep</group>
+                <allowspecific>0</allowspecific>
+                <action>immediate</action>
+                <delay>1</delay>
+                <status>
+                    <authorized>etep_authorized</authorized>
+                    <paid>etep_paid</paid>
+                </status>
+                <tds_version>2</tds_version>
+                <cards>
+                    <MAESTRO>
+                        <label>Carte Maestro</label>
+                        <image>images/etep/maestro.png</image>
+                        <payment>CARTE</payment>
+                        <card>MAESTRO</card>
+                    </MAESTRO>
+                </cards>
+            </etep_maestro>
+            <etep_paybuttons>
+                <active>0</active>
+                <model>ETransactions\Epayment\Model\Payment\Paybuttons</model>
+                <title>Pay by Paybutton</title>
+                <group>etep</group>
+                <allowspecific>0</allowspecific>
+                <action>immediate</action>
+                <status>
+                    <authorized>etep_authorized</authorized>
+                    <paid>etep_paid</paid>
+                </status>
+                <cards>
+                    <IDEAL>
+                        <label>iDEAL</label>
+                        <image>images/etep/ideal.45.png</image>
+                        <payment>PREPAYEE</payment>
+                        <card>IDEAL</card>
+                    </IDEAL>
+                    <PAYBUTTING>
+                        <label>ING HomePay</label>
+                        <image>images/etep/paybutting.45.png</image>
+                        <payment>PAYBUTTONS</payment>
+                        <card>PAYBUTTING</card>
+                    </PAYBUTTING>
+                </cards>
+            </etep_paybuttons>
+        </payment>
+    </default>
+</config>

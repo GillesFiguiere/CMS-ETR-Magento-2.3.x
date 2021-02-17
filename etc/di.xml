@@ -1,0 +1,841 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * E-Transactions Epayment module for Magento
+ *
+ * Feel free to contact E-Transactions at support@e-transactions.fr for any
+ * question.
+ *
+ * LICENSE: This source file is subject to the version 3.0 of the Open
+ * Software License (OSL-3.0) that is available through the world-wide-web
+ * at the following URI: http://opensource.org/licenses/OSL-3.0. If
+ * you did not receive a copy of the OSL-3.0 license and are unable
+ * to obtain it through the web, please send a note to
+ * support@e-transactions.fr so we can mail you a copy immediately.
+ *
+ * @version   1.0.0
+ * @author    E-Transactions <support@e-transactions.fr>
+ * @copyright 2012-2017 E-Transactions
+ * @license   http://opensource.org/licenses/OSL-3.0
+ * @link      http://www.e-transactions.fr/
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+<!--    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="etransactions_test_save_order" xsi:type="object">ETransactions\Epayment\Console\Command\OrderSaveCommand</item>
+
+            </argument>
+        </arguments>
+    </type>-->
+    <!-- ETEP_CB -->
+    <!-- Payment Method Facade configuration -->
+    <virtualType name="EtepcbFacade" type="Magento\Payment\Model\Method\Adapter">
+        <arguments>
+            <argument name="code" xsi:type="const">\ETransactions\Epayment\Model\Ui\EtepcbConfigProvider::CODE</argument>
+            <argument name="formBlockType" xsi:type="string">ETransactions\Epayment\Block\Checkout\Payment</argument>
+            <argument name="infoBlockType" xsi:type="string">ETransactions\Epayment\Block\Info</argument>
+            <argument name="valueHandlerPool" xsi:type="object">EtepcbValueHandlerPool</argument>
+            <argument name="commandPool" xsi:type="object">EtepcbCommandPool</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Configuration reader -->
+    <virtualType name="EtepcbConfig" type="Magento\Payment\Gateway\Config\Config">
+        <arguments>
+            <argument name="methodCode" xsi:type="const">\ETransactions\Epayment\Model\Ui\EtepcbConfigProvider::CODE</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Logger, initialized with EtepcbConfig -->
+    <virtualType name="EtepcbLogger" type="Magento\Payment\Model\Method\Logger">
+        <arguments>
+            <argument name="config" xsi:type="object">EtepcbConfig</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="ETransactions\Epayment\Gateway\Http\Client\ClientMock">
+        <arguments>
+            <argument name="logger" xsi:type="object">EtepcbLogger</argument>
+        </arguments>
+    </type>
+
+    <!-- Commands infrastructure -->
+    <virtualType name="EtepcbCommandPool" type="Magento\Payment\Gateway\Command\CommandPool">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="authorize" xsi:type="string">EtepcbAuthorizeCommand</item>
+                <item name="capture" xsi:type="string">EtepcbCaptureCommand</item>
+                <item name="void" xsi:type="string">EtepcbVoidCommand</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Authorize command -->
+    <virtualType name="EtepcbAuthorizeCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">EtepcbAuthorizationRequest</argument>
+            <argument name="handler" xsi:type="object">EtepcbResponseHandlerComposite</argument>
+            <argument name="transferFactory" xsi:type="object">ETransactions\Epayment\Gateway\Http\TransferFactory</argument>
+            <argument name="client" xsi:type="object">ETransactions\Epayment\Gateway\Http\Client\ClientMock</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Authorization Request -->
+    <virtualType name="EtepcbAuthorizationRequest" type="Magento\Payment\Gateway\Request\BuilderComposite">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="transaction" xsi:type="string">ETransactions\Epayment\Gateway\Request\AuthorizationRequest</item>
+                <item name="mockData" xsi:type="string">ETransactions\Epayment\Gateway\Request\MockDataRequest</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="ETransactions\Epayment\Gateway\Request\AuthorizationRequest">
+        <arguments>
+            <argument name="config" xsi:type="object">EtepcbConfig</argument>
+        </arguments>
+    </type>
+
+    <!-- Capture command -->
+    <virtualType name="EtepcbCaptureCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">ETransactions\Epayment\Gateway\Request\CaptureRequest</argument>
+            <argument name="handler" xsi:type="object">ETransactions\Epayment\Gateway\Response\TxnIdHandler</argument>
+            <argument name="transferFactory" xsi:type="object">ETransactions\Epayment\Gateway\Http\TransferFactory</argument>
+            <argument name="validator" xsi:type="object">ETransactions\Epayment\Gateway\Validator\ResponseCodeValidator</argument>
+            <argument name="client" xsi:type="object">ETransactions\Epayment\Gateway\Http\Client\ClientMock</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Capture Request -->
+    <type name="ETransactions\Epayment\Gateway\Request\CaptureRequest">
+        <arguments>
+            <argument name="config" xsi:type="object">EtepcbConfig</argument>
+        </arguments>
+    </type>
+
+    <!-- Void command -->
+    <virtualType name="EtepcbVoidCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">ETransactions\Epayment\Gateway\Request\VoidRequest</argument>
+            <argument name="handler" xsi:type="object">ETransactions\Epayment\Gateway\Response\TxnIdHandler</argument>
+            <argument name="transferFactory" xsi:type="object">ETransactions\Epayment\Gateway\Http\TransferFactory</argument>
+            <argument name="validator" xsi:type="object">ETransactions\Epayment\Gateway\Validator\ResponseCodeValidator</argument>
+            <argument name="client" xsi:type="object">ETransactions\Epayment\Gateway\Http\Client\ClientMock</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Void Request -->
+    <type name="ETransactions\Epayment\Gateway\Request\VoidRequest">
+        <arguments>
+            <argument name="config" xsi:type="object">EtepcbConfig</argument>
+        </arguments>
+    </type>
+
+    <!-- Response handlers -->
+    <virtualType name="EtepcbResponseHandlerComposite" type="Magento\Payment\Gateway\Response\HandlerChain">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="txnid" xsi:type="string">ETransactions\Epayment\Gateway\Response\TxnIdHandler</item>
+                <item name="fraud" xsi:type="string">ETransactions\Epayment\Gateway\Response\FraudHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Value handlers infrastructure -->
+    <virtualType name="EtepcbValueHandlerPool" type="Magento\Payment\Gateway\Config\ValueHandlerPool">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="default" xsi:type="string">EtepcbConfigValueHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="EtepcbConfigValueHandler" type="Magento\Payment\Gateway\Config\ConfigValueHandler">
+        <arguments>
+            <argument name="configInterface" xsi:type="object">EtepcbConfig</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="ETransactions\Epayment\Block\Info">
+        <arguments>
+            <argument name="config" xsi:type="object">EtepcbConfig</argument>
+        </arguments>
+    </type>
+    <!-- ! ETEP_CB -->
+
+    <!-- ETEP_THREETIME -->
+    <!-- Payment Method Facade configuration -->
+    <virtualType name="EtepthreetimeFacade" type="Magento\Payment\Model\Method\Adapter">
+        <arguments>
+            <argument name="code" xsi:type="const">\ETransactions\Epayment\Model\Ui\EtepthreetimeConfigProvider::CODE</argument>
+            <argument name="formBlockType" xsi:type="string">ETransactions\Epayment\Block\Checkout\Payment</argument>
+            <argument name="infoBlockType" xsi:type="string">ETransactions\Epayment\Block\Info</argument>
+            <argument name="valueHandlerPool" xsi:type="object">EtepthreetimeValueHandlerPool</argument>
+            <argument name="commandPool" xsi:type="object">EtepthreetimeCommandPool</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Configuration reader -->
+    <virtualType name="EtepthreetimeConfig" type="Magento\Payment\Gateway\Config\Config">
+        <arguments>
+            <argument name="methodCode" xsi:type="const">\ETransactions\Epayment\Model\Ui\EtepthreetimeConfigProvider::CODE</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Logger, initialized with EtepthreetimeConfig -->
+    <virtualType name="EtepthreetimeLogger" type="Magento\Payment\Model\Method\Logger">
+        <arguments>
+            <argument name="config" xsi:type="object">EtepthreetimeConfig</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="ETransactions\Epayment\Gateway\Http\Client\ClientMock">
+        <arguments>
+            <argument name="logger" xsi:type="object">EtepthreetimeLogger</argument>
+        </arguments>
+    </type>
+
+    <!-- Commands infrastructure -->
+    <virtualType name="EtepthreetimeCommandPool" type="Magento\Payment\Gateway\Command\CommandPool">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="authorize" xsi:type="string">EtepthreetimeAuthorizeCommand</item>
+                <item name="capture" xsi:type="string">EtepthreetimeCaptureCommand</item>
+                <item name="void" xsi:type="string">EtepthreetimeVoidCommand</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Authorize command -->
+    <virtualType name="EtepthreetimeAuthorizeCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">EtepthreetimeAuthorizationRequest</argument>
+            <argument name="handler" xsi:type="object">EtepthreetimeResponseHandlerComposite</argument>
+            <argument name="transferFactory" xsi:type="object">ETransactions\Epayment\Gateway\Http\TransferFactory</argument>
+            <argument name="client" xsi:type="object">ETransactions\Epayment\Gateway\Http\Client\ClientMock</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Authorization Request -->
+    <virtualType name="EtepthreetimeAuthorizationRequest" type="Magento\Payment\Gateway\Request\BuilderComposite">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="transaction" xsi:type="string">ETransactions\Epayment\Gateway\Request\AuthorizationRequest</item>
+                <item name="mockData" xsi:type="string">ETransactions\Epayment\Gateway\Request\MockDataRequest</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="ETransactions\Epayment\Gateway\Request\AuthorizationRequest">
+        <arguments>
+            <argument name="config" xsi:type="object">EtepthreetimeConfig</argument>
+        </arguments>
+    </type>
+
+    <!-- Capture command -->
+    <virtualType name="EtepthreetimeCaptureCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">ETransactions\Epayment\Gateway\Request\CaptureRequest</argument>
+            <argument name="handler" xsi:type="object">ETransactions\Epayment\Gateway\Response\TxnIdHandler</argument>
+            <argument name="transferFactory" xsi:type="object">ETransactions\Epayment\Gateway\Http\TransferFactory</argument>
+            <argument name="validator" xsi:type="object">ETransactions\Epayment\Gateway\Validator\ResponseCodeValidator</argument>
+            <argument name="client" xsi:type="object">ETransactions\Epayment\Gateway\Http\Client\ClientMock</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Capture Request -->
+    <type name="ETransactions\Epayment\Gateway\Request\CaptureRequest">
+        <arguments>
+            <argument name="config" xsi:type="object">EtepthreetimeConfig</argument>
+        </arguments>
+    </type>
+
+    <!-- Void command -->
+    <virtualType name="EtepthreetimeVoidCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">ETransactions\Epayment\Gateway\Request\VoidRequest</argument>
+            <argument name="handler" xsi:type="object">ETransactions\Epayment\Gateway\Response\TxnIdHandler</argument>
+            <argument name="transferFactory" xsi:type="object">ETransactions\Epayment\Gateway\Http\TransferFactory</argument>
+            <argument name="validator" xsi:type="object">ETransactions\Epayment\Gateway\Validator\ResponseCodeValidator</argument>
+            <argument name="client" xsi:type="object">ETransactions\Epayment\Gateway\Http\Client\ClientMock</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Void Request -->
+    <type name="ETransactions\Epayment\Gateway\Request\VoidRequest">
+        <arguments>
+            <argument name="config" xsi:type="object">EtepthreetimeConfig</argument>
+        </arguments>
+    </type>
+
+    <!-- Response handlers -->
+    <virtualType name="EtepthreetimeResponseHandlerComposite" type="Magento\Payment\Gateway\Response\HandlerChain">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="txnid" xsi:type="string">ETransactions\Epayment\Gateway\Response\TxnIdHandler</item>
+                <item name="fraud" xsi:type="string">ETransactions\Epayment\Gateway\Response\FraudHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Value handlers infrastructure -->
+    <virtualType name="EtepthreetimeValueHandlerPool" type="Magento\Payment\Gateway\Config\ValueHandlerPool">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="default" xsi:type="string">EtepthreetimeConfigValueHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="EtepthreetimeConfigValueHandler" type="Magento\Payment\Gateway\Config\ConfigValueHandler">
+        <arguments>
+            <argument name="configInterface" xsi:type="object">EtepthreetimeConfig</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="ETransactions\Epayment\Block\Info">
+        <arguments>
+            <argument name="config" xsi:type="object">EtepthreetimeConfig</argument>
+        </arguments>
+    </type>
+    <!-- ! ETEP_THREETIME -->
+
+    <!-- ETEP_PREPAID -->
+    <!-- Payment Method Facade configuration -->
+    <virtualType name="EtepprepaidFacade" type="Magento\Payment\Model\Method\Adapter">
+        <arguments>
+            <argument name="code" xsi:type="const">\ETransactions\Epayment\Model\Ui\EtepprepaidConfigProvider::CODE</argument>
+            <argument name="formBlockType" xsi:type="string">ETransactions\Epayment\Block\Checkout\Payment</argument>
+            <argument name="infoBlockType" xsi:type="string">ETransactions\Epayment\Block\Info</argument>
+            <argument name="valueHandlerPool" xsi:type="object">EtepprepaidValueHandlerPool</argument>
+            <argument name="commandPool" xsi:type="object">EtepprepaidCommandPool</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Configuration reader -->
+    <virtualType name="EtepprepaidConfig" type="Magento\Payment\Gateway\Config\Config">
+        <arguments>
+            <argument name="methodCode" xsi:type="const">\ETransactions\Epayment\Model\Ui\EtepprepaidConfigProvider::CODE</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Logger, initialized with EtepprepaidConfig -->
+    <virtualType name="EtepprepaidLogger" type="Magento\Payment\Model\Method\Logger">
+        <arguments>
+            <argument name="config" xsi:type="object">EtepprepaidConfig</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="ETransactions\Epayment\Gateway\Http\Client\ClientMock">
+        <arguments>
+            <argument name="logger" xsi:type="object">EtepprepaidLogger</argument>
+        </arguments>
+    </type>
+
+    <!-- Commands infrastructure -->
+    <virtualType name="EtepprepaidCommandPool" type="Magento\Payment\Gateway\Command\CommandPool">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="authorize" xsi:type="string">EtepprepaidAuthorizeCommand</item>
+                <item name="capture" xsi:type="string">EtepprepaidCaptureCommand</item>
+                <item name="void" xsi:type="string">EtepprepaidVoidCommand</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Authorize command -->
+    <virtualType name="EtepprepaidAuthorizeCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">EtepprepaidAuthorizationRequest</argument>
+            <argument name="handler" xsi:type="object">EtepprepaidResponseHandlerComposite</argument>
+            <argument name="transferFactory" xsi:type="object">ETransactions\Epayment\Gateway\Http\TransferFactory</argument>
+            <argument name="client" xsi:type="object">ETransactions\Epayment\Gateway\Http\Client\ClientMock</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Authorization Request -->
+    <virtualType name="EtepprepaidAuthorizationRequest" type="Magento\Payment\Gateway\Request\BuilderComposite">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="transaction" xsi:type="string">ETransactions\Epayment\Gateway\Request\AuthorizationRequest</item>
+                <item name="mockData" xsi:type="string">ETransactions\Epayment\Gateway\Request\MockDataRequest</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="ETransactions\Epayment\Gateway\Request\AuthorizationRequest">
+        <arguments>
+            <argument name="config" xsi:type="object">EtepprepaidConfig</argument>
+        </arguments>
+    </type>
+
+    <!-- Capture command -->
+    <virtualType name="EtepprepaidCaptureCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">ETransactions\Epayment\Gateway\Request\CaptureRequest</argument>
+            <argument name="handler" xsi:type="object">ETransactions\Epayment\Gateway\Response\TxnIdHandler</argument>
+            <argument name="transferFactory" xsi:type="object">ETransactions\Epayment\Gateway\Http\TransferFactory</argument>
+            <argument name="validator" xsi:type="object">ETransactions\Epayment\Gateway\Validator\ResponseCodeValidator</argument>
+            <argument name="client" xsi:type="object">ETransactions\Epayment\Gateway\Http\Client\ClientMock</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Capture Request -->
+    <type name="ETransactions\Epayment\Gateway\Request\CaptureRequest">
+        <arguments>
+            <argument name="config" xsi:type="object">EtepprepaidConfig</argument>
+        </arguments>
+    </type>
+
+    <!-- Void command -->
+    <virtualType name="EtepprepaidVoidCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">ETransactions\Epayment\Gateway\Request\VoidRequest</argument>
+            <argument name="handler" xsi:type="object">ETransactions\Epayment\Gateway\Response\TxnIdHandler</argument>
+            <argument name="transferFactory" xsi:type="object">ETransactions\Epayment\Gateway\Http\TransferFactory</argument>
+            <argument name="validator" xsi:type="object">ETransactions\Epayment\Gateway\Validator\ResponseCodeValidator</argument>
+            <argument name="client" xsi:type="object">ETransactions\Epayment\Gateway\Http\Client\ClientMock</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Void Request -->
+    <type name="ETransactions\Epayment\Gateway\Request\VoidRequest">
+        <arguments>
+            <argument name="config" xsi:type="object">EtepprepaidConfig</argument>
+        </arguments>
+    </type>
+
+    <!-- Response handlers -->
+    <virtualType name="EtepprepaidResponseHandlerComposite" type="Magento\Payment\Gateway\Response\HandlerChain">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="txnid" xsi:type="string">ETransactions\Epayment\Gateway\Response\TxnIdHandler</item>
+                <item name="fraud" xsi:type="string">ETransactions\Epayment\Gateway\Response\FraudHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Value handlers infrastructure -->
+    <virtualType name="EtepprepaidValueHandlerPool" type="Magento\Payment\Gateway\Config\ValueHandlerPool">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="default" xsi:type="string">EtepprepaidConfigValueHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="EtepprepaidConfigValueHandler" type="Magento\Payment\Gateway\Config\ConfigValueHandler">
+        <arguments>
+            <argument name="configInterface" xsi:type="object">EtepprepaidConfig</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="ETransactions\Epayment\Block\Info">
+        <arguments>
+            <argument name="config" xsi:type="object">EtepprepaidConfig</argument>
+        </arguments>
+    </type>
+    <!-- ! ETEP_PREPAID -->
+
+    <!-- ETEP_PAYBUTTONS -->
+    <!-- Payment Method Facade configuration -->
+    <virtualType name="EteppaybuttonsFacade" type="Magento\Payment\Model\Method\Adapter">
+        <arguments>
+            <argument name="code" xsi:type="const">\ETransactions\Epayment\Model\Ui\EteppaybuttonsConfigProvider::CODE</argument>
+            <argument name="formBlockType" xsi:type="string">ETransactions\Epayment\Block\Checkout\Payment</argument>
+            <argument name="infoBlockType" xsi:type="string">ETransactions\Epayment\Block\Info</argument>
+            <argument name="valueHandlerPool" xsi:type="object">EteppaybuttonsValueHandlerPool</argument>
+            <argument name="commandPool" xsi:type="object">EteppaybuttonsCommandPool</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Configuration reader -->
+    <virtualType name="EteppaybuttonsConfig" type="Magento\Payment\Gateway\Config\Config">
+        <arguments>
+            <argument name="methodCode" xsi:type="const">\ETransactions\Epayment\Model\Ui\EteppaybuttonsConfigProvider::CODE</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Logger, initialized with EteppaybuttonsConfig -->
+    <virtualType name="EteppaybuttonsLogger" type="Magento\Payment\Model\Method\Logger">
+        <arguments>
+            <argument name="config" xsi:type="object">EteppaybuttonsConfig</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="ETransactions\Epayment\Gateway\Http\Client\ClientMock">
+        <arguments>
+            <argument name="logger" xsi:type="object">EteppaybuttonsLogger</argument>
+        </arguments>
+    </type>
+
+    <!-- Commands infrastructure -->
+    <virtualType name="EteppaybuttonsCommandPool" type="Magento\Payment\Gateway\Command\CommandPool">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="authorize" xsi:type="string">EteppaybuttonsAuthorizeCommand</item>
+                <item name="capture" xsi:type="string">EteppaybuttonsCaptureCommand</item>
+                <item name="void" xsi:type="string">EteppaybuttonsVoidCommand</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Authorize command -->
+    <virtualType name="EteppaybuttonsAuthorizeCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">EteppaybuttonsAuthorizationRequest</argument>
+            <argument name="handler" xsi:type="object">EteppaybuttonsResponseHandlerComposite</argument>
+            <argument name="transferFactory" xsi:type="object">ETransactions\Epayment\Gateway\Http\TransferFactory</argument>
+            <argument name="client" xsi:type="object">ETransactions\Epayment\Gateway\Http\Client\ClientMock</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Authorization Request -->
+    <virtualType name="EteppaybuttonsAuthorizationRequest" type="Magento\Payment\Gateway\Request\BuilderComposite">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="transaction" xsi:type="string">ETransactions\Epayment\Gateway\Request\AuthorizationRequest</item>
+                <item name="mockData" xsi:type="string">ETransactions\Epayment\Gateway\Request\MockDataRequest</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="ETransactions\Epayment\Gateway\Request\AuthorizationRequest">
+        <arguments>
+            <argument name="config" xsi:type="object">EteppaybuttonsConfig</argument>
+        </arguments>
+    </type>
+
+    <!-- Capture command -->
+    <virtualType name="EteppaybuttonsCaptureCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">ETransactions\Epayment\Gateway\Request\CaptureRequest</argument>
+            <argument name="handler" xsi:type="object">ETransactions\Epayment\Gateway\Response\TxnIdHandler</argument>
+            <argument name="transferFactory" xsi:type="object">ETransactions\Epayment\Gateway\Http\TransferFactory</argument>
+            <argument name="validator" xsi:type="object">ETransactions\Epayment\Gateway\Validator\ResponseCodeValidator</argument>
+            <argument name="client" xsi:type="object">ETransactions\Epayment\Gateway\Http\Client\ClientMock</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Capture Request -->
+    <type name="ETransactions\Epayment\Gateway\Request\CaptureRequest">
+        <arguments>
+            <argument name="config" xsi:type="object">EteppaybuttonsConfig</argument>
+        </arguments>
+    </type>
+
+    <!-- Void command -->
+    <virtualType name="EteppaybuttonsVoidCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">ETransactions\Epayment\Gateway\Request\VoidRequest</argument>
+            <argument name="handler" xsi:type="object">ETransactions\Epayment\Gateway\Response\TxnIdHandler</argument>
+            <argument name="transferFactory" xsi:type="object">ETransactions\Epayment\Gateway\Http\TransferFactory</argument>
+            <argument name="validator" xsi:type="object">ETransactions\Epayment\Gateway\Validator\ResponseCodeValidator</argument>
+            <argument name="client" xsi:type="object">ETransactions\Epayment\Gateway\Http\Client\ClientMock</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Void Request -->
+    <type name="ETransactions\Epayment\Gateway\Request\VoidRequest">
+        <arguments>
+            <argument name="config" xsi:type="object">EteppaybuttonsConfig</argument>
+        </arguments>
+    </type>
+
+    <!-- Response handlers -->
+    <virtualType name="EteppaybuttonsResponseHandlerComposite" type="Magento\Payment\Gateway\Response\HandlerChain">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="txnid" xsi:type="string">ETransactions\Epayment\Gateway\Response\TxnIdHandler</item>
+                <item name="fraud" xsi:type="string">ETransactions\Epayment\Gateway\Response\FraudHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Value handlers infrastructure -->
+    <virtualType name="EteppaybuttonsValueHandlerPool" type="Magento\Payment\Gateway\Config\ValueHandlerPool">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="default" xsi:type="string">EteppaybuttonsConfigValueHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="EteppaybuttonsConfigValueHandler" type="Magento\Payment\Gateway\Config\ConfigValueHandler">
+        <arguments>
+            <argument name="configInterface" xsi:type="object">EteppaybuttonsConfig</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="ETransactions\Epayment\Block\Info">
+        <arguments>
+            <argument name="config" xsi:type="object">EteppaybuttonsConfig</argument>
+        </arguments>
+    </type>
+    <!-- ! ETEP_PAYBUTTONS -->
+
+    <!-- ETEP_PRIVATE -->
+    <!-- Payment Method Facade configuration -->
+    <virtualType name="EtepprivateFacade" type="Magento\Payment\Model\Method\Adapter">
+        <arguments>
+            <argument name="code" xsi:type="const">\ETransactions\Epayment\Model\Ui\EtepprivateConfigProvider::CODE</argument>
+            <argument name="formBlockType" xsi:type="string">ETransactions\Epayment\Block\Checkout\Payment</argument>
+            <argument name="infoBlockType" xsi:type="string">ETransactions\Epayment\Block\Info</argument>
+            <argument name="valueHandlerPool" xsi:type="object">EtepprivateValueHandlerPool</argument>
+            <argument name="commandPool" xsi:type="object">EtepprivateCommandPool</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Configuration reader -->
+    <virtualType name="EtepprivateConfig" type="Magento\Payment\Gateway\Config\Config">
+        <arguments>
+            <argument name="methodCode" xsi:type="const">\ETransactions\Epayment\Model\Ui\EtepprivateConfigProvider::CODE</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Logger, initialized with EtepprivateConfig -->
+    <virtualType name="EtepprivateLogger" type="Magento\Payment\Model\Method\Logger">
+        <arguments>
+            <argument name="config" xsi:type="object">EtepprivateConfig</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="ETransactions\Epayment\Gateway\Http\Client\ClientMock">
+        <arguments>
+            <argument name="logger" xsi:type="object">EtepprivateLogger</argument>
+        </arguments>
+    </type>
+
+    <!-- Commands infrastructure -->
+    <virtualType name="EtepprivateCommandPool" type="Magento\Payment\Gateway\Command\CommandPool">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="authorize" xsi:type="string">EtepprivateAuthorizeCommand</item>
+                <item name="capture" xsi:type="string">EtepprivateCaptureCommand</item>
+                <item name="void" xsi:type="string">EtepprivateVoidCommand</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Authorize command -->
+    <virtualType name="EtepprivateAuthorizeCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">EtepprivateAuthorizationRequest</argument>
+            <argument name="handler" xsi:type="object">EtepprivateResponseHandlerComposite</argument>
+            <argument name="transferFactory" xsi:type="object">ETransactions\Epayment\Gateway\Http\TransferFactory</argument>
+            <argument name="client" xsi:type="object">ETransactions\Epayment\Gateway\Http\Client\ClientMock</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Authorization Request -->
+    <virtualType name="EtepprivateAuthorizationRequest" type="Magento\Payment\Gateway\Request\BuilderComposite">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="transaction" xsi:type="string">ETransactions\Epayment\Gateway\Request\AuthorizationRequest</item>
+                <item name="mockData" xsi:type="string">ETransactions\Epayment\Gateway\Request\MockDataRequest</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="ETransactions\Epayment\Gateway\Request\AuthorizationRequest">
+        <arguments>
+            <argument name="config" xsi:type="object">EtepprivateConfig</argument>
+        </arguments>
+    </type>
+
+    <!-- Capture command -->
+    <virtualType name="EtepprivateCaptureCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">ETransactions\Epayment\Gateway\Request\CaptureRequest</argument>
+            <argument name="handler" xsi:type="object">ETransactions\Epayment\Gateway\Response\TxnIdHandler</argument>
+            <argument name="transferFactory" xsi:type="object">ETransactions\Epayment\Gateway\Http\TransferFactory</argument>
+            <argument name="validator" xsi:type="object">ETransactions\Epayment\Gateway\Validator\ResponseCodeValidator</argument>
+            <argument name="client" xsi:type="object">ETransactions\Epayment\Gateway\Http\Client\ClientMock</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Capture Request -->
+    <type name="ETransactions\Epayment\Gateway\Request\CaptureRequest">
+        <arguments>
+            <argument name="config" xsi:type="object">EtepprivateConfig</argument>
+        </arguments>
+    </type>
+
+    <!-- Void command -->
+    <virtualType name="EtepprivateVoidCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">ETransactions\Epayment\Gateway\Request\VoidRequest</argument>
+            <argument name="handler" xsi:type="object">ETransactions\Epayment\Gateway\Response\TxnIdHandler</argument>
+            <argument name="transferFactory" xsi:type="object">ETransactions\Epayment\Gateway\Http\TransferFactory</argument>
+            <argument name="validator" xsi:type="object">ETransactions\Epayment\Gateway\Validator\ResponseCodeValidator</argument>
+            <argument name="client" xsi:type="object">ETransactions\Epayment\Gateway\Http\Client\ClientMock</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Void Request -->
+    <type name="ETransactions\Epayment\Gateway\Request\VoidRequest">
+        <arguments>
+            <argument name="config" xsi:type="object">EtepprivateConfig</argument>
+        </arguments>
+    </type>
+
+    <!-- Response handlers -->
+    <virtualType name="EtepprivateResponseHandlerComposite" type="Magento\Payment\Gateway\Response\HandlerChain">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="txnid" xsi:type="string">ETransactions\Epayment\Gateway\Response\TxnIdHandler</item>
+                <item name="fraud" xsi:type="string">ETransactions\Epayment\Gateway\Response\FraudHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Value handlers infrastructure -->
+    <virtualType name="EtepprivateValueHandlerPool" type="Magento\Payment\Gateway\Config\ValueHandlerPool">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="default" xsi:type="string">EtepprivateConfigValueHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="EtepprivateConfigValueHandler" type="Magento\Payment\Gateway\Config\ConfigValueHandler">
+        <arguments>
+            <argument name="configInterface" xsi:type="object">EtepprivateConfig</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="ETransactions\Epayment\Block\Info">
+        <arguments>
+            <argument name="config" xsi:type="object">EtepprivateConfig</argument>
+        </arguments>
+    </type>
+    <!-- ! ETEP_PRIVATE -->
+
+    <!-- ETEP_FINANCIAL -->
+    <!-- Payment Method Facade configuration -->
+    <virtualType name="EtepfinancialFacade" type="Magento\Payment\Model\Method\Adapter">
+        <arguments>
+            <argument name="code" xsi:type="const">\ETransactions\Epayment\Model\Ui\EtepfinancialConfigProvider::CODE</argument>
+            <argument name="formBlockType" xsi:type="string">ETransactions\Epayment\Block\Checkout\Payment</argument>
+            <argument name="infoBlockType" xsi:type="string">ETransactions\Epayment\Block\Info</argument>
+            <argument name="valueHandlerPool" xsi:type="object">EtepfinancialValueHandlerPool</argument>
+            <argument name="commandPool" xsi:type="object">EtepfinancialCommandPool</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Configuration reader -->
+    <virtualType name="EtepfinancialConfig" type="Magento\Payment\Gateway\Config\Config">
+        <arguments>
+            <argument name="methodCode" xsi:type="const">\ETransactions\Epayment\Model\Ui\EtepfinancialConfigProvider::CODE</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Logger, initialized with EtepfinancialConfig -->
+    <virtualType name="EtepfinancialLogger" type="Magento\Payment\Model\Method\Logger">
+        <arguments>
+            <argument name="config" xsi:type="object">EtepfinancialConfig</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="ETransactions\Epayment\Gateway\Http\Client\ClientMock">
+        <arguments>
+            <argument name="logger" xsi:type="object">EtepfinancialLogger</argument>
+        </arguments>
+    </type>
+
+    <!-- Commands infrastructure -->
+    <virtualType name="EtepfinancialCommandPool" type="Magento\Payment\Gateway\Command\CommandPool">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="authorize" xsi:type="string">EtepfinancialAuthorizeCommand</item>
+                <item name="capture" xsi:type="string">EtepfinancialCaptureCommand</item>
+                <item name="void" xsi:type="string">EtepfinancialVoidCommand</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Authorize command -->
+    <virtualType name="EtepfinancialAuthorizeCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">EtepfinancialAuthorizationRequest</argument>
+            <argument name="handler" xsi:type="object">EtepfinancialResponseHandlerComposite</argument>
+            <argument name="transferFactory" xsi:type="object">ETransactions\Epayment\Gateway\Http\TransferFactory</argument>
+            <argument name="client" xsi:type="object">ETransactions\Epayment\Gateway\Http\Client\ClientMock</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Authorization Request -->
+    <virtualType name="EtepfinancialAuthorizationRequest" type="Magento\Payment\Gateway\Request\BuilderComposite">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="transaction" xsi:type="string">ETransactions\Epayment\Gateway\Request\AuthorizationRequest</item>
+                <item name="mockData" xsi:type="string">ETransactions\Epayment\Gateway\Request\MockDataRequest</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="ETransactions\Epayment\Gateway\Request\AuthorizationRequest">
+        <arguments>
+            <argument name="config" xsi:type="object">EtepfinancialConfig</argument>
+        </arguments>
+    </type>
+
+    <!-- Capture command -->
+    <virtualType name="EtepfinancialCaptureCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">ETransactions\Epayment\Gateway\Request\CaptureRequest</argument>
+            <argument name="handler" xsi:type="object">ETransactions\Epayment\Gateway\Response\TxnIdHandler</argument>
+            <argument name="transferFactory" xsi:type="object">ETransactions\Epayment\Gateway\Http\TransferFactory</argument>
+            <argument name="validator" xsi:type="object">ETransactions\Epayment\Gateway\Validator\ResponseCodeValidator</argument>
+            <argument name="client" xsi:type="object">ETransactions\Epayment\Gateway\Http\Client\ClientMock</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Capture Request -->
+    <type name="ETransactions\Epayment\Gateway\Request\CaptureRequest">
+        <arguments>
+            <argument name="config" xsi:type="object">EtepfinancialConfig</argument>
+        </arguments>
+    </type>
+
+    <!-- Void command -->
+    <virtualType name="EtepfinancialVoidCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">ETransactions\Epayment\Gateway\Request\VoidRequest</argument>
+            <argument name="handler" xsi:type="object">ETransactions\Epayment\Gateway\Response\TxnIdHandler</argument>
+            <argument name="transferFactory" xsi:type="object">ETransactions\Epayment\Gateway\Http\TransferFactory</argument>
+            <argument name="validator" xsi:type="object">ETransactions\Epayment\Gateway\Validator\ResponseCodeValidator</argument>
+            <argument name="client" xsi:type="object">ETransactions\Epayment\Gateway\Http\Client\ClientMock</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Void Request -->
+    <type name="ETransactions\Epayment\Gateway\Request\VoidRequest">
+        <arguments>
+            <argument name="config" xsi:type="object">EtepfinancialConfig</argument>
+        </arguments>
+    </type>
+
+    <!-- Response handlers -->
+    <virtualType name="EtepfinancialResponseHandlerComposite" type="Magento\Payment\Gateway\Response\HandlerChain">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="txnid" xsi:type="string">ETransactions\Epayment\Gateway\Response\TxnIdHandler</item>
+                <item name="fraud" xsi:type="string">ETransactions\Epayment\Gateway\Response\FraudHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Value handlers infrastructure -->
+    <virtualType name="EtepfinancialValueHandlerPool" type="Magento\Payment\Gateway\Config\ValueHandlerPool">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="default" xsi:type="string">EtepfinancialConfigValueHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="EtepfinancialConfigValueHandler" type="Magento\Payment\Gateway\Config\ConfigValueHandler">
+        <arguments>
+            <argument name="configInterface" xsi:type="object">EtepfinancialConfig</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="ETransactions\Epayment\Block\Info">
+        <arguments>
+            <argument name="config" xsi:type="object">EtepfinancialConfig</argument>
+        </arguments>
+    </type>
+    <!-- ! ETEP_FINANCIAL -->
+</config>

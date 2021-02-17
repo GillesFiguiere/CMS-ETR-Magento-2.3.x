@@ -1,0 +1,135 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * E-Transactions Epayment module for Magento
+ *
+ * Feel free to contact E-Transactions at support@e-transactions.fr for any
+ * question.
+ *
+ * LICENSE: This source file is subject to the version 3.0 of the Open
+ * Software License (OSL-3.0) that is available through the world-wide-web
+ * at the following URI: http://opensource.org/licenses/OSL-3.0. If
+ * you did not receive a copy of the OSL-3.0 license and are unable
+ * to obtain it through the web, please send a note to
+ * support@e-transactions.fr so we can mail you a copy immediately.
+ *
+ * @version   1.0.11-hmac
+ * @author    E-Transactions <support@e-transactions.fr>
+ * @copyright 2012-2017 E-Transactions
+ * @license   http://opensource.org/licenses/OSL-3.0
+ * @link      http://www.e-transactions.fr/
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <etep>
+            <merchant>
+                <environment>TEST</environment>
+                <subscription>access</subscription>
+                <site>1999888</site>
+                <rank>77</rank>
+                <identifier>3262411</identifier>
+                <password backend_model="Magento\Config\Model\Config\Backend\Encrypted">1999888I</password>
+                <hmackey backend_model="Magento\Config\Model\Config\Backend\Encrypted">0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF</hmackey>
+                <hmacalgo>SHA512</hmacalgo>
+            </merchant>
+            <languages>
+                <fr>FRA</fr>
+                <es>ESP</es>
+                <it>ITA</it>
+                <de>DEU</de>
+                <nl>NLD</nl>
+                <sv>SWE</sv>
+                <pt>PRT</pt>
+                <default>GBR</default>
+            </languages>
+            <allowedips>194.2.122.158,195.25.7.166,195.101.99.76,10.48.2.254</allowedips>
+        </etep>
+        <payment>
+            <etep_cb>
+                <active>1</active>
+                <model>ETransactions\Epayment\Model\Payment\Cb</model>
+                <title>Pay by Bank Card</title>
+                <group>etep</group>
+                <is_gateway>1</is_gateway>
+                <can_order>1</can_order>
+                <can_use_checkout>1</can_use_checkout>
+                <can_capture>1</can_capture>
+                <can_use_for_multishipping>1</can_use_for_multishipping>
+                <allowspecific>0</allowspecific>
+                <cctypes>CB,VISA,EUROCARD_MASTERCARD,E_CARD</cctypes>
+                <status_paid>etep_paid</status_paid>
+                <status_authorized>etep_authorized</status_authorized>
+                <payment_action>immediate</payment_action>
+                <delay>1</delay>
+                <tds_active>always</tds_active>
+                <cards>
+                    <CB>
+                        <label>CB</label>
+                        <image>images/etep/cb.45.png</image>
+                        <payment>CARTE</payment>
+                        <card>CB</card>
+                    </CB>
+                    <VISA>
+                        <label>Visa</label>
+                        <image>images/etep/visa.45.png</image>
+                        <payment>CARTE</payment>
+                        <card>VISA</card>
+                    </VISA>
+                    <EUROCARD_MASTERCARD>
+                        <label>Mastercard</label>
+                        <image>images/etep/mastercard.45.png</image>
+                        <payment>CARTE</payment>
+                        <card>EUROCARD_MASTERCARD</card>
+                    </EUROCARD_MASTERCARD>
+                    <E_CARD>
+                        <label>E-Carte Bleue</label>
+                        <image>images/etep/ecartebleue.45.png</image>
+                        <payment>CARTE</payment>
+                        <card>E_CARD</card>
+                    </E_CARD>
+                </cards>
+            </etep_cb>
+            <etep_threetime>
+                <active>0</active>
+                <model>ETransactions\Epayment\Model\Payment\Threetime</model>
+                <title>Pay by Card Three Times</title>
+                <group>etep</group>
+                <allowspecific>0</allowspecific>
+                <cctypes>CB,VISA,EUROCARD_MASTERCARD,E_CARD</cctypes>
+                <status>
+                    <intermediary>etep_intermediary</intermediary>
+                    <paid>etep_paid</paid>
+                </status>
+                <action>immediate</action>
+                <tds_active>always</tds_active>
+                <cards>
+                    <CB>
+                        <label>CB</label>
+                        <image>images/etep/cb.45.png</image>
+                        <payment>CARTE</payment>
+                        <card>CB</card>
+                    </CB>
+                    <VISA>
+                        <label>Visa</label>
+                        <image>images/etep/visa.45.png</image>
+                        <payment>CARTE</payment>
+                        <card>VISA</card>
+                    </VISA>
+                    <EUROCARD_MASTERCARD>
+                        <label>Mastercard</label>
+                        <image>images/etep/mastercard.45.png</image>
+                        <payment>CARTE</payment>
+                        <card>EUROCARD_MASTERCARD</card>
+                    </EUROCARD_MASTERCARD>
+                    <E_CARD>
+                        <label>E-Carte Bleue</label>
+                        <image>images/etep/ecartebleue.45.png</image>
+                        <payment>CARTE</payment>
+                        <card>E_CARD</card>
+                    </E_CARD>
+                </cards>
+            </etep_threetime>
+        </payment>
+    </default>
+</config>
