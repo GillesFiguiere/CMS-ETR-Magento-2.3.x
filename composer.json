@@ -23,6 +23,6 @@
       }
   ],
   "require": {
-      "etransactions/epayment": "dev-bugfix"
+      "etransactions/epayment": "master"
   }
 }
