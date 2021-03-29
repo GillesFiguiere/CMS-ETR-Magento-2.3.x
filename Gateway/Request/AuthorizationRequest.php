@@ -182,16 +182,9 @@ class AuthorizationRequest implements BuilderInterface
             $values['PBX_REPONDRE_A'] .= $s;
         }
 
-        // Check if 3DS is managed by current payment method
-        if (!$payment->is3DSEnabled($order)) {
-            $values['PBX_3DS'] = 'N';
-        }
-
-        // 3DSv2 is enabled, add new parameters if 3DS is enabled on the payment method
-        if ($payment->is3DSEnabled($order) && $payment->get3DSVersion($order) == 2) {
-            $values['PBX_SHOPPINGCART'] = $payment->getXmlShoppingCartInformation($order);
-            $values['PBX_BILLING'] = $payment->getXmlBillingInformation($order);
-        }
+        // 3DSv2 parameters
+        $values['PBX_SHOPPINGCART'] = $payment->getXmlShoppingCartInformation($order);
+        $values['PBX_BILLING'] = $payment->getXmlBillingInformation($order);
 
         // Sort parameters for simpler debug
         ksort($values);

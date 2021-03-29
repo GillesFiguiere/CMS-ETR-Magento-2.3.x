@@ -133,18 +133,5 @@
 	            </depends>
 	        </field>
 	    </group>
-	    <group id="etep_maestro_tds" translate="label" showInDefault="1" showInWebsite="1" sortOrder="30">
-        	<label>3-D Secure</label>
-        	<depends>
-                <field id="etep_payments/etep_maestro/maestro_active">1</field>
-            </depends>
-	        <field id="maestro_tds_info" translate="label comment" sortOrder="305" showInDefault="1" showInWebsite="1" showInStore="1">
-	        	<label><![CDATA[3-D Secure is mandatory for this payment method.]]></label>
-	            <frontend_model>ETransactions\Epayment\Block\Admin\Field\Info</frontend_model>
-	        	<depends>
-	                <field id="etep_payments/etep_maestro/maestro_active">1</field>
-	            </depends>
-	        </field>
-	    </group>
     </group>
 </include>

@@ -31,8 +31,6 @@ class Threetime extends AbstractPayment
     const XML_PATH = 'payment/etep_threetime/cctypes';
 
     protected $_code = self::CODE;
-    protected $_3dsAllowed = true;
-    protected $_3dsMandatory = true;
     protected $_hasCctypes = true;
     protected $_allowManualDebit = true;
     protected $_allowDeferredDebit = true;
@@ -157,17 +155,5 @@ class Threetime extends AbstractPayment
 
         $payment->save();
         $order->save();
-    }
-
-
-    /**
-     * Retrieve 3ds version from configuration
-     *
-     * @param  Mage_Sales_Model_Order $order
-     * @return string
-     */
-    public function get3DSVersion(Order $order)
-    {
-        return $this->getConfigData('tds_version');
     }
 }

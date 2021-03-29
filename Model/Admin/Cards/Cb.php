@@ -42,20 +42,8 @@ class Cb extends AbstractCards
             }
         } else {
             $result[] = [
-                'label' => __('CB'),
+                'label' => __('CB, Visa, Mastercard, E-Carte Bleue'),
                 'value' => 'CB',
-            ];
-            $result[] = [
-                'label' => __('Visa'),
-                'value' => 'VISA',
-            ];
-            $result[] = [
-                'label' => __('Mastercard'),
-                'value' => 'EUROCARD_MASTERCARD',
-            ];
-            $result[] = [
-                'label' => __('E-Carte Bleue'),
-                'value' => 'E_CARD',
             ];
         }
         return $result;

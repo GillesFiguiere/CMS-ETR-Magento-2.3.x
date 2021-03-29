@@ -36,6 +36,20 @@ define(
                 payload,
                 paymentData = quote.paymentMethod();
 
+            var filterTemplateData = function (data) {
+                return _.each(data, function (value, key, list) {
+                    if (_.isArray(value) || _.isObject(value)) {
+                        list[key] = filterTemplateData(value);
+                    }
+
+                    if (key === '__disableTmpl') {
+                        delete list[key];
+                    }
+                });
+            };
+
+            paymentData = filterTemplateData(paymentData);
+
             /**
              * Checkout for guest and registered customer.
              */

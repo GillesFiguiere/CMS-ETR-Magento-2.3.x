@@ -64,7 +64,7 @@ final class EtepthreetimeConfigProvider implements ConfigProviderInterface
             $types = explode(',', $types);
         }
         foreach ($types as $code) {
-            $asset = $assetRepository->createAsset('ETransactions_Epayment::images/' . strtolower($code) . '.45.png');
+            $asset = $assetRepository->createAsset('ETransactions_Epayment::images/' . strtoupper($code) . '.svg');
             $placeholder = $assetSource->findRelativeSourceFilePath($asset);
             if ($placeholder) {
                 list($width, $height) = getimagesize($asset->getSourceFile());

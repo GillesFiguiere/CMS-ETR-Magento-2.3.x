@@ -47,7 +47,7 @@ class Action implements \Magento\Framework\Option\ArrayInterface
         $out = [];
         $out[] = $immediate;
         $out[] = $deferred;
-        $out[] = $manual;
+        // $out[] = $manual;
         return $out;
     }
 }

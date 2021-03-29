@@ -80,8 +80,6 @@ abstract class AbstractPayment extends AbstractMethod
     /**
      * E-Transactions specific options
      */
-    protected $_3dsAllowed = false;
-    protected $_3dsMandatory = false;
     protected $_allowDeferredDebit = false;
     protected $_allowImmediatDebit = true;
     protected $_allowManualDebit = false;
@@ -361,6 +359,9 @@ abstract class AbstractPayment extends AbstractMethod
         $data = $etransactions->directCapture($amount, $order, $txn);
         $this->logDebug(sprintf('Order %s: Capture - response code %s', $order->getIncrementId(), $data['CODEREPONSE']));
 
+        // Fix possible invalid utf-8 chars
+        $data = array_map('utf8_decode', $data);
+
         // Message
         if ($data['CODEREPONSE'] == '00000') {
             $message = 'Payment was captured by E-Transactions.';
@@ -380,8 +381,8 @@ abstract class AbstractPayment extends AbstractMethod
             $data,
             $close,
             [
-            self::CALL_NUMBER => $data['NUMTRANS'],
-            self::TRANSACTION_NUMBER => $data['NUMAPPEL'],
+            self::CALL_NUMBER => $data['NUMAPPEL'],
+            self::TRANSACTION_NUMBER => $data['NUMTRANS'],
             ],
             $txn
         );
@@ -574,17 +575,6 @@ abstract class AbstractPayment extends AbstractMethod
     }
 
     /**
-     * Retrieve 3ds version from configuration
-     *
-     * @param  Mage_Sales_Model_Order $order
-     * @return string|null
-     */
-    public function get3DSVersion(Order $order)
-    {
-        return null;
-    }
-
-    /**
      * Format a value to respect specific rules
      *
      * @param string $value
@@ -711,44 +701,6 @@ abstract class AbstractPayment extends AbstractMethod
         return sprintf('<?xml version="1.0" encoding="utf-8"?><shoppingcart><total><totalQuantity>%d</totalQuantity></total></shoppingcart>', $totalQuantity);
     }
 
-    /**
-     * Check whether 3DS is enabled
-     *
-     * @param  Mage_Sales_Model_Order $order
-     * @return boolean
-     */
-    public function is3DSEnabled(Order $order)
-    {
-        // If 3DS is mandatory, answer is simple
-        if ($this->_3dsMandatory) {
-            return true;
-        }
-
-        // If 3DS is not allowed, answer is simple
-        if (!$this->_3dsAllowed) {
-            return false;
-        }
-
-        // Otherwise lets see the configuration
-        switch ($this->getConfigData('tds_active')) {
-            case 'always':
-                return true;
-            case 'condition':
-                // Minimum order total
-                $value = $this->getConfigData('tds_min_order_total');
-                if (!empty($value)) {
-                    $total = round($order->getGrandTotal(), 2);
-                    if ($total >= round($value, 2)) {
-                        return true;
-                    }
-                }
-                return false;
-        }
-
-        // Always off
-        return false;
-    }
-
     public function logDebug($message)
     {
         $this->_logger->debug($message);
@@ -790,8 +742,6 @@ abstract class AbstractPayment extends AbstractMethod
         $invoice->register();
         $invoice->pay();
 
-        //        var_dump('makeCapture');
-        //        die();
         //        $transactionSave = $this->_objectManager->get('Magento\Framework\Model\ResourceModel\Db\TransactionManager')
         //                ->addObject($invoice)
         //                ->addObject($order);
@@ -833,6 +783,9 @@ abstract class AbstractPayment extends AbstractMethod
         // Call E-Transactions Direct
         $connector = $this->getEtransactions();
         $data = $connector->directRefund((float) $amount, $order, $txn);
+
+        // Fix possible invalid utf-8 chars
+        $data = array_map('utf8_decode', $data);
 
         // Message
         if ($data['CODEREPONSE'] == '00000') {

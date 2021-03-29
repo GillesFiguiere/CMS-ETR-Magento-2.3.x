@@ -42,9 +42,11 @@ class Index extends \Magento\Backend\App\Action
         $result = $method->makeCapture($order);
 
         if (!$result) {
-            $this->_objectManager->get('Magento\Backend\Model\Session')->setCommentText($this->__('Unable to create an invoice.'));
+            $this->_objectManager
+                ->get('Magento\Backend\Model\Session')
+                ->setCommentText(__('Unable to create an invoice.'));
         }
 
-        $this->_redirect('*/sales/order/view', ['order_id' => $orderId]);
+        $this->_redirect('sales/order/view', ['order_id' => $orderId]);
     }
 }

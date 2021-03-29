@@ -44,10 +44,10 @@ class UpgradeData implements UpgradeDataInterface
     {
         $setup->startSetup();
 
-        // Force 3DS v1 during upgrade for any version <= 2.0.0
-        if (!empty($context->getVersion()) && version_compare($context->getVersion(), '2.0.0', '<=')) {
-            $this->writerInterface->save('payment/etep_cb/tds_version', '1', 'default', 0);
-            $this->writerInterface->save('payment/etep_threetime/tds_version', '1', 'default', 0);
+        // Merge CB/VISA/MC/ECB into one method
+        if (!empty($context->getVersion()) && version_compare($context->getVersion(), '2.0.2', '<=')) {
+            $this->writerInterface->save('payment/etep_cb/cctypes', 'CB', 'default', 0);
+            $this->writerInterface->save('payment/etep_threetime/cctypes', 'CB', 'default', 0);
         }
 
         $setup->endSetup();

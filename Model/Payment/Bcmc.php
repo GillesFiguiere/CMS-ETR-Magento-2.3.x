@@ -24,5 +24,4 @@ namespace ETransactions\Epayment\Model\Payment;
 class Bcmc extends AbstractPayment
 {
     protected $_code = 'etep_bcmc';
-    protected $_3dsMandatory = true;
 }

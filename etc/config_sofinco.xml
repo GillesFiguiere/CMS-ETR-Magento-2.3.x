@@ -30,6 +30,7 @@
                 <rank>77</rank>
                 <identifier>3262411</identifier>
                 <password backend_model="Magento\Config\Model\Config\Backend\Encrypted">1999888I</password>
+                <passwordplus backend_model="Magento\Config\Model\Config\Backend\Encrypted">1999888I</passwordplus>
                 <hmackey backend_model="Magento\Config\Model\Config\Backend\Encrypted">0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF</hmackey>
                 <hmacalgo>SHA512</hmacalgo>
             </merchant>
@@ -57,12 +58,11 @@
                 <can_capture>1</can_capture>
                 <can_use_for_multishipping>1</can_use_for_multishipping>
                 <allowspecific>0</allowspecific>
-                <cctypes>CB,VISA,EUROCARD_MASTERCARD,E_CARD</cctypes>
+                <cctypes>CB</cctypes>
                 <status_paid>etep_paid</status_paid>
                 <status_authorized>etep_authorized</status_authorized>
                 <payment_action>immediate</payment_action>
                 <delay>1</delay>
-                <tds_active>always</tds_active>
                 <cards>
                     <CB>
                         <label>CB</label>
@@ -96,13 +96,12 @@
                 <title>Pay by Card Three Times</title>
                 <group>etep</group>
                 <allowspecific>0</allowspecific>
-                <cctypes>CB,VISA,EUROCARD_MASTERCARD,E_CARD</cctypes>
+                <cctypes>CB</cctypes>
                 <status>
                     <intermediary>etep_intermediary</intermediary>
                     <paid>etep_paid</paid>
                 </status>
                 <action>immediate</action>
-                <tds_active>always</tds_active>
                 <cards>
                     <CB>
                         <label>CB</label>

@@ -29,8 +29,6 @@ class Cb extends AbstractPayment
     const XML_PATH = 'payment/etep_cb/cctypes';
 
     protected $_code = self::CODE;
-    protected $_3dsAllowed = true;
-    protected $_3dsMandatory = true;
     protected $_hasCctypes = true;
     protected $_allowManualDebit = true;
     protected $_allowDeferredDebit = true;
@@ -73,16 +71,5 @@ class Cb extends AbstractPayment
             ];
         }
         return $result;
-    }
-
-    /**
-     * Retrieve 3ds version from configuration
-     *
-     * @param  Mage_Sales_Model_Order $order
-     * @return string
-     */
-    public function get3DSVersion(Order $order)
-    {
-        return $this->getConfigData('tds_version');
     }
 }

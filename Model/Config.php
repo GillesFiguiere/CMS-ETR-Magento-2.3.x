@@ -183,6 +183,12 @@ class Config extends \Magento\Payment\Model\Config
         return $value;
     }
 
+    public function getPasswordplus()
+    {
+        $value = $this->_getConfigValue('etep/merchant/passwordplus');
+        return $value;
+    }
+
     public function getSystemUrls($environment = null)
     {
         return $this->_getUrls('system', $environment);

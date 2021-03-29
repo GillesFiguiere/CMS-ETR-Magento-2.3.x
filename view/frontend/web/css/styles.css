@@ -1,0 +1,4 @@
+/* Override Magento's grayscale filter applied on cards icons */
+.checkout-payment-method .payment-method-content .credit-card-types img {
+    -webkit-filter: none;
+}

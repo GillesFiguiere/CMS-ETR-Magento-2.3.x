@@ -27,7 +27,6 @@ class Prepaid extends AbstractPayment
     const XML_PATH = 'payment/etep_prepaid/cctypes';
 
     protected $_code = self::CODE;
-    protected $_3dsAllowed = true;
     protected $_hasCctypes = true;
     protected $_allowManualDebit = true;
     protected $_allowDeferredDebit = true;

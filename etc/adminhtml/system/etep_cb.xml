@@ -162,27 +162,5 @@
                 </depends>
             </field>
         </group>
-        <group id="etep_cb_tds" translate="label" showInDefault="1" showInWebsite="1" sortOrder="30">
-            <label>3-D Secure</label>
-            <depends>
-                <field id="etep_payments/etep_cb/active">1</field>
-            </depends>
-            <field id="tds_info" translate="label comment" sortOrder="305" showInDefault="1" showInWebsite="1" showInStore="1">
-                <label><![CDATA[Make sure that the contract signed with your bank allows 3-D Secure before proceeding with setup.]]></label>
-                <frontend_model>ETransactions\Epayment\Block\Admin\Field\Info</frontend_model>
-                <depends>
-                    <field id="etep_payments/etep_cb/active">1</field>
-                </depends>
-            </field>
-            <field id="tds_version" translate="label comment" type="select" sortOrder="310" showInDefault="1" showInWebsite="1" showInStore="1">
-                <label>3-D Secure Version</label>
-                <comment><![CDATA[<span style="color: red;">Warning: make sure your setup is coherent with your bank, E-Transactions and Magento module.</span>]]></comment>
-                <source_model>ETransactions\Epayment\Model\Admin\Payment\Version3ds</source_model>
-                <config_path>payment/etep_cb/tds_version</config_path>
-                <depends>
-                    <field id="etep_payments/etep_cb/active">1</field>
-                </depends>
-            </field>
-        </group>
     </group>
 </include>

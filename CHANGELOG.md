@@ -1,5 +1,14 @@
 # Change Log
 
+## [2.0.2] 2021-03-16
+
+- Improve compatibility with Magento 2.4
+- Force 3DSv2 for every cards
+- Fix template related error during checkout
+- Fix refund & capture action on orders
+- Remove grayscale effect on cards logo
+- Merge all credits cards to one single method
+
 ## [2.0.1] 2020-10-16
 
 - Add 3DSv2 support

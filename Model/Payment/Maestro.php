@@ -24,7 +24,6 @@ namespace ETransactions\Epayment\Model\Payment;
 class Maestro extends AbstractPayment
 {
     protected $_code = 'etep_maestro';
-    protected $_3dsMandatory = true;
     protected $_allowManualDebit = true;
     protected $_allowDeferredDebit = true;
     protected $_allowRefund = true;

@@ -56,7 +56,6 @@ class EtepthreetimeConfig
      */
     protected $_isOffline = false;
     protected $scopeConfig;
-    protected $_3dsAllowed = true;
     protected $_hasCctypes = true;
     protected $_allowManualDebit = true;
     protected $_allowDeferredDebit = true;
