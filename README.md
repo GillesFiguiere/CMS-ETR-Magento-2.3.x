@@ -12,10 +12,10 @@ En une seule intégration, offrez plusieurs méthodes de paiement, bénéficiez 
 
 2. Aller dans le dossier racine de Magento2 en ligne de commande (`<your Magento install dir>`)
 
-3. Exécuter la commande suivante pour la récupération des fichiers du module via Composer (un dossier `e-transactions` sera créé dans le sous-dossier `vendor`). Vous aurez besoin de votre `Public key` comme identifiant et de votre `Private key` comme mot de passe :
+3. Exécuter la commande suivante pour la récupération des fichiers du module via Composer (un dossier `etransactions` sera créé dans le sous-dossier `vendor`). Vous aurez besoin de votre `Public key` comme identifiant et de votre `Private key` comme mot de passe :
 
     ```sh
-	composer require e-transactions/epayment
+	composer require etransactions/epayment
     ```
 
 4. Exécuter les commandes suivantes pour l'installation, l'activation et le déploiement du module :
