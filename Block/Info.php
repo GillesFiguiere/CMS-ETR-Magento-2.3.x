@@ -1,6 +1,6 @@
 <?php
 /**
- * E-Transactions Epayment module for Magento
+ * CreditAgricole etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -19,11 +19,11 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace ETransactions\Epayment\Block;
+namespace ETransactions\etransactions\Block;
 
 use Magento\Framework\Phrase;
 use Magento\Payment\Block\ConfigurableInfo;
-use ETransactions\Epayment\Gateway\Response\FraudHandler;
+use ETransactions\etransactions\Gateway\Response\FraudHandler;
 
 class Info extends ConfigurableInfo
 {
@@ -88,7 +88,7 @@ class Info extends ConfigurableInfo
 
     public function getEtransactionsConfig()
     {
-        return $this->_object_manager->get('ETransactions\Epayment\Model\Config');
+        return $this->_object_manager->get('ETransactions\etransactions\Model\Config');
     }
 
     public function getCardImageUrl()
@@ -99,7 +99,7 @@ class Info extends ConfigurableInfo
             return null;
         }
         return $this->getViewFileUrl(
-            'ETransactions_Epayment::' . 'images/' .strtolower($data['cardType']).'.45.png',
+            'ETransactions_etransactions::' . 'images/' .strtolower($data['cardType']).'.45.png',
             ['area'  => 'frontend', 'theme' => 'Magento/luma']
         );
     }
@@ -130,9 +130,9 @@ class Info extends ConfigurableInfo
         $info = $this->getInfo();
         $capture = $info->getEtepCapture();
         $config = $this->getEtransactionsConfig();
-        if ($config->getSubscription() == \ETransactions\Epayment\Model\Config::SUBSCRIPTION_OFFER2 ||
-            $config->getSubscription() == \ETransactions\Epayment\Model\Config::SUBSCRIPTION_OFFER3) {
-            if ($info->getEtepAction() == \ETransactions\Epayment\Model\Payment\AbstractPayment::ETRANSACTION_MANUAL) {
+        if ($config->getSubscription() == \ETransactions\etransactions\Model\Config::SUBSCRIPTION_OFFER2 ||
+            $config->getSubscription() == \ETransactions\etransactions\Model\Config::SUBSCRIPTION_OFFER3) {
+            if ($info->getEtepAction() == \ETransactions\ETransactions\Model\Payment\AbstractPayment::ETRANSACTION_MANUAL) {
                 $order = $info->getOrder();
                 return empty($capture) && $order->canInvoice();
             }
@@ -145,8 +145,8 @@ class Info extends ConfigurableInfo
         $info = $this->getInfo();
         $capture = $info->getEtepCapture();
         $config = $this->getEtransactionsConfig();
-        if ($config->getSubscription() == \ETransactions\Epayment\Model\Config::SUBSCRIPTION_OFFER2 ||
-            $config->getSubscription() == \ETransactions\Epayment\Model\Config::SUBSCRIPTION_OFFER3) {
+        if ($config->getSubscription() == \ETransactions\etransactions\Model\Config::SUBSCRIPTION_OFFER2 ||
+            $config->getSubscription() == \ETransactions\etransactions\Model\Config::SUBSCRIPTION_OFFER3) {
             return !empty($capture);
         }
         return false;
@@ -161,7 +161,7 @@ class Info extends ConfigurableInfo
         }
 
         $action = $info->getEtepAction();
-        $action_model = new \ETransactions\Epayment\Model\Admin\Payment\Action();
+        $action_model = new \ETransactions\etransactions\Model\Admin\Payment\Action();
         $actions = $action_model->toOptionArray();
         $result = '';
         foreach ($actions as $act) {
@@ -169,9 +169,9 @@ class Info extends ConfigurableInfo
                 $result = $act['label'];
             }
         }
-        if (($info->getEtepAction() == \ETransactions\Epayment\Model\Payment\AbstractPayment::ETRANSACTION_DEFERRED) &&
+        if (($info->getEtepAction() == \ETransactions\etransactions\Model\Payment\AbstractPayment::ETRANSACTION_DEFERRED) &&
             (null !== $info->getEtepDelay())) {
-            $delays = new \ETransactions\Epayment\Model\Admin\Payment\Delays();
+            $delays = new \ETransactions\etransactions\Model\Admin\Payment\Delays();
             $delays = $delays->toOptionArray();
             $result .= ' (' . $delays[$info->getEtepDelay()]['label'] . ')';
         }

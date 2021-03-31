@@ -1,6 +1,6 @@
 <?php
 /**
- * E-Transactions Epayment module for Magento
+ * CreditAgricole etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -19,7 +19,7 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace ETransactions\Epayment\Observer;
+namespace ETransactions\etransactions\Observer;
 
 use Magento\Framework\DataObject;
 use Magento\Framework\Event\Observer;
@@ -56,7 +56,7 @@ class DataAssignObserver extends AbstractDataAssignObserver
         }
 
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-        $selected = explode(',', $objectManager->get('ETransactions\Epayment\Model\Ui\EtepcbConfig')->getCards());
+        $selected = explode(',', $objectManager->get('ETransactions\etransactions\Model\Ui\EtepcbConfig')->getCards());
         if (!in_array($cctype, $selected)) {
             throw new \Magento\Framework\Exception\LocalizedException(
                 __('Please select a valid credit card type')

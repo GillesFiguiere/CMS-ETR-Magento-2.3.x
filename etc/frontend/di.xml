@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 /**
- * E-Transactions Epayment module for Magento
+ * CreditAgricole etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -24,16 +24,16 @@
     <type name="Magento\Checkout\Model\CompositeConfigProvider">
         <arguments>
             <argument name="configProviders" xsi:type="array">
-                <item name="etep_cb_config_provider" xsi:type="object">ETransactions\Epayment\Model\Ui\EtepcbConfigProvider</item>
-                <item name="etep_threetime_config_provider" xsi:type="object">ETransactions\Epayment\Model\Ui\EtepthreetimeConfigProvider</item>
-                <item name="etep_prepaid_config_provider" xsi:type="object">ETransactions\Epayment\Model\Ui\EtepprepaidConfigProvider</item>
-                <item name="etep_paybuttons_config_provider" xsi:type="object">ETransactions\Epayment\Model\Ui\EteppaybuttonsConfigProvider</item>
-                <item name="etep_private_config_provider" xsi:type="object">ETransactions\Epayment\Model\Ui\EtepprivateConfigProvider</item>
-                <item name="etep_financial_config_provider" xsi:type="object">ETransactions\Epayment\Model\Ui\EtepfinancialConfigProvider</item>
+                <item name="etep_cb_config_provider" xsi:type="object">ETransactions\etransactions\Model\Ui\EtepcbConfigProvider</item>
+                <item name="etep_threetime_config_provider" xsi:type="object">ETransactions\etransactions\Model\Ui\EtepthreetimeConfigProvider</item>
+                <item name="etep_prepaid_config_provider" xsi:type="object">ETransactions\etransactions\Model\Ui\EtepprepaidConfigProvider</item>
+                <item name="etep_paybuttons_config_provider" xsi:type="object">ETransactions\etransactions\Model\Ui\EteppaybuttonsConfigProvider</item>
+                <item name="etep_private_config_provider" xsi:type="object">ETransactions\etransactions\Model\Ui\EtepprivateConfigProvider</item>
+                <item name="etep_financial_config_provider" xsi:type="object">ETransactions\etransactions\Model\Ui\EtepfinancialConfigProvider</item>
             </argument>
         </arguments>
     </type>
-    <type name="ETransactions\Epayment\Block\Info">
+    <type name="ETransactions\etransactions\Block\Info">
         <arguments>
             <argument name="data" xsi:type="array">
                 <item xsi:type="string" name="is_secure_mode">1</item>
@@ -41,6 +41,6 @@
         </arguments>
     </type>
     <type name="Magento\Framework\View\Layout">
-        <plugin name="etep_layout_plugin" type="ETransactions\Epayment\Plugin\Framework\View\LayoutPlugin" sortOrder="1" />
+        <plugin name="etep_layout_plugin" type="ETransactions\etransactions\Plugin\Framework\View\LayoutPlugin" sortOrder="1" />
     </type>
 </config>

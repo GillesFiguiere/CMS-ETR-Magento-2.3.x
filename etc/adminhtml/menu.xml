@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 /**
- * E-Transactions Epayment module for Magento
+ * CreditAgricole etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -22,8 +22,8 @@
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
     <menu>
-<!--        <add id="ETransactions_Epayment::etransactions" title="Etransactions" module="ETransactions_Epayment" sortOrder="15" dependsOnModule="ETransactions_Epayment" resource="ETransactions_Epayment::etransactions"/>
-        <add id="ETransactions_Epayment::etransactions_capture" title="Capture" module="ETransactions_Epayment" sortOrder="10" parent="ETransactions_Epayment::etransactions" resource="ETransactions_Epayment::etransactions" />
-        <add id="ETransactions_Epayment::etransactions_capture_test" title="Test" module="ETransactions_Epayment" sortOrder="10" parent="ETransactions_Epayment::etransactions_capture" action="etransactions/capture" resource="ETransactions_Epayment::etransactions_capture_test"/>-->
+<!--        <add id="ETransactions_etransactions::etransactions" title="Etransactions" module="ETransactions_etransactions" sortOrder="15" dependsOnModule="ETransactions_etransactions" resource="ETransactions_etransactions::etransactions"/>
+        <add id="ETransactions_etransactions::etransactions_capture" title="Capture" module="ETransactions_etransactions" sortOrder="10" parent="ETransactions_etransactions::etransactions" resource="ETransactions_etransactions::etransactions" />
+        <add id="ETransactions_etransactions::etransactions_capture_test" title="Test" module="ETransactions_etransactions" sortOrder="10" parent="ETransactions_etransactions::etransactions_capture" action="etransactions/capture" resource="ETransactions_etransactions::etransactions_capture_test"/>-->
     </menu>
 </config>

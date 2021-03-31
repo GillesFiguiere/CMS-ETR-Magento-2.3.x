@@ -1,6 +1,6 @@
 <?php
 /**
- * E-Transactions Epayment module for Magento
+ * CreditAgricole etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -19,7 +19,7 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace ETransactions\Epayment\Controller\Adminhtml\Capture;
+namespace ETransactions\etransactions\Controller\Adminhtml\Capture;
 
 class Index extends \Magento\Backend\App\Action
 {

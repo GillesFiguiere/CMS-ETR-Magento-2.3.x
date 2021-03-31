@@ -1,6 +1,6 @@
 <?php
 /**
- * E-Transactions Epayment module for Magento
+ * CreditAgricole etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -18,20 +18,20 @@
  * @license   http://opensource.org/licenses/OSL-3.0
  * @link      http://www.e-transactions.fr/
  */
-namespace ETransactions\Epayment\Controller\Payment;
+namespace ETransactions\etransactions\Controller\Payment;
 
 use \Magento\Framework\Validator\Exception;
 
-class Failed extends \ETransactions\Epayment\Controller\Payment
+class Failed extends \ETransactions\etransactions\Controller\Payment
 {
     public function execute()
     {
         try {
             $session = $this->getSession();
-            $etransactions = $this->getEtransactions();
+            $creditagricole = $this->getEtransactions();
 
             // Retrieves params
-            $params = $etransactions->getParams(false, false);
+            $params = $creditagricole->getParams(false, false);
             if ($params === false) {
                 return $this->_404();
             }
@@ -51,10 +51,10 @@ class Failed extends \ETransactions\Epayment\Controller\Payment
             // Cleanup
             $session->unsCurrentEtepOrderId();
 
-            $message = sprintf('Order %d: Customer is back from E-Transactions payment page. Payment refused by E-Transactions (%d).', $order->getIncrementId(), $params['error']);
+            $message = sprintf('Order %d: Customer is back from CreditAgricole payment page. Payment refused by CreditAgricole (%d).', $order->getIncrementId(), $params['error']);
             $this->logDebug($message);
 
-            $message = __('Payment refused by E-Transactions.');
+            $message = __('Payment refused by CreditAgricole.');
             $this->_messageManager->addError($message);
 
             // redirect

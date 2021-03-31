@@ -1,5 +1,5 @@
 /**
- * ETransactions Epayment module for Magento
+ * CreditAgricole E-Transactions module for Magento
  *
  * Feel free to contact LicenseCompany at LicenseEmailContact for any
  * question.
@@ -24,7 +24,7 @@
      [
      'jquery',
      'Magento_Checkout/js/view/payment/default',
-     'ETransactions_Epayment/js/action/set-payment-method',
+     'ETransactions_E-Transactions/js/action/set-payment-method',
      'Magento_Checkout/js/model/full-screen-loader',
      'mage/url',
      ],
@@ -33,7 +33,7 @@
 
         return Component.extend({
             defaults: {
-                template: 'ETransactions_Epayment/payment/etep_multi',
+                template: 'ETransactions_E-Transactions/payment/etep_multi',
                 transactionResult: ''
             },
             initObservable: function () {
@@ -60,7 +60,7 @@
             getCreditCardType: function () {
                 return jQuery('input[name="payment[cc_type]"]:checked').val();
             },
-            continueToETransactions: function () {
+            continueToCreditAgricole: function () {
                 this.redirectAfterPlaceOrder = false;
                     this.selectPaymentMethod(); // save selected payment method in Quote
                     setPaymentMethodAction(this.messageContainer);

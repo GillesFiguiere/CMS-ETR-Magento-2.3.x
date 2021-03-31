@@ -1,6 +1,6 @@
 <?php
 /**
- * E-Transactions Epayment module for Magento
+ * CreditAgricole etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -19,7 +19,7 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace ETransactions\Epayment\Model\Ui;
+namespace ETransactions\etransactions\Model\Ui;
 
 /**
  * Class Etepcb
@@ -42,12 +42,12 @@ class EtepcbConfig
     /**
      * @var string
      */
-    // protected $_formBlockType = 'ETransactions\Epayment\Block\Form\Etepcb';
+    // protected $_formBlockType = 'ETransactions\etransactions\Block\Form\Etepcb';
 
     /**
      * @var string
      */
-    // protected $_infoBlockType = 'ETransactions\Epayment\Block\Info\Etepcb';
+    // protected $_infoBlockType = 'ETransactions\etransactions\Block\Info\Etepcb';
 
     /**
      * Availability option

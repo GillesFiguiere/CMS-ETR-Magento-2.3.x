@@ -1,5 +1,5 @@
 /**
- * ETransactions Epayment module for Magento
+ * CreditAgricole E-Transactions module for Magento
  *
  * Feel free to contact LicenseCompany at LicenseEmailContact for any
  * question.
@@ -32,39 +32,39 @@ define(
         rendererList.push(
             {
                 type: 'etep_cb',
-                component: 'ETransactions_Epayment/js/view/payment/method-renderer/etep_multi-method'
+                component: 'ETransactions_E-Transactions/js/view/payment/method-renderer/etep_multi-method'
             },
             {
                 type: 'etep_threetime',
-                component: 'ETransactions_Epayment/js/view/payment/method-renderer/etep_multi-method'
+                component: 'ETransactions_E-Transactions/js/view/payment/method-renderer/etep_multi-method'
             },
             {
                 type: 'etep_paypal',
-                component: 'ETransactions_Epayment/js/view/payment/method-renderer/etep_simple-method'
+                component: 'ETransactions_E-Transactions/js/view/payment/method-renderer/etep_simple-method'
             },
             {
                 type: 'etep_private',
-                component: 'ETransactions_Epayment/js/view/payment/method-renderer/etep_multi-method'
+                component: 'ETransactions_E-Transactions/js/view/payment/method-renderer/etep_multi-method'
             },
             {
                 type: 'etep_prepaid',
-                component: 'ETransactions_Epayment/js/view/payment/method-renderer/etep_multi-method'
+                component: 'ETransactions_E-Transactions/js/view/payment/method-renderer/etep_multi-method'
             },
             {
                 type: 'etep_financial',
-                component: 'ETransactions_Epayment/js/view/payment/method-renderer/etep_multi-method'
+                component: 'ETransactions_E-Transactions/js/view/payment/method-renderer/etep_multi-method'
             },
             {
                 type: 'etep_bcmc',
-                component: 'ETransactions_Epayment/js/view/payment/method-renderer/etep_simple-method'
+                component: 'ETransactions_E-Transactions/js/view/payment/method-renderer/etep_simple-method'
             },
             {
                 type: 'etep_paybuttons',
-                component: 'ETransactions_Epayment/js/view/payment/method-renderer/etep_multi-method'
+                component: 'ETransactions_E-Transactions/js/view/payment/method-renderer/etep_multi-method'
             },
             {
                 type: 'etep_maestro',
-                component: 'ETransactions_Epayment/js/view/payment/method-renderer/etep_simple-method'
+                component: 'ETransactions_E-Transactions/js/view/payment/method-renderer/etep_simple-method'
             }
         );
 

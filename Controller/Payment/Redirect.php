@@ -1,6 +1,6 @@
 <?php
 /**
- * E-Transactions Epayment module for Magento
+ * CreditAgricole etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -19,9 +19,9 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace ETransactions\Epayment\Controller\Payment;
+namespace ETransactions\etransactions\Controller\Payment;
 
-class Redirect extends \ETransactions\Epayment\Controller\Payment
+class Redirect extends \ETransactions\etransactions\Controller\Payment
 {
     public function execute()
     {
@@ -109,7 +109,7 @@ class Redirect extends \ETransactions\Epayment\Controller\Payment
         }
 
         // add history comment and save it
-        $order->addStatusHistoryComment(__('ETransactions - Client sent to E-Transactions payment page.'), false)
+        $order->addStatusHistoryComment(__('ETransactions - Client sent to CreditAgricole payment page.'), false)
             ->setIsCustomerNotified(false)
             ->save();
 

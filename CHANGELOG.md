@@ -71,7 +71,7 @@
 ## [1.0.5] 2016-11-15
 
 ### Ajouts
-- Paiement : possibilité d'utiliser la page de paiement E-Transactions RWD
+- Paiement : possibilité d'utiliser la page de paiement CreditAgricole RWD
 - PayPal : paramétrage spécifique lors de l'appel à la plateforme de paiement
 
 ## [1.0.4] 2016-11-15
@@ -94,7 +94,7 @@
 ## [1.0.1] 2016-10-25
 
 ### Ajouts
-- Paiement : ajout du paramètre de version pour suivi des transactions par E-Transactions
+- Paiement : ajout du paramètre de version pour suivi des transactions par CreditAgricole
 - Configuration : gestion du multi-devise pour le paiement avec possibilité de forcer le paiement avec la devise par défaut ou de laisser le choix au client parmi les devises disponibles
 
 ### Modifications

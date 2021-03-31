@@ -1,6 +1,6 @@
 <?php
 /**
- * E-Transactions Epayment module for Magento
+ * CreditAgricole etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -19,7 +19,7 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace ETransactions\Epayment\Controller;
+namespace ETransactions\etransactions\Controller;
 
 use Magento\Framework\App\CsrfAwareActionInterface;
 use Magento\Framework\App\RequestInterface;
@@ -35,8 +35,8 @@ class Payment extends \Magento\Framework\App\Action\Action implements CsrfAwareA
     protected $_quoteRepository;
     protected $_logger;
     protected $_checkoutSession;
-    protected $_etransactionsConfig;
-    protected $_etransactions;
+    protected $_creditagricoleConfig;
+    protected $_creditagricole;
     protected $_registry;
 
     /**
@@ -49,8 +49,8 @@ class Payment extends \Magento\Framework\App\Action\Action implements CsrfAwareA
         \Psr\Log\LoggerInterface $loggerInteface,
         \Magento\Quote\Api\CartRepositoryInterface $cartRepositoryInterface,
         \Magento\Checkout\Model\Session $checkoutSession,
-        \ETransactions\Epayment\Model\Config $etransactionsConfig,
-        \ETransactions\Epayment\Model\Etransactions $etransactions,
+        \ETransactions\etransactions\Model\Config $creditagricoleConfig,
+        \ETransactions\etransactions\Model\Etransactions $creditagricole,
         \Magento\Framework\Registry $registry
     ) {
         $this->resultPageFactory = $resultPageFactory;
@@ -60,8 +60,8 @@ class Payment extends \Magento\Framework\App\Action\Action implements CsrfAwareA
         $this->_messageManager = $context->getMessageManager();
         $this->_quoteRepository = $cartRepositoryInterface;
         $this->_checkoutSession = $checkoutSession;
-        $this->_etransactionsConfig = $etransactionsConfig;
-        $this->_etransactions = $etransactions;
+        $this->_creditagricoleConfig = $creditagricoleConfig;
+        $this->_creditagricole = $creditagricole;
         $this->_registry = $registry;
     }
 
@@ -136,8 +136,8 @@ class Payment extends \Magento\Framework\App\Action\Action implements CsrfAwareA
     protected function _getOrderFromParams(array $params)
     {
         // Retrieves order
-        $etransactions = $this->getEtransactions();
-        $order = $etransactions->untokenizeOrder($params['reference']);
+        $creditagricole = $this->getEtransactions();
+        $order = $creditagricole->untokenizeOrder($params['reference']);
         if (is_null($order) || is_null($order->getId())) {
             return null;
         }
@@ -146,12 +146,12 @@ class Payment extends \Magento\Framework\App\Action\Action implements CsrfAwareA
 
     public function getConfig()
     {
-        return $this->_etransactionsConfig;
+        return $this->_creditagricoleConfig;
     }
 
     public function getEtransactions()
     {
-        return $this->_etransactions;
+        return $this->_creditagricole;
     }
 
     public function getSession()

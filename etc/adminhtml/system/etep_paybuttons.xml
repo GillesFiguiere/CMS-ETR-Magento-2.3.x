@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 /**
- * E-Transactions Epayment module for Magento
+ * CreditAgricole etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -33,7 +33,7 @@
         <field id="pb_cctypes" translate="label comment" type="multiselect" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
             <label>Card type</label>
             <config_path>payment/etep_paybuttons/cctypes</config_path>
-            <source_model>ETransactions\Epayment\Model\Admin\Cards\Paybuttons</source_model>
+            <source_model>ETransactions\etransactions\Model\Admin\Cards\Paybuttons</source_model>
             <depends>
                 <field id="pb_active">1</field>
             </depends>
@@ -63,7 +63,7 @@
 	        <field id="pb_status_paid" translate="label comment" type="select" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="0">
 	        	<label>Once paid</label>
 	        	<config_path>payment/etep_paybuttons/status_paid</config_path>
-	        	<source_model>ETransactions\Epayment\Model\Admin\Order\Status\Processing</source_model>
+	        	<source_model>ETransactions\etransactions\Model\Admin\Order\Status\Processing</source_model>
 	        	<depends>
 	                <field id="etep_payments/etep_paybuttons/pb_active">1</field>
 	            </depends>

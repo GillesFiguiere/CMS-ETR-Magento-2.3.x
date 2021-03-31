@@ -1,6 +1,6 @@
 <?php
 /**
- * E-Transactions Epayment module for Magento
+ * CreditAgricole etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -19,7 +19,7 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace ETransactions\Epayment\Block\Admin;
+namespace ETransactions\etransactions\Block\Admin;
 
 use Magento\Framework\View\Element\Template;
 
@@ -34,7 +34,7 @@ class Presentation extends Template
     public function getHtmlTemplate()
     {
         $manager = \Magento\Framework\App\ObjectManager::getInstance();
-        $config  = $manager->get('ETransactions\Epayment\Model\Config');
+        $config  = $manager->get('ETransactions\etransactions\Model\Config');
         $lang = $manager->get('Magento\Framework\Locale\Resolver');
         if (!empty($lang)) {
             $lang = preg_replace('#_.*$#', '', $lang->getLocale());

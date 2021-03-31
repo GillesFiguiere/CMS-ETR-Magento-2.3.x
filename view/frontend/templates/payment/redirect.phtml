@@ -1,6 +1,6 @@
 <?php
 /**
- * E-Transactions Epayment module for Magento
+ * CreditAgricole etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -25,7 +25,7 @@ try {
 	if ($values['PBX_TYPEPAIEMENT'] == 'KWIXO') {
 		$url = $this->escapeUrl($this->getKwixoUrl());
 	}
-	else if ($this->helper('ETransactions\Epayment\Helper\Mobile')->isMobile()) {
+	else if ($this->helper('ETransactions\etransactions\Helper\Mobile')->isMobile()) {
 		$url = $this->escapeUrl($this->getMobileUrl());
 	}
 	else {
@@ -56,11 +56,11 @@ else {
 	<form id="etep_form" method="post" action="<?php echo $url; ?>" enctype="application/x-www-form-urlencoded">
 		<?php if ($type != 'hidden'): ?>
 			<p>
-				<?php echo __('This is a debug view. Click continue to be redirected to Epayment payment page.'); ?>
+				<?php echo __('This is a debug view. Click continue to be redirected to etransactions payment page.'); ?>
 			</p>
 		<?php else: ?>
 			<p>
-				<?php echo __('You will be redirected to the Epayment payment page. If not, please use the button bellow.'); ?>
+				<?php echo __('You will be redirected to the etransactions payment page. If not, please use the button bellow.'); ?>
 			</p>
 		<?php endif; ?>
 		<center><button><?php echo __('Continue...'); ?></button></center>

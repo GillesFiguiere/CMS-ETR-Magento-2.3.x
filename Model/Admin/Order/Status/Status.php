@@ -1,6 +1,6 @@
 <?php
 /**
- * E-Transactions Epayment module for Magento
+ * CreditAgricole etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -19,9 +19,9 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace ETransactions\Epayment\Model\Admin\Order\Status;
+namespace ETransactions\etransactions\Model\Admin\Order\Status;
 
-class Status extends \ETransactions\Epayment\Model\Admin\Order\Status
+class Status extends \ETransactions\etransactions\Model\Admin\Order\Status
 {
     protected $_stateStatuses = [
         \Magento\Sales\Model\Order::STATE_NEW,
