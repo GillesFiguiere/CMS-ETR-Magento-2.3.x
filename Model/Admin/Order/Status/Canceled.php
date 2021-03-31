@@ -1,6 +1,6 @@
 <?php
 /**
- * CreditAgricole etransactions module for Magento
+ * E-Transactions etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -19,9 +19,9 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace ETransactions\etransactions\Model\Admin\Order\Status;
+namespace creditagricole\etransactions\Model\Admin\Order\Status;
 
-class Canceled extends \ETransactions\etransactions\Model\Admin\Order\Status
+class Canceled extends \creditagricole\etransactions\Model\Admin\Order\Status
 {
     protected $_stateStatuses = \Magento\Sales\Model\Order::STATE_CANCELED;
 }

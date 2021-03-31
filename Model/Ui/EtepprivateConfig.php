@@ -1,6 +1,6 @@
 <?php
 /**
- * CreditAgricole etransactions module for Magento
+ * E-Transactions etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -19,7 +19,7 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace ETransactions\etransactions\Model\Ui;
+namespace creditagricole\etransactions\Model\Ui;
 
 /**
  * Class Etepprivate
@@ -42,12 +42,12 @@ class EtepprivateConfig
     /**
      * @var string
      */
-    // protected $_formBlockType = 'ETransactions\etransactions\Block\Form\Etepprivate';
+    // protected $_formBlockType = 'creditagricole\etransactions\Block\Form\Etepprivate';
 
     /**
      * @var string
      */
-    // protected $_infoBlockType = 'ETransactions\etransactions\Block\Info\Etepprivate';
+    // protected $_infoBlockType = 'creditagricole\etransactions\Block\Info\Etepprivate';
 
     /**
      * Availability option

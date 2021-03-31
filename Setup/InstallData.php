@@ -1,6 +1,6 @@
 <?php
 /**
- * CreditAgricole etransactions module for Magento
+ * E-Transactions etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -19,7 +19,7 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace ETransactions\etransactions\Setup;
+namespace creditagricole\etransactions\Setup;
 
 use Magento\Eav\Setup\EavSetupFactory;
 use Magento\Framework\Setup\InstallDataInterface;

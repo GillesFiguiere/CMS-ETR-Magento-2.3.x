@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 /**
- * CreditAgricole etransactions module for Magento
+ * E-Transactions etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -24,7 +24,7 @@
 <!--    <type name="Magento\Framework\Console\CommandList">
         <arguments>
             <argument name="commands" xsi:type="array">
-                <item name="etransactions_test_save_order" xsi:type="object">ETransactions\etransactions\Console\Command\OrderSaveCommand</item>
+                <item name="creditagricole_test_save_order" xsi:type="object">creditagricole\etransactions\Console\Command\OrderSaveCommand</item>
 
             </argument>
         </arguments>
@@ -33,9 +33,9 @@
     <!-- Payment Method Facade configuration -->
     <virtualType name="EtepcbFacade" type="Magento\Payment\Model\Method\Adapter">
         <arguments>
-            <argument name="code" xsi:type="const">\ETransactions\etransactions\Model\Ui\EtepcbConfigProvider::CODE</argument>
-            <argument name="formBlockType" xsi:type="string">ETransactions\etransactions\Block\Checkout\Payment</argument>
-            <argument name="infoBlockType" xsi:type="string">ETransactions\etransactions\Block\Info</argument>
+            <argument name="code" xsi:type="const">\creditagricole\etransactions\Model\Ui\EtepcbConfigProvider::CODE</argument>
+            <argument name="formBlockType" xsi:type="string">creditagricole\etransactions\Block\Checkout\Payment</argument>
+            <argument name="infoBlockType" xsi:type="string">creditagricole\etransactions\Block\Info</argument>
             <argument name="valueHandlerPool" xsi:type="object">EtepcbValueHandlerPool</argument>
             <argument name="commandPool" xsi:type="object">EtepcbCommandPool</argument>
         </arguments>
@@ -44,7 +44,7 @@
     <!-- Configuration reader -->
     <virtualType name="EtepcbConfig" type="Magento\Payment\Gateway\Config\Config">
         <arguments>
-            <argument name="methodCode" xsi:type="const">\ETransactions\etransactions\Model\Ui\EtepcbConfigProvider::CODE</argument>
+            <argument name="methodCode" xsi:type="const">\creditagricole\etransactions\Model\Ui\EtepcbConfigProvider::CODE</argument>
         </arguments>
     </virtualType>
 
@@ -55,7 +55,7 @@
         </arguments>
     </virtualType>
 
-    <type name="ETransactions\etransactions\Gateway\Http\Client\ClientMock">
+    <type name="creditagricole\etransactions\Gateway\Http\Client\ClientMock">
         <arguments>
             <argument name="logger" xsi:type="object">EtepcbLogger</argument>
         </arguments>
@@ -77,8 +77,8 @@
         <arguments>
             <argument name="requestBuilder" xsi:type="object">EtepcbAuthorizationRequest</argument>
             <argument name="handler" xsi:type="object">EtepcbResponseHandlerComposite</argument>
-            <argument name="transferFactory" xsi:type="object">ETransactions\etransactions\Gateway\Http\TransferFactory</argument>
-            <argument name="client" xsi:type="object">ETransactions\etransactions\Gateway\Http\Client\ClientMock</argument>
+            <argument name="transferFactory" xsi:type="object">creditagricole\etransactions\Gateway\Http\TransferFactory</argument>
+            <argument name="client" xsi:type="object">creditagricole\etransactions\Gateway\Http\Client\ClientMock</argument>
         </arguments>
     </virtualType>
 
@@ -86,12 +86,12 @@
     <virtualType name="EtepcbAuthorizationRequest" type="Magento\Payment\Gateway\Request\BuilderComposite">
         <arguments>
             <argument name="builders" xsi:type="array">
-                <item name="transaction" xsi:type="string">ETransactions\etransactions\Gateway\Request\AuthorizationRequest</item>
-                <item name="mockData" xsi:type="string">ETransactions\etransactions\Gateway\Request\MockDataRequest</item>
+                <item name="transaction" xsi:type="string">creditagricole\etransactions\Gateway\Request\AuthorizationRequest</item>
+                <item name="mockData" xsi:type="string">creditagricole\etransactions\Gateway\Request\MockDataRequest</item>
             </argument>
         </arguments>
     </virtualType>
-    <type name="ETransactions\etransactions\Gateway\Request\AuthorizationRequest">
+    <type name="creditagricole\etransactions\Gateway\Request\AuthorizationRequest">
         <arguments>
             <argument name="config" xsi:type="object">EtepcbConfig</argument>
         </arguments>
@@ -100,16 +100,16 @@
     <!-- Capture command -->
     <virtualType name="EtepcbCaptureCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
         <arguments>
-            <argument name="requestBuilder" xsi:type="object">ETransactions\etransactions\Gateway\Request\CaptureRequest</argument>
-            <argument name="handler" xsi:type="object">ETransactions\etransactions\Gateway\Response\TxnIdHandler</argument>
-            <argument name="transferFactory" xsi:type="object">ETransactions\etransactions\Gateway\Http\TransferFactory</argument>
-            <argument name="validator" xsi:type="object">ETransactions\etransactions\Gateway\Validator\ResponseCodeValidator</argument>
-            <argument name="client" xsi:type="object">ETransactions\etransactions\Gateway\Http\Client\ClientMock</argument>
+            <argument name="requestBuilder" xsi:type="object">creditagricole\etransactions\Gateway\Request\CaptureRequest</argument>
+            <argument name="handler" xsi:type="object">creditagricole\etransactions\Gateway\Response\TxnIdHandler</argument>
+            <argument name="transferFactory" xsi:type="object">creditagricole\etransactions\Gateway\Http\TransferFactory</argument>
+            <argument name="validator" xsi:type="object">creditagricole\etransactions\Gateway\Validator\ResponseCodeValidator</argument>
+            <argument name="client" xsi:type="object">creditagricole\etransactions\Gateway\Http\Client\ClientMock</argument>
         </arguments>
     </virtualType>
 
     <!-- Capture Request -->
-    <type name="ETransactions\etransactions\Gateway\Request\CaptureRequest">
+    <type name="creditagricole\etransactions\Gateway\Request\CaptureRequest">
         <arguments>
             <argument name="config" xsi:type="object">EtepcbConfig</argument>
         </arguments>
@@ -118,16 +118,16 @@
     <!-- Void command -->
     <virtualType name="EtepcbVoidCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
         <arguments>
-            <argument name="requestBuilder" xsi:type="object">ETransactions\etransactions\Gateway\Request\VoidRequest</argument>
-            <argument name="handler" xsi:type="object">ETransactions\etransactions\Gateway\Response\TxnIdHandler</argument>
-            <argument name="transferFactory" xsi:type="object">ETransactions\etransactions\Gateway\Http\TransferFactory</argument>
-            <argument name="validator" xsi:type="object">ETransactions\etransactions\Gateway\Validator\ResponseCodeValidator</argument>
-            <argument name="client" xsi:type="object">ETransactions\etransactions\Gateway\Http\Client\ClientMock</argument>
+            <argument name="requestBuilder" xsi:type="object">creditagricole\etransactions\Gateway\Request\VoidRequest</argument>
+            <argument name="handler" xsi:type="object">creditagricole\etransactions\Gateway\Response\TxnIdHandler</argument>
+            <argument name="transferFactory" xsi:type="object">creditagricole\etransactions\Gateway\Http\TransferFactory</argument>
+            <argument name="validator" xsi:type="object">creditagricole\etransactions\Gateway\Validator\ResponseCodeValidator</argument>
+            <argument name="client" xsi:type="object">creditagricole\etransactions\Gateway\Http\Client\ClientMock</argument>
         </arguments>
     </virtualType>
 
     <!-- Void Request -->
-    <type name="ETransactions\etransactions\Gateway\Request\VoidRequest">
+    <type name="creditagricole\etransactions\Gateway\Request\VoidRequest">
         <arguments>
             <argument name="config" xsi:type="object">EtepcbConfig</argument>
         </arguments>
@@ -137,8 +137,8 @@
     <virtualType name="EtepcbResponseHandlerComposite" type="Magento\Payment\Gateway\Response\HandlerChain">
         <arguments>
             <argument name="handlers" xsi:type="array">
-                <item name="txnid" xsi:type="string">ETransactions\etransactions\Gateway\Response\TxnIdHandler</item>
-                <item name="fraud" xsi:type="string">ETransactions\etransactions\Gateway\Response\FraudHandler</item>
+                <item name="txnid" xsi:type="string">creditagricole\etransactions\Gateway\Response\TxnIdHandler</item>
+                <item name="fraud" xsi:type="string">creditagricole\etransactions\Gateway\Response\FraudHandler</item>
             </argument>
         </arguments>
     </virtualType>
@@ -157,7 +157,7 @@
         </arguments>
     </virtualType>
 
-    <type name="ETransactions\etransactions\Block\Info">
+    <type name="creditagricole\etransactions\Block\Info">
         <arguments>
             <argument name="config" xsi:type="object">EtepcbConfig</argument>
         </arguments>
@@ -168,9 +168,9 @@
     <!-- Payment Method Facade configuration -->
     <virtualType name="EtepthreetimeFacade" type="Magento\Payment\Model\Method\Adapter">
         <arguments>
-            <argument name="code" xsi:type="const">\ETransactions\etransactions\Model\Ui\EtepthreetimeConfigProvider::CODE</argument>
-            <argument name="formBlockType" xsi:type="string">ETransactions\etransactions\Block\Checkout\Payment</argument>
-            <argument name="infoBlockType" xsi:type="string">ETransactions\etransactions\Block\Info</argument>
+            <argument name="code" xsi:type="const">\creditagricole\etransactions\Model\Ui\EtepthreetimeConfigProvider::CODE</argument>
+            <argument name="formBlockType" xsi:type="string">creditagricole\etransactions\Block\Checkout\Payment</argument>
+            <argument name="infoBlockType" xsi:type="string">creditagricole\etransactions\Block\Info</argument>
             <argument name="valueHandlerPool" xsi:type="object">EtepthreetimeValueHandlerPool</argument>
             <argument name="commandPool" xsi:type="object">EtepthreetimeCommandPool</argument>
         </arguments>
@@ -179,7 +179,7 @@
     <!-- Configuration reader -->
     <virtualType name="EtepthreetimeConfig" type="Magento\Payment\Gateway\Config\Config">
         <arguments>
-            <argument name="methodCode" xsi:type="const">\ETransactions\etransactions\Model\Ui\EtepthreetimeConfigProvider::CODE</argument>
+            <argument name="methodCode" xsi:type="const">\creditagricole\etransactions\Model\Ui\EtepthreetimeConfigProvider::CODE</argument>
         </arguments>
     </virtualType>
 
@@ -190,7 +190,7 @@
         </arguments>
     </virtualType>
 
-    <type name="ETransactions\etransactions\Gateway\Http\Client\ClientMock">
+    <type name="creditagricole\etransactions\Gateway\Http\Client\ClientMock">
         <arguments>
             <argument name="logger" xsi:type="object">EtepthreetimeLogger</argument>
         </arguments>
@@ -212,8 +212,8 @@
         <arguments>
             <argument name="requestBuilder" xsi:type="object">EtepthreetimeAuthorizationRequest</argument>
             <argument name="handler" xsi:type="object">EtepthreetimeResponseHandlerComposite</argument>
-            <argument name="transferFactory" xsi:type="object">ETransactions\etransactions\Gateway\Http\TransferFactory</argument>
-            <argument name="client" xsi:type="object">ETransactions\etransactions\Gateway\Http\Client\ClientMock</argument>
+            <argument name="transferFactory" xsi:type="object">creditagricole\etransactions\Gateway\Http\TransferFactory</argument>
+            <argument name="client" xsi:type="object">creditagricole\etransactions\Gateway\Http\Client\ClientMock</argument>
         </arguments>
     </virtualType>
 
@@ -221,12 +221,12 @@
     <virtualType name="EtepthreetimeAuthorizationRequest" type="Magento\Payment\Gateway\Request\BuilderComposite">
         <arguments>
             <argument name="builders" xsi:type="array">
-                <item name="transaction" xsi:type="string">ETransactions\etransactions\Gateway\Request\AuthorizationRequest</item>
-                <item name="mockData" xsi:type="string">ETransactions\etransactions\Gateway\Request\MockDataRequest</item>
+                <item name="transaction" xsi:type="string">creditagricole\etransactions\Gateway\Request\AuthorizationRequest</item>
+                <item name="mockData" xsi:type="string">creditagricole\etransactions\Gateway\Request\MockDataRequest</item>
             </argument>
         </arguments>
     </virtualType>
-    <type name="ETransactions\etransactions\Gateway\Request\AuthorizationRequest">
+    <type name="creditagricole\etransactions\Gateway\Request\AuthorizationRequest">
         <arguments>
             <argument name="config" xsi:type="object">EtepthreetimeConfig</argument>
         </arguments>
@@ -235,16 +235,16 @@
     <!-- Capture command -->
     <virtualType name="EtepthreetimeCaptureCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
         <arguments>
-            <argument name="requestBuilder" xsi:type="object">ETransactions\etransactions\Gateway\Request\CaptureRequest</argument>
-            <argument name="handler" xsi:type="object">ETransactions\etransactions\Gateway\Response\TxnIdHandler</argument>
-            <argument name="transferFactory" xsi:type="object">ETransactions\etransactions\Gateway\Http\TransferFactory</argument>
-            <argument name="validator" xsi:type="object">ETransactions\etransactions\Gateway\Validator\ResponseCodeValidator</argument>
-            <argument name="client" xsi:type="object">ETransactions\etransactions\Gateway\Http\Client\ClientMock</argument>
+            <argument name="requestBuilder" xsi:type="object">creditagricole\etransactions\Gateway\Request\CaptureRequest</argument>
+            <argument name="handler" xsi:type="object">creditagricole\etransactions\Gateway\Response\TxnIdHandler</argument>
+            <argument name="transferFactory" xsi:type="object">creditagricole\etransactions\Gateway\Http\TransferFactory</argument>
+            <argument name="validator" xsi:type="object">creditagricole\etransactions\Gateway\Validator\ResponseCodeValidator</argument>
+            <argument name="client" xsi:type="object">creditagricole\etransactions\Gateway\Http\Client\ClientMock</argument>
         </arguments>
     </virtualType>
 
     <!-- Capture Request -->
-    <type name="ETransactions\etransactions\Gateway\Request\CaptureRequest">
+    <type name="creditagricole\etransactions\Gateway\Request\CaptureRequest">
         <arguments>
             <argument name="config" xsi:type="object">EtepthreetimeConfig</argument>
         </arguments>
@@ -253,16 +253,16 @@
     <!-- Void command -->
     <virtualType name="EtepthreetimeVoidCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
         <arguments>
-            <argument name="requestBuilder" xsi:type="object">ETransactions\etransactions\Gateway\Request\VoidRequest</argument>
-            <argument name="handler" xsi:type="object">ETransactions\etransactions\Gateway\Response\TxnIdHandler</argument>
-            <argument name="transferFactory" xsi:type="object">ETransactions\etransactions\Gateway\Http\TransferFactory</argument>
-            <argument name="validator" xsi:type="object">ETransactions\etransactions\Gateway\Validator\ResponseCodeValidator</argument>
-            <argument name="client" xsi:type="object">ETransactions\etransactions\Gateway\Http\Client\ClientMock</argument>
+            <argument name="requestBuilder" xsi:type="object">creditagricole\etransactions\Gateway\Request\VoidRequest</argument>
+            <argument name="handler" xsi:type="object">creditagricole\etransactions\Gateway\Response\TxnIdHandler</argument>
+            <argument name="transferFactory" xsi:type="object">creditagricole\etransactions\Gateway\Http\TransferFactory</argument>
+            <argument name="validator" xsi:type="object">creditagricole\etransactions\Gateway\Validator\ResponseCodeValidator</argument>
+            <argument name="client" xsi:type="object">creditagricole\etransactions\Gateway\Http\Client\ClientMock</argument>
         </arguments>
     </virtualType>
 
     <!-- Void Request -->
-    <type name="ETransactions\etransactions\Gateway\Request\VoidRequest">
+    <type name="creditagricole\etransactions\Gateway\Request\VoidRequest">
         <arguments>
             <argument name="config" xsi:type="object">EtepthreetimeConfig</argument>
         </arguments>
@@ -272,8 +272,8 @@
     <virtualType name="EtepthreetimeResponseHandlerComposite" type="Magento\Payment\Gateway\Response\HandlerChain">
         <arguments>
             <argument name="handlers" xsi:type="array">
-                <item name="txnid" xsi:type="string">ETransactions\etransactions\Gateway\Response\TxnIdHandler</item>
-                <item name="fraud" xsi:type="string">ETransactions\etransactions\Gateway\Response\FraudHandler</item>
+                <item name="txnid" xsi:type="string">creditagricole\etransactions\Gateway\Response\TxnIdHandler</item>
+                <item name="fraud" xsi:type="string">creditagricole\etransactions\Gateway\Response\FraudHandler</item>
             </argument>
         </arguments>
     </virtualType>
@@ -292,7 +292,7 @@
         </arguments>
     </virtualType>
 
-    <type name="ETransactions\etransactions\Block\Info">
+    <type name="creditagricole\etransactions\Block\Info">
         <arguments>
             <argument name="config" xsi:type="object">EtepthreetimeConfig</argument>
         </arguments>
@@ -303,9 +303,9 @@
     <!-- Payment Method Facade configuration -->
     <virtualType name="EtepprepaidFacade" type="Magento\Payment\Model\Method\Adapter">
         <arguments>
-            <argument name="code" xsi:type="const">\ETransactions\etransactions\Model\Ui\EtepprepaidConfigProvider::CODE</argument>
-            <argument name="formBlockType" xsi:type="string">ETransactions\etransactions\Block\Checkout\Payment</argument>
-            <argument name="infoBlockType" xsi:type="string">ETransactions\etransactions\Block\Info</argument>
+            <argument name="code" xsi:type="const">\creditagricole\etransactions\Model\Ui\EtepprepaidConfigProvider::CODE</argument>
+            <argument name="formBlockType" xsi:type="string">creditagricole\etransactions\Block\Checkout\Payment</argument>
+            <argument name="infoBlockType" xsi:type="string">creditagricole\etransactions\Block\Info</argument>
             <argument name="valueHandlerPool" xsi:type="object">EtepprepaidValueHandlerPool</argument>
             <argument name="commandPool" xsi:type="object">EtepprepaidCommandPool</argument>
         </arguments>
@@ -314,7 +314,7 @@
     <!-- Configuration reader -->
     <virtualType name="EtepprepaidConfig" type="Magento\Payment\Gateway\Config\Config">
         <arguments>
-            <argument name="methodCode" xsi:type="const">\ETransactions\etransactions\Model\Ui\EtepprepaidConfigProvider::CODE</argument>
+            <argument name="methodCode" xsi:type="const">\creditagricole\etransactions\Model\Ui\EtepprepaidConfigProvider::CODE</argument>
         </arguments>
     </virtualType>
 
@@ -325,7 +325,7 @@
         </arguments>
     </virtualType>
 
-    <type name="ETransactions\etransactions\Gateway\Http\Client\ClientMock">
+    <type name="creditagricole\etransactions\Gateway\Http\Client\ClientMock">
         <arguments>
             <argument name="logger" xsi:type="object">EtepprepaidLogger</argument>
         </arguments>
@@ -347,8 +347,8 @@
         <arguments>
             <argument name="requestBuilder" xsi:type="object">EtepprepaidAuthorizationRequest</argument>
             <argument name="handler" xsi:type="object">EtepprepaidResponseHandlerComposite</argument>
-            <argument name="transferFactory" xsi:type="object">ETransactions\etransactions\Gateway\Http\TransferFactory</argument>
-            <argument name="client" xsi:type="object">ETransactions\etransactions\Gateway\Http\Client\ClientMock</argument>
+            <argument name="transferFactory" xsi:type="object">creditagricole\etransactions\Gateway\Http\TransferFactory</argument>
+            <argument name="client" xsi:type="object">creditagricole\etransactions\Gateway\Http\Client\ClientMock</argument>
         </arguments>
     </virtualType>
 
@@ -356,12 +356,12 @@
     <virtualType name="EtepprepaidAuthorizationRequest" type="Magento\Payment\Gateway\Request\BuilderComposite">
         <arguments>
             <argument name="builders" xsi:type="array">
-                <item name="transaction" xsi:type="string">ETransactions\etransactions\Gateway\Request\AuthorizationRequest</item>
-                <item name="mockData" xsi:type="string">ETransactions\etransactions\Gateway\Request\MockDataRequest</item>
+                <item name="transaction" xsi:type="string">creditagricole\etransactions\Gateway\Request\AuthorizationRequest</item>
+                <item name="mockData" xsi:type="string">creditagricole\etransactions\Gateway\Request\MockDataRequest</item>
             </argument>
         </arguments>
     </virtualType>
-    <type name="ETransactions\etransactions\Gateway\Request\AuthorizationRequest">
+    <type name="creditagricole\etransactions\Gateway\Request\AuthorizationRequest">
         <arguments>
             <argument name="config" xsi:type="object">EtepprepaidConfig</argument>
         </arguments>
@@ -370,16 +370,16 @@
     <!-- Capture command -->
     <virtualType name="EtepprepaidCaptureCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
         <arguments>
-            <argument name="requestBuilder" xsi:type="object">ETransactions\etransactions\Gateway\Request\CaptureRequest</argument>
-            <argument name="handler" xsi:type="object">ETransactions\etransactions\Gateway\Response\TxnIdHandler</argument>
-            <argument name="transferFactory" xsi:type="object">ETransactions\etransactions\Gateway\Http\TransferFactory</argument>
-            <argument name="validator" xsi:type="object">ETransactions\etransactions\Gateway\Validator\ResponseCodeValidator</argument>
-            <argument name="client" xsi:type="object">ETransactions\etransactions\Gateway\Http\Client\ClientMock</argument>
+            <argument name="requestBuilder" xsi:type="object">creditagricole\etransactions\Gateway\Request\CaptureRequest</argument>
+            <argument name="handler" xsi:type="object">creditagricole\etransactions\Gateway\Response\TxnIdHandler</argument>
+            <argument name="transferFactory" xsi:type="object">creditagricole\etransactions\Gateway\Http\TransferFactory</argument>
+            <argument name="validator" xsi:type="object">creditagricole\etransactions\Gateway\Validator\ResponseCodeValidator</argument>
+            <argument name="client" xsi:type="object">creditagricole\etransactions\Gateway\Http\Client\ClientMock</argument>
         </arguments>
     </virtualType>
 
     <!-- Capture Request -->
-    <type name="ETransactions\etransactions\Gateway\Request\CaptureRequest">
+    <type name="creditagricole\etransactions\Gateway\Request\CaptureRequest">
         <arguments>
             <argument name="config" xsi:type="object">EtepprepaidConfig</argument>
         </arguments>
@@ -388,16 +388,16 @@
     <!-- Void command -->
     <virtualType name="EtepprepaidVoidCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
         <arguments>
-            <argument name="requestBuilder" xsi:type="object">ETransactions\etransactions\Gateway\Request\VoidRequest</argument>
-            <argument name="handler" xsi:type="object">ETransactions\etransactions\Gateway\Response\TxnIdHandler</argument>
-            <argument name="transferFactory" xsi:type="object">ETransactions\etransactions\Gateway\Http\TransferFactory</argument>
-            <argument name="validator" xsi:type="object">ETransactions\etransactions\Gateway\Validator\ResponseCodeValidator</argument>
-            <argument name="client" xsi:type="object">ETransactions\etransactions\Gateway\Http\Client\ClientMock</argument>
+            <argument name="requestBuilder" xsi:type="object">creditagricole\etransactions\Gateway\Request\VoidRequest</argument>
+            <argument name="handler" xsi:type="object">creditagricole\etransactions\Gateway\Response\TxnIdHandler</argument>
+            <argument name="transferFactory" xsi:type="object">creditagricole\etransactions\Gateway\Http\TransferFactory</argument>
+            <argument name="validator" xsi:type="object">creditagricole\etransactions\Gateway\Validator\ResponseCodeValidator</argument>
+            <argument name="client" xsi:type="object">creditagricole\etransactions\Gateway\Http\Client\ClientMock</argument>
         </arguments>
     </virtualType>
 
     <!-- Void Request -->
-    <type name="ETransactions\etransactions\Gateway\Request\VoidRequest">
+    <type name="creditagricole\etransactions\Gateway\Request\VoidRequest">
         <arguments>
             <argument name="config" xsi:type="object">EtepprepaidConfig</argument>
         </arguments>
@@ -407,8 +407,8 @@
     <virtualType name="EtepprepaidResponseHandlerComposite" type="Magento\Payment\Gateway\Response\HandlerChain">
         <arguments>
             <argument name="handlers" xsi:type="array">
-                <item name="txnid" xsi:type="string">ETransactions\etransactions\Gateway\Response\TxnIdHandler</item>
-                <item name="fraud" xsi:type="string">ETransactions\etransactions\Gateway\Response\FraudHandler</item>
+                <item name="txnid" xsi:type="string">creditagricole\etransactions\Gateway\Response\TxnIdHandler</item>
+                <item name="fraud" xsi:type="string">creditagricole\etransactions\Gateway\Response\FraudHandler</item>
             </argument>
         </arguments>
     </virtualType>
@@ -427,7 +427,7 @@
         </arguments>
     </virtualType>
 
-    <type name="ETransactions\etransactions\Block\Info">
+    <type name="creditagricole\etransactions\Block\Info">
         <arguments>
             <argument name="config" xsi:type="object">EtepprepaidConfig</argument>
         </arguments>
@@ -438,9 +438,9 @@
     <!-- Payment Method Facade configuration -->
     <virtualType name="EteppaybuttonsFacade" type="Magento\Payment\Model\Method\Adapter">
         <arguments>
-            <argument name="code" xsi:type="const">\ETransactions\etransactions\Model\Ui\EteppaybuttonsConfigProvider::CODE</argument>
-            <argument name="formBlockType" xsi:type="string">ETransactions\etransactions\Block\Checkout\Payment</argument>
-            <argument name="infoBlockType" xsi:type="string">ETransactions\etransactions\Block\Info</argument>
+            <argument name="code" xsi:type="const">\creditagricole\etransactions\Model\Ui\EteppaybuttonsConfigProvider::CODE</argument>
+            <argument name="formBlockType" xsi:type="string">creditagricole\etransactions\Block\Checkout\Payment</argument>
+            <argument name="infoBlockType" xsi:type="string">creditagricole\etransactions\Block\Info</argument>
             <argument name="valueHandlerPool" xsi:type="object">EteppaybuttonsValueHandlerPool</argument>
             <argument name="commandPool" xsi:type="object">EteppaybuttonsCommandPool</argument>
         </arguments>
@@ -449,7 +449,7 @@
     <!-- Configuration reader -->
     <virtualType name="EteppaybuttonsConfig" type="Magento\Payment\Gateway\Config\Config">
         <arguments>
-            <argument name="methodCode" xsi:type="const">\ETransactions\etransactions\Model\Ui\EteppaybuttonsConfigProvider::CODE</argument>
+            <argument name="methodCode" xsi:type="const">\creditagricole\etransactions\Model\Ui\EteppaybuttonsConfigProvider::CODE</argument>
         </arguments>
     </virtualType>
 
@@ -460,7 +460,7 @@
         </arguments>
     </virtualType>
 
-    <type name="ETransactions\etransactions\Gateway\Http\Client\ClientMock">
+    <type name="creditagricole\etransactions\Gateway\Http\Client\ClientMock">
         <arguments>
             <argument name="logger" xsi:type="object">EteppaybuttonsLogger</argument>
         </arguments>
@@ -482,8 +482,8 @@
         <arguments>
             <argument name="requestBuilder" xsi:type="object">EteppaybuttonsAuthorizationRequest</argument>
             <argument name="handler" xsi:type="object">EteppaybuttonsResponseHandlerComposite</argument>
-            <argument name="transferFactory" xsi:type="object">ETransactions\etransactions\Gateway\Http\TransferFactory</argument>
-            <argument name="client" xsi:type="object">ETransactions\etransactions\Gateway\Http\Client\ClientMock</argument>
+            <argument name="transferFactory" xsi:type="object">creditagricole\etransactions\Gateway\Http\TransferFactory</argument>
+            <argument name="client" xsi:type="object">creditagricole\etransactions\Gateway\Http\Client\ClientMock</argument>
         </arguments>
     </virtualType>
 
@@ -491,12 +491,12 @@
     <virtualType name="EteppaybuttonsAuthorizationRequest" type="Magento\Payment\Gateway\Request\BuilderComposite">
         <arguments>
             <argument name="builders" xsi:type="array">
-                <item name="transaction" xsi:type="string">ETransactions\etransactions\Gateway\Request\AuthorizationRequest</item>
-                <item name="mockData" xsi:type="string">ETransactions\etransactions\Gateway\Request\MockDataRequest</item>
+                <item name="transaction" xsi:type="string">creditagricole\etransactions\Gateway\Request\AuthorizationRequest</item>
+                <item name="mockData" xsi:type="string">creditagricole\etransactions\Gateway\Request\MockDataRequest</item>
             </argument>
         </arguments>
     </virtualType>
-    <type name="ETransactions\etransactions\Gateway\Request\AuthorizationRequest">
+    <type name="creditagricole\etransactions\Gateway\Request\AuthorizationRequest">
         <arguments>
             <argument name="config" xsi:type="object">EteppaybuttonsConfig</argument>
         </arguments>
@@ -505,16 +505,16 @@
     <!-- Capture command -->
     <virtualType name="EteppaybuttonsCaptureCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
         <arguments>
-            <argument name="requestBuilder" xsi:type="object">ETransactions\etransactions\Gateway\Request\CaptureRequest</argument>
-            <argument name="handler" xsi:type="object">ETransactions\etransactions\Gateway\Response\TxnIdHandler</argument>
-            <argument name="transferFactory" xsi:type="object">ETransactions\etransactions\Gateway\Http\TransferFactory</argument>
-            <argument name="validator" xsi:type="object">ETransactions\etransactions\Gateway\Validator\ResponseCodeValidator</argument>
-            <argument name="client" xsi:type="object">ETransactions\etransactions\Gateway\Http\Client\ClientMock</argument>
+            <argument name="requestBuilder" xsi:type="object">creditagricole\etransactions\Gateway\Request\CaptureRequest</argument>
+            <argument name="handler" xsi:type="object">creditagricole\etransactions\Gateway\Response\TxnIdHandler</argument>
+            <argument name="transferFactory" xsi:type="object">creditagricole\etransactions\Gateway\Http\TransferFactory</argument>
+            <argument name="validator" xsi:type="object">creditagricole\etransactions\Gateway\Validator\ResponseCodeValidator</argument>
+            <argument name="client" xsi:type="object">creditagricole\etransactions\Gateway\Http\Client\ClientMock</argument>
         </arguments>
     </virtualType>
 
     <!-- Capture Request -->
-    <type name="ETransactions\etransactions\Gateway\Request\CaptureRequest">
+    <type name="creditagricole\etransactions\Gateway\Request\CaptureRequest">
         <arguments>
             <argument name="config" xsi:type="object">EteppaybuttonsConfig</argument>
         </arguments>
@@ -523,16 +523,16 @@
     <!-- Void command -->
     <virtualType name="EteppaybuttonsVoidCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
         <arguments>
-            <argument name="requestBuilder" xsi:type="object">ETransactions\etransactions\Gateway\Request\VoidRequest</argument>
-            <argument name="handler" xsi:type="object">ETransactions\etransactions\Gateway\Response\TxnIdHandler</argument>
-            <argument name="transferFactory" xsi:type="object">ETransactions\etransactions\Gateway\Http\TransferFactory</argument>
-            <argument name="validator" xsi:type="object">ETransactions\etransactions\Gateway\Validator\ResponseCodeValidator</argument>
-            <argument name="client" xsi:type="object">ETransactions\etransactions\Gateway\Http\Client\ClientMock</argument>
+            <argument name="requestBuilder" xsi:type="object">creditagricole\etransactions\Gateway\Request\VoidRequest</argument>
+            <argument name="handler" xsi:type="object">creditagricole\etransactions\Gateway\Response\TxnIdHandler</argument>
+            <argument name="transferFactory" xsi:type="object">creditagricole\etransactions\Gateway\Http\TransferFactory</argument>
+            <argument name="validator" xsi:type="object">creditagricole\etransactions\Gateway\Validator\ResponseCodeValidator</argument>
+            <argument name="client" xsi:type="object">creditagricole\etransactions\Gateway\Http\Client\ClientMock</argument>
         </arguments>
     </virtualType>
 
     <!-- Void Request -->
-    <type name="ETransactions\etransactions\Gateway\Request\VoidRequest">
+    <type name="creditagricole\etransactions\Gateway\Request\VoidRequest">
         <arguments>
             <argument name="config" xsi:type="object">EteppaybuttonsConfig</argument>
         </arguments>
@@ -542,8 +542,8 @@
     <virtualType name="EteppaybuttonsResponseHandlerComposite" type="Magento\Payment\Gateway\Response\HandlerChain">
         <arguments>
             <argument name="handlers" xsi:type="array">
-                <item name="txnid" xsi:type="string">ETransactions\etransactions\Gateway\Response\TxnIdHandler</item>
-                <item name="fraud" xsi:type="string">ETransactions\etransactions\Gateway\Response\FraudHandler</item>
+                <item name="txnid" xsi:type="string">creditagricole\etransactions\Gateway\Response\TxnIdHandler</item>
+                <item name="fraud" xsi:type="string">creditagricole\etransactions\Gateway\Response\FraudHandler</item>
             </argument>
         </arguments>
     </virtualType>
@@ -562,7 +562,7 @@
         </arguments>
     </virtualType>
 
-    <type name="ETransactions\etransactions\Block\Info">
+    <type name="creditagricole\etransactions\Block\Info">
         <arguments>
             <argument name="config" xsi:type="object">EteppaybuttonsConfig</argument>
         </arguments>
@@ -573,9 +573,9 @@
     <!-- Payment Method Facade configuration -->
     <virtualType name="EtepprivateFacade" type="Magento\Payment\Model\Method\Adapter">
         <arguments>
-            <argument name="code" xsi:type="const">\ETransactions\etransactions\Model\Ui\EtepprivateConfigProvider::CODE</argument>
-            <argument name="formBlockType" xsi:type="string">ETransactions\etransactions\Block\Checkout\Payment</argument>
-            <argument name="infoBlockType" xsi:type="string">ETransactions\etransactions\Block\Info</argument>
+            <argument name="code" xsi:type="const">\creditagricole\etransactions\Model\Ui\EtepprivateConfigProvider::CODE</argument>
+            <argument name="formBlockType" xsi:type="string">creditagricole\etransactions\Block\Checkout\Payment</argument>
+            <argument name="infoBlockType" xsi:type="string">creditagricole\etransactions\Block\Info</argument>
             <argument name="valueHandlerPool" xsi:type="object">EtepprivateValueHandlerPool</argument>
             <argument name="commandPool" xsi:type="object">EtepprivateCommandPool</argument>
         </arguments>
@@ -584,7 +584,7 @@
     <!-- Configuration reader -->
     <virtualType name="EtepprivateConfig" type="Magento\Payment\Gateway\Config\Config">
         <arguments>
-            <argument name="methodCode" xsi:type="const">\ETransactions\etransactions\Model\Ui\EtepprivateConfigProvider::CODE</argument>
+            <argument name="methodCode" xsi:type="const">\creditagricole\etransactions\Model\Ui\EtepprivateConfigProvider::CODE</argument>
         </arguments>
     </virtualType>
 
@@ -595,7 +595,7 @@
         </arguments>
     </virtualType>
 
-    <type name="ETransactions\etransactions\Gateway\Http\Client\ClientMock">
+    <type name="creditagricole\etransactions\Gateway\Http\Client\ClientMock">
         <arguments>
             <argument name="logger" xsi:type="object">EtepprivateLogger</argument>
         </arguments>
@@ -617,8 +617,8 @@
         <arguments>
             <argument name="requestBuilder" xsi:type="object">EtepprivateAuthorizationRequest</argument>
             <argument name="handler" xsi:type="object">EtepprivateResponseHandlerComposite</argument>
-            <argument name="transferFactory" xsi:type="object">ETransactions\etransactions\Gateway\Http\TransferFactory</argument>
-            <argument name="client" xsi:type="object">ETransactions\etransactions\Gateway\Http\Client\ClientMock</argument>
+            <argument name="transferFactory" xsi:type="object">creditagricole\etransactions\Gateway\Http\TransferFactory</argument>
+            <argument name="client" xsi:type="object">creditagricole\etransactions\Gateway\Http\Client\ClientMock</argument>
         </arguments>
     </virtualType>
 
@@ -626,12 +626,12 @@
     <virtualType name="EtepprivateAuthorizationRequest" type="Magento\Payment\Gateway\Request\BuilderComposite">
         <arguments>
             <argument name="builders" xsi:type="array">
-                <item name="transaction" xsi:type="string">ETransactions\etransactions\Gateway\Request\AuthorizationRequest</item>
-                <item name="mockData" xsi:type="string">ETransactions\etransactions\Gateway\Request\MockDataRequest</item>
+                <item name="transaction" xsi:type="string">creditagricole\etransactions\Gateway\Request\AuthorizationRequest</item>
+                <item name="mockData" xsi:type="string">creditagricole\etransactions\Gateway\Request\MockDataRequest</item>
             </argument>
         </arguments>
     </virtualType>
-    <type name="ETransactions\etransactions\Gateway\Request\AuthorizationRequest">
+    <type name="creditagricole\etransactions\Gateway\Request\AuthorizationRequest">
         <arguments>
             <argument name="config" xsi:type="object">EtepprivateConfig</argument>
         </arguments>
@@ -640,16 +640,16 @@
     <!-- Capture command -->
     <virtualType name="EtepprivateCaptureCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
         <arguments>
-            <argument name="requestBuilder" xsi:type="object">ETransactions\etransactions\Gateway\Request\CaptureRequest</argument>
-            <argument name="handler" xsi:type="object">ETransactions\etransactions\Gateway\Response\TxnIdHandler</argument>
-            <argument name="transferFactory" xsi:type="object">ETransactions\etransactions\Gateway\Http\TransferFactory</argument>
-            <argument name="validator" xsi:type="object">ETransactions\etransactions\Gateway\Validator\ResponseCodeValidator</argument>
-            <argument name="client" xsi:type="object">ETransactions\etransactions\Gateway\Http\Client\ClientMock</argument>
+            <argument name="requestBuilder" xsi:type="object">creditagricole\etransactions\Gateway\Request\CaptureRequest</argument>
+            <argument name="handler" xsi:type="object">creditagricole\etransactions\Gateway\Response\TxnIdHandler</argument>
+            <argument name="transferFactory" xsi:type="object">creditagricole\etransactions\Gateway\Http\TransferFactory</argument>
+            <argument name="validator" xsi:type="object">creditagricole\etransactions\Gateway\Validator\ResponseCodeValidator</argument>
+            <argument name="client" xsi:type="object">creditagricole\etransactions\Gateway\Http\Client\ClientMock</argument>
         </arguments>
     </virtualType>
 
     <!-- Capture Request -->
-    <type name="ETransactions\etransactions\Gateway\Request\CaptureRequest">
+    <type name="creditagricole\etransactions\Gateway\Request\CaptureRequest">
         <arguments>
             <argument name="config" xsi:type="object">EtepprivateConfig</argument>
         </arguments>
@@ -658,16 +658,16 @@
     <!-- Void command -->
     <virtualType name="EtepprivateVoidCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
         <arguments>
-            <argument name="requestBuilder" xsi:type="object">ETransactions\etransactions\Gateway\Request\VoidRequest</argument>
-            <argument name="handler" xsi:type="object">ETransactions\etransactions\Gateway\Response\TxnIdHandler</argument>
-            <argument name="transferFactory" xsi:type="object">ETransactions\etransactions\Gateway\Http\TransferFactory</argument>
-            <argument name="validator" xsi:type="object">ETransactions\etransactions\Gateway\Validator\ResponseCodeValidator</argument>
-            <argument name="client" xsi:type="object">ETransactions\etransactions\Gateway\Http\Client\ClientMock</argument>
+            <argument name="requestBuilder" xsi:type="object">creditagricole\etransactions\Gateway\Request\VoidRequest</argument>
+            <argument name="handler" xsi:type="object">creditagricole\etransactions\Gateway\Response\TxnIdHandler</argument>
+            <argument name="transferFactory" xsi:type="object">creditagricole\etransactions\Gateway\Http\TransferFactory</argument>
+            <argument name="validator" xsi:type="object">creditagricole\etransactions\Gateway\Validator\ResponseCodeValidator</argument>
+            <argument name="client" xsi:type="object">creditagricole\etransactions\Gateway\Http\Client\ClientMock</argument>
         </arguments>
     </virtualType>
 
     <!-- Void Request -->
-    <type name="ETransactions\etransactions\Gateway\Request\VoidRequest">
+    <type name="creditagricole\etransactions\Gateway\Request\VoidRequest">
         <arguments>
             <argument name="config" xsi:type="object">EtepprivateConfig</argument>
         </arguments>
@@ -677,8 +677,8 @@
     <virtualType name="EtepprivateResponseHandlerComposite" type="Magento\Payment\Gateway\Response\HandlerChain">
         <arguments>
             <argument name="handlers" xsi:type="array">
-                <item name="txnid" xsi:type="string">ETransactions\etransactions\Gateway\Response\TxnIdHandler</item>
-                <item name="fraud" xsi:type="string">ETransactions\etransactions\Gateway\Response\FraudHandler</item>
+                <item name="txnid" xsi:type="string">creditagricole\etransactions\Gateway\Response\TxnIdHandler</item>
+                <item name="fraud" xsi:type="string">creditagricole\etransactions\Gateway\Response\FraudHandler</item>
             </argument>
         </arguments>
     </virtualType>
@@ -697,7 +697,7 @@
         </arguments>
     </virtualType>
 
-    <type name="ETransactions\etransactions\Block\Info">
+    <type name="creditagricole\etransactions\Block\Info">
         <arguments>
             <argument name="config" xsi:type="object">EtepprivateConfig</argument>
         </arguments>
@@ -708,9 +708,9 @@
     <!-- Payment Method Facade configuration -->
     <virtualType name="EtepfinancialFacade" type="Magento\Payment\Model\Method\Adapter">
         <arguments>
-            <argument name="code" xsi:type="const">\ETransactions\etransactions\Model\Ui\EtepfinancialConfigProvider::CODE</argument>
-            <argument name="formBlockType" xsi:type="string">ETransactions\etransactions\Block\Checkout\Payment</argument>
-            <argument name="infoBlockType" xsi:type="string">ETransactions\etransactions\Block\Info</argument>
+            <argument name="code" xsi:type="const">\creditagricole\etransactions\Model\Ui\EtepfinancialConfigProvider::CODE</argument>
+            <argument name="formBlockType" xsi:type="string">creditagricole\etransactions\Block\Checkout\Payment</argument>
+            <argument name="infoBlockType" xsi:type="string">creditagricole\etransactions\Block\Info</argument>
             <argument name="valueHandlerPool" xsi:type="object">EtepfinancialValueHandlerPool</argument>
             <argument name="commandPool" xsi:type="object">EtepfinancialCommandPool</argument>
         </arguments>
@@ -719,7 +719,7 @@
     <!-- Configuration reader -->
     <virtualType name="EtepfinancialConfig" type="Magento\Payment\Gateway\Config\Config">
         <arguments>
-            <argument name="methodCode" xsi:type="const">\ETransactions\etransactions\Model\Ui\EtepfinancialConfigProvider::CODE</argument>
+            <argument name="methodCode" xsi:type="const">\creditagricole\etransactions\Model\Ui\EtepfinancialConfigProvider::CODE</argument>
         </arguments>
     </virtualType>
 
@@ -730,7 +730,7 @@
         </arguments>
     </virtualType>
 
-    <type name="ETransactions\etransactions\Gateway\Http\Client\ClientMock">
+    <type name="creditagricole\etransactions\Gateway\Http\Client\ClientMock">
         <arguments>
             <argument name="logger" xsi:type="object">EtepfinancialLogger</argument>
         </arguments>
@@ -752,8 +752,8 @@
         <arguments>
             <argument name="requestBuilder" xsi:type="object">EtepfinancialAuthorizationRequest</argument>
             <argument name="handler" xsi:type="object">EtepfinancialResponseHandlerComposite</argument>
-            <argument name="transferFactory" xsi:type="object">ETransactions\etransactions\Gateway\Http\TransferFactory</argument>
-            <argument name="client" xsi:type="object">ETransactions\etransactions\Gateway\Http\Client\ClientMock</argument>
+            <argument name="transferFactory" xsi:type="object">creditagricole\etransactions\Gateway\Http\TransferFactory</argument>
+            <argument name="client" xsi:type="object">creditagricole\etransactions\Gateway\Http\Client\ClientMock</argument>
         </arguments>
     </virtualType>
 
@@ -761,12 +761,12 @@
     <virtualType name="EtepfinancialAuthorizationRequest" type="Magento\Payment\Gateway\Request\BuilderComposite">
         <arguments>
             <argument name="builders" xsi:type="array">
-                <item name="transaction" xsi:type="string">ETransactions\etransactions\Gateway\Request\AuthorizationRequest</item>
-                <item name="mockData" xsi:type="string">ETransactions\etransactions\Gateway\Request\MockDataRequest</item>
+                <item name="transaction" xsi:type="string">creditagricole\etransactions\Gateway\Request\AuthorizationRequest</item>
+                <item name="mockData" xsi:type="string">creditagricole\etransactions\Gateway\Request\MockDataRequest</item>
             </argument>
         </arguments>
     </virtualType>
-    <type name="ETransactions\etransactions\Gateway\Request\AuthorizationRequest">
+    <type name="creditagricole\etransactions\Gateway\Request\AuthorizationRequest">
         <arguments>
             <argument name="config" xsi:type="object">EtepfinancialConfig</argument>
         </arguments>
@@ -775,16 +775,16 @@
     <!-- Capture command -->
     <virtualType name="EtepfinancialCaptureCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
         <arguments>
-            <argument name="requestBuilder" xsi:type="object">ETransactions\etransactions\Gateway\Request\CaptureRequest</argument>
-            <argument name="handler" xsi:type="object">ETransactions\etransactions\Gateway\Response\TxnIdHandler</argument>
-            <argument name="transferFactory" xsi:type="object">ETransactions\etransactions\Gateway\Http\TransferFactory</argument>
-            <argument name="validator" xsi:type="object">ETransactions\etransactions\Gateway\Validator\ResponseCodeValidator</argument>
-            <argument name="client" xsi:type="object">ETransactions\etransactions\Gateway\Http\Client\ClientMock</argument>
+            <argument name="requestBuilder" xsi:type="object">creditagricole\etransactions\Gateway\Request\CaptureRequest</argument>
+            <argument name="handler" xsi:type="object">creditagricole\etransactions\Gateway\Response\TxnIdHandler</argument>
+            <argument name="transferFactory" xsi:type="object">creditagricole\etransactions\Gateway\Http\TransferFactory</argument>
+            <argument name="validator" xsi:type="object">creditagricole\etransactions\Gateway\Validator\ResponseCodeValidator</argument>
+            <argument name="client" xsi:type="object">creditagricole\etransactions\Gateway\Http\Client\ClientMock</argument>
         </arguments>
     </virtualType>
 
     <!-- Capture Request -->
-    <type name="ETransactions\etransactions\Gateway\Request\CaptureRequest">
+    <type name="creditagricole\etransactions\Gateway\Request\CaptureRequest">
         <arguments>
             <argument name="config" xsi:type="object">EtepfinancialConfig</argument>
         </arguments>
@@ -793,16 +793,16 @@
     <!-- Void command -->
     <virtualType name="EtepfinancialVoidCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
         <arguments>
-            <argument name="requestBuilder" xsi:type="object">ETransactions\etransactions\Gateway\Request\VoidRequest</argument>
-            <argument name="handler" xsi:type="object">ETransactions\etransactions\Gateway\Response\TxnIdHandler</argument>
-            <argument name="transferFactory" xsi:type="object">ETransactions\etransactions\Gateway\Http\TransferFactory</argument>
-            <argument name="validator" xsi:type="object">ETransactions\etransactions\Gateway\Validator\ResponseCodeValidator</argument>
-            <argument name="client" xsi:type="object">ETransactions\etransactions\Gateway\Http\Client\ClientMock</argument>
+            <argument name="requestBuilder" xsi:type="object">creditagricole\etransactions\Gateway\Request\VoidRequest</argument>
+            <argument name="handler" xsi:type="object">creditagricole\etransactions\Gateway\Response\TxnIdHandler</argument>
+            <argument name="transferFactory" xsi:type="object">creditagricole\etransactions\Gateway\Http\TransferFactory</argument>
+            <argument name="validator" xsi:type="object">creditagricole\etransactions\Gateway\Validator\ResponseCodeValidator</argument>
+            <argument name="client" xsi:type="object">creditagricole\etransactions\Gateway\Http\Client\ClientMock</argument>
         </arguments>
     </virtualType>
 
     <!-- Void Request -->
-    <type name="ETransactions\etransactions\Gateway\Request\VoidRequest">
+    <type name="creditagricole\etransactions\Gateway\Request\VoidRequest">
         <arguments>
             <argument name="config" xsi:type="object">EtepfinancialConfig</argument>
         </arguments>
@@ -812,8 +812,8 @@
     <virtualType name="EtepfinancialResponseHandlerComposite" type="Magento\Payment\Gateway\Response\HandlerChain">
         <arguments>
             <argument name="handlers" xsi:type="array">
-                <item name="txnid" xsi:type="string">ETransactions\etransactions\Gateway\Response\TxnIdHandler</item>
-                <item name="fraud" xsi:type="string">ETransactions\etransactions\Gateway\Response\FraudHandler</item>
+                <item name="txnid" xsi:type="string">creditagricole\etransactions\Gateway\Response\TxnIdHandler</item>
+                <item name="fraud" xsi:type="string">creditagricole\etransactions\Gateway\Response\FraudHandler</item>
             </argument>
         </arguments>
     </virtualType>
@@ -832,7 +832,7 @@
         </arguments>
     </virtualType>
 
-    <type name="ETransactions\etransactions\Block\Info">
+    <type name="creditagricole\etransactions\Block\Info">
         <arguments>
             <argument name="config" xsi:type="object">EtepfinancialConfig</argument>
         </arguments>

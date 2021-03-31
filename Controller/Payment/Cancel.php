@@ -1,6 +1,6 @@
 <?php
 /**
- * CreditAgricole etransactions module for Magento
+ * E-Transactions etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -19,20 +19,20 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace ETransactions\etransactions\Controller\Payment;
+namespace creditagricole\etransactions\Controller\Payment;
 
 use \Magento\Framework\Validator\Exception;
 
-class Cancel extends \ETransactions\etransactions\Controller\Payment
+class Cancel extends \creditagricole\etransactions\Controller\Payment
 {
     public function execute()
     {
         try {
             $session = $this->getSession();
-            $creditagricole = $this->getEtransactions();
+            $etransactions = $this->getcreditagricole();
 
             // Retrieves params
-            $params = $creditagricole->getParams();
+            $params = $etransactions->getParams();
             if ($params === false) {
                 return $this->_404();
             }
@@ -52,7 +52,7 @@ class Cancel extends \ETransactions\etransactions\Controller\Payment
             // Cleanup
             $session->unsCurrentEtepOrderId();
 
-            $message = sprintf('Order %d: Payment was canceled by user on CreditAgricole payment page.', $order->getIncrementId());
+            $message = sprintf('Order %d: Payment was canceled by user on E-Transactions payment page.', $order->getIncrementId());
             $this->logDebug($message);
 
             $message = __('Payment canceled by user');

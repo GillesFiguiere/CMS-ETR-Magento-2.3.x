@@ -1,6 +1,6 @@
 <?php
 /**
- * CreditAgricole etransactions module for Magento
+ * E-Transactions etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -19,7 +19,7 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace ETransactions\etransactions\Model\Payment;
+namespace creditagricole\etransactions\Model\Payment;
 
 use \Magento\Sales\Model\Order;
 use \Magento\Sales\Model\Order\Payment\Transaction;
@@ -87,7 +87,7 @@ class Threetime extends AbstractPayment
 
         // Create transaction
         $type = Transaction::TYPE_CAPTURE;
-        $txn = $this->_addEtransactionsTransaction(
+        $txn = $this->_addcreditagricoleTransaction(
             $order,
             $type,
             $data,
@@ -102,7 +102,7 @@ class Threetime extends AbstractPayment
             $this->logDebug(sprintf('Order %s: First payment', $order->getIncrementId()));
 
             // Message
-            $message = 'Payment was authorized and captured by CreditAgricole.';
+            $message = 'Payment was authorized and captured by E-Transactions.';
 
             // Status
             $status = $this->getConfigPaidStatus();
@@ -130,7 +130,7 @@ class Threetime extends AbstractPayment
             $invoice = $this->_createInvoice($payment, $order, $txn);
         } elseif (is_null($payment->getEtepSecondPayment())) {
             // Message
-            $message = 'Second payment was captured by CreditAgricole.';
+            $message = 'Second payment was captured by E-Transactions.';
             $order->addStatusHistoryComment($message);
 
             // Additional informations
@@ -138,7 +138,7 @@ class Threetime extends AbstractPayment
             $this->logDebug(sprintf('Order %s: %s', $order->getIncrementId(), $message));
         } elseif (is_null($payment->getEtepThirdPayment())) {
             // Message
-            $message = 'Third payment was captured by CreditAgricole.';
+            $message = 'Third payment was captured by E-Transactions.';
             $order->addStatusHistoryComment($message);
 
             // Additional informations

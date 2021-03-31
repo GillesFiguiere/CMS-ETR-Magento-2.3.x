@@ -1,6 +1,6 @@
 <?php
 /**
- * CreditAgricole etransactions module for Magento
+ * E-Transactions etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -19,13 +19,13 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace ETransactions\etransactions\Model;
+namespace creditagricole\etransactions\Model;
 
 use Magento\Sales\Model\Order;
 use Magento\Sales\Model\Order\Payment\Transaction;
-use ETransactions\etransactions\Model\Payment\AbstractPayment;
+use creditagricole\etransactions\Model\Payment\AbstractPayment;
 
-class Etransactions
+class creditagricole
 {
     private $_currencyDecimals = [
         '008' => 2,
@@ -253,7 +253,7 @@ class Etransactions
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $objectManager,
         \Magento\Framework\UrlInterface $urlInterface,
-        \ETransactions\etransactions\Helper\Data $helper,
+        \creditagricole\etransactions\Helper\Data $helper,
         \Psr\Log\LoggerInterface $logger
     ) {
         $this->_objectManager = $objectManager;
@@ -332,7 +332,7 @@ class Etransactions
             $url,
             [
             'maxredirects' => 0,
-            'useragent' => 'Magento CreditAgricole module',
+            'useragent' => 'Magento E-Transactions module',
             'timeout' => 5,
             ]
         );
@@ -350,7 +350,7 @@ class Etransactions
         }
 
         // Here, there's a problem
-        throw new \LogicException(__('CreditAgricole not available. Please try again later.'));
+        throw new \LogicException(__('E-Transactions not available. Please try again later.'));
     }
 
     public function buildSystemParams(Order $order, AbstractPayment $payment)
@@ -410,7 +410,7 @@ class Etransactions
             }
         } else {
             $values['PBX_TOTAL'] = sprintf('%03d', round($orderAmount * $amountScale));
-            switch ($payment->getEtransactionsAction()) {
+            switch ($payment->getcreditagricoleAction()) {
                 case AbstractPayment::ETRANSACTION_MANUAL:
                     $values['PBX_AUTOSEULE'] = 'O';
                     break;
@@ -427,7 +427,7 @@ class Etransactions
             }
         }
 
-        // CreditAgricole => Magento
+        // E-Transactions => Magento
         $values['PBX_RETOUR'] = 'M:M;R:R;T:T;A:A;B:B;C:C;D:D;E:E;F:F;G:G;H:H;I:I;J:J;N:N;O:O;P:P;Q:Q;S:S;W:W;Y:Y;v:v;K:K';
         $values['PBX_RUF1'] = 'POST';
 
@@ -444,7 +444,7 @@ class Etransactions
         $values['PBX_LANGUE'] = $lang;
 
         // Choose page format depending on browser/devise
-        if ($this->_objectManager->get('ETransactions\etransactions\Helper\Mobile')->isMobile()) {
+        if ($this->_objectManager->get('creditagricole\etransactions\Helper\Mobile')->isMobile()) {
             $values['PBX_SOURCE'] = 'XHTML';
         }
 
@@ -501,8 +501,8 @@ class Etransactions
         // PBX_VERSION
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
         $productMetadata = $objectManager->get('Magento\Framework\App\ProductMetadataInterface');
-        $moduleInfo = $this->_objectManager->get('Magento\Framework\Module\ModuleList')->getOne('ETransactions_etransactions');
-        $values['PBX_VERSION'] = 'Magento_' . $productMetadata->getVersion() . '-' . 'creditagricole' . '_' . $moduleInfo['setup_version'];
+        $moduleInfo = $this->_objectManager->get('Magento\Framework\Module\ModuleList')->getOne('creditagricole_etransactions');
+        $values['PBX_VERSION'] = 'Magento_' . $productMetadata->getVersion() . '-' . 'etransactions' . '_' . $moduleInfo['setup_version'];
 
         // 3DSv2 parameters
         $values['PBX_SHOPPINGCART'] = $payment->getXmlShoppingCartInformation($order);
@@ -540,7 +540,7 @@ class Etransactions
             null,
             [
             'maxredirects' => 0,
-            'useragent' => 'Magento CreditAgricole module',
+            'useragent' => 'Magento E-Transactions module',
             'timeout' => 5,
             ]
         );
@@ -562,7 +562,7 @@ class Etransactions
         }
 
         // Here, there's a problem
-        throw new \LogicException(__('CreditAgricole not available. Please try again later.'));
+        throw new \LogicException(__('E-Transactions not available. Please try again later.'));
     }
 
     public function computeThreetimePayments($orderAmount, $amountScale)
@@ -601,11 +601,11 @@ class Etransactions
     }
 
     /**
-     * Create transaction ID from CreditAgricole data
+     * Create transaction ID from E-Transactions data
      */
-    protected function createTransactionId(array $creditagricoleData)
+    protected function createTransactionId(array $etransactionsData)
     {
-        $transaction = (int) (isset($creditagricoleData['transaction']) ? $creditagricoleData['transaction'] : $creditagricoleData['NUMTRANS']);
+        $transaction = (int) (isset($etransactionsData['transaction']) ? $etransactionsData['transaction'] : $etransactionsData['NUMTRANS']);
         $now = new DateTime('now', new DateTimeZone('Europe/Paris'));
         return $transaction . '/' . $now->format('U');
     }
@@ -631,16 +631,16 @@ class Etransactions
     }
 
     /**
-     * @return ETransactions\etransactions\Model\Config CreditAgricole configuration object
+     * @return creditagricole\etransactions\Model\Config E-Transactions configuration object
      */
     public function getConfig()
     {
-        return $this->_objectManager->get('ETransactions\etransactions\Model\Config');
+        return $this->_objectManager->get('creditagricole\etransactions\Model\Config');
     }
 
     public function getCurrency(Order $order)
     {
-        $currencyMapper = $this->_objectManager->get('ETransactions\etransactions\Model\Iso4217Currency');
+        $currencyMapper = $this->_objectManager->get('creditagricole\etransactions\Model\Iso4217Currency');
 
         $currencies = $this->_storeManager->getStore()->getAvailableCurrencyCodes();
         if (count($currencies) > 1 && $this->getConfig()->getCurrencyConfig() == 0) {
@@ -670,7 +670,7 @@ class Etransactions
         }
         if (empty($data)) {
             throw new \LogicException("Error Processing Request");
-            (__('An unexpected error in CreditAgricole call has occured: no parameters.'));
+            (__('An unexpected error in E-Transactions call has occured: no parameters.'));
         }
 
         // Log params if needed
@@ -684,7 +684,7 @@ class Etransactions
             $matches = [];
             if (!preg_match('#^(.*)&K=(.*)$#', $data, $matches)) {
                 throw new \LogicException("Error Processing Request");
-                (__('An unexpected error in CreditAgricole call has occured: missing signature.'));
+                (__('An unexpected error in E-Transactions call has occured: missing signature.'));
             }
 
             // Check signature
@@ -700,7 +700,7 @@ class Etransactions
 
                 if (!$res) {
                     throw new \LogicException("Error Processing Request");
-                    (__('An unexpected error in CreditAgricole call has occured: invalid signature.'));
+                    (__('An unexpected error in E-Transactions call has occured: invalid signature.'));
                 }
             }
         }
@@ -711,7 +711,7 @@ class Etransactions
         // Decrypt params
         $params = $this->convertParams($rawParams);
         if (empty($params)) {
-            throw new \LogicException(__('An unexpected error in CreditAgricole call has occured.'));
+            throw new \LogicException(__('An unexpected error in E-Transactions call has occured.'));
         }
 
         return $params;
@@ -722,7 +722,7 @@ class Etransactions
         $config = $this->getConfig();
         $urls = $config->getSystemUrls();
         if (empty($urls)) {
-            $message = 'Missing URL for CreditAgricole system in configuration';
+            $message = 'Missing URL for E-Transactions system in configuration';
             throw new \LogicException(__($message));
         }
 
@@ -736,7 +736,7 @@ class Etransactions
         $config = $this->getConfig();
         $urls = $config->getResponsiveUrls();
         if (empty($urls)) {
-            $message = 'Missing URL for CreditAgricole responsive in configuration';
+            $message = 'Missing URL for E-Transactions responsive in configuration';
             throw new \LogicException(__($message));
         }
 
@@ -750,7 +750,7 @@ class Etransactions
         $config = $this->getConfig();
         $urls = $config->getKwixoUrls();
         if (empty($urls)) {
-            $message = 'Missing URL for CreditAgricole system in configuration';
+            $message = 'Missing URL for E-Transactions system in configuration';
             throw new \LogicException(__($message));
         }
 

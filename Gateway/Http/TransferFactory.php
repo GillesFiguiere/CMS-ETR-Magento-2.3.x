@@ -1,6 +1,6 @@
 <?php
 /**
- * CreditAgricole etransactions module for Magento
+ * E-Transactions etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -19,12 +19,12 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace ETransactions\etransactions\Gateway\Http;
+namespace creditagricole\etransactions\Gateway\Http;
 
 use Magento\Payment\Gateway\Http\TransferBuilder;
 use Magento\Payment\Gateway\Http\TransferFactoryInterface;
 use Magento\Payment\Gateway\Http\TransferInterface;
-use ETransactions\etransactions\Gateway\Request\MockDataRequest;
+use creditagricole\etransactions\Gateway\Request\MockDataRequest;
 
 class TransferFactory implements TransferFactoryInterface
 {

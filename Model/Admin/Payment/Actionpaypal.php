@@ -1,6 +1,6 @@
 <?php
 /**
- * CreditAgricole etransactions module for Magento
+ * E-Transactions etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -19,7 +19,7 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace ETransactions\etransactions\Model\Admin\Payment;
+namespace creditagricole\etransactions\Model\Admin\Payment;
 
 class Actionpaypal implements \Magento\Framework\Option\ArrayInterface
 {
@@ -35,8 +35,8 @@ class Actionpaypal implements \Magento\Framework\Option\ArrayInterface
         ];
 
         $manager = \Magento\Framework\App\ObjectManager::getInstance();
-        $config  = $manager->get('ETransactions\etransactions\Model\Config');
-        if ($config->getSubscription() != \ETransactions\etransactions\Model\Config::SUBSCRIPTION_OFFER1) {
+        $config  = $manager->get('creditagricole\etransactions\Model\Config');
+        if ($config->getSubscription() != \creditagricole\etransactions\Model\Config::SUBSCRIPTION_OFFER1) {
             $manual['disabled'] = 'disabled';
         }
 

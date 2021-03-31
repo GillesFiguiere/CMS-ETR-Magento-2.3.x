@@ -1,6 +1,6 @@
 <?php
 /**
- * CreditAgricole etransactions module for Magento
+ * E-Transactions etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -19,7 +19,7 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace ETransactions\etransactions\Block\Admin\Field;
+namespace creditagricole\etransactions\Block\Admin\Field;
 
 class Presentation extends \Magento\Config\Block\System\Config\Form\Field
 {
@@ -31,7 +31,7 @@ class Presentation extends \Magento\Config\Block\System\Config\Form\Field
      */
     public function render(\Magento\Framework\Data\Form\Element\AbstractElement $element)
     {
-        $block = $this->getLayout()->createBlock('ETransactions\etransactions\Block\Admin\Presentation');
+        $block = $this->getLayout()->createBlock('creditagricole\etransactions\Block\Admin\Presentation');
         $template_html = $block->toHtml();
         $html = '<tr id="row_'.$element->getHtmlId().
         '"><td class="label" colspan="5" style="text-align: left;"><span id="'.$element->getHtmlId().'">';

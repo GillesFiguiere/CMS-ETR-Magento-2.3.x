@@ -1,6 +1,6 @@
 <?php
 /**
- * CreditAgricole etransactions module for Magento
+ * E-Transactions etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -19,7 +19,7 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace ETransactions\etransactions\Gateway\Request;
+namespace creditagricole\etransactions\Gateway\Request;
 
 use Magento\Payment\Gateway\ConfigInterface;
 use Magento\Payment\Gateway\Data\PaymentDataObjectInterface;
@@ -126,12 +126,12 @@ class AuthorizationRequest implements BuilderInterface
             }
         } else {
             $values['PBX_TOTAL'] = sprintf('%03d', round($orderAmount * $amountScale));
-            switch ($payment->getEtransactionsAction()) {
-                case ETransactions_etransactions_Model_Payment_Abstract::ETRANSACTION_MANUAL:
+            switch ($payment->getcreditagricoleAction()) {
+                case creditagricole_etransactions_Model_Payment_Abstract::ETRANSACTION_MANUAL:
                     $values['PBX_AUTOSEULE'] = 'O';
                     break;
 
-                case ETransactions_etransactions_Model_Payment_Abstract::ETRANSACTION_DEFERRED:
+                case creditagricole_etransactions_Model_Payment_Abstract::ETRANSACTION_DEFERRED:
                     $delay = (int) $payment->getConfigData('delay');
                     if ($delay < 1) {
                         $delay = 1;
@@ -143,7 +143,7 @@ class AuthorizationRequest implements BuilderInterface
             }
         }
 
-        // CreditAgricole => Magento
+        // E-Transactions => Magento
         $values['PBX_RETOUR'] = 'M:M;R:R;T:T;A:A;B:B;C:C;D:D;E:E;F:F;G:G;H:H;I:I;J:J;N:N;O:O;P:P;Q:Q;S:S;W:W;Y:Y;v:v;K:K';
         $values['PBX_RUF1'] = 'POST';
 
@@ -160,7 +160,7 @@ class AuthorizationRequest implements BuilderInterface
         $values['PBX_LANGUE'] = $lang;
 
         // Choose page format depending on browser/devise
-        if ($this->_objectManager->get('ETransactions\etransactions\Helper\Mobile')->isMobile()) {
+        if ($this->_objectManager->get('creditagricole\etransactions\Helper\Mobile')->isMobile()) {
             $values['PBX_SOURCE'] = 'XHTML';
         }
 

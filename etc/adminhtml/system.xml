@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 /**
- * CreditAgricole etransactions module for Magento
+ * E-Transactions etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -23,25 +23,25 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="../../../../Magento/Config/etc/system_file.xsd">
     <system>
-        <tab id="creditagricole" translate="label" sortOrder="400">
-            <label>CreditAgricole</label>
+        <tab id="etransactions" translate="label" sortOrder="400">
+            <label>E-Transactions</label>
         </tab>
         <section id="etep_pres" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
             <label>Presentation</label>
-            <tab>creditagricole</tab>
-            <resource>ETransactions_etransactions::creditagricole_config</resource>
+            <tab>etransactions</tab>
+            <resource>creditagricole_etransactions::etransactions_config</resource>
             <group id="presentation" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
             	<label>Presentation</label>
             	<attribute type="expanded">1</attribute>
                 <field id="presentation" translate="label comment" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <frontend_model>ETransactions\etransactions\Block\Admin\Field\Presentation</frontend_model>
+                    <frontend_model>creditagricole\etransactions\Block\Admin\Field\Presentation</frontend_model>
                 </field>
         	</group>
         </section>
         <section id="etep_merchant" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
             <label>Account settings</label>
-            <tab>creditagricole</tab>
-            <resource>ETransactions_etransactions::creditagricole_config</resource>
+            <tab>etransactions</tab>
+            <resource>creditagricole_etransactions::etransactions_config</resource>
             <group id="environment" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                 <attribute type="expanded">1</attribute>
                 <label>Environment</label>
@@ -49,7 +49,7 @@
                 <field id="environment" translate="label comment" type="select" sortOrder="10" showInDefault="1"
                        showInWebsite="1" showInStore="1">
                     <label>Environment</label>
-                    <source_model>ETransactions\etransactions\Model\Admin\Environment</source_model>
+                    <source_model>creditagricole\etransactions\Model\Admin\Environment</source_model>
                     <config_path>etep/merchant/environment</config_path>
                 </field>
             </group>
@@ -58,42 +58,42 @@
                 <label>Account settings</label>
                 <field id="subscription" translate="label comment" type="select" sortOrder="0" showInDefault="1"
                        showInWebsite="1" showInStore="1">
-                    <label>Subscribed CreditAgricole Solution</label>
-                    <source_model>ETransactions\etransactions\Model\Admin\Subscription</source_model>
+                    <label>Subscribed E-Transactions Solution</label>
+                    <source_model>creditagricole\etransactions\Model\Admin\Subscription</source_model>
                     <config_path>etep/merchant/subscription</config_path>
                 </field>
                 <field id="site" translate="label comment" type="text" sortOrder="10" showInDefault="1"
                        showInWebsite="1" showInStore="1">
                     <label>Site number</label>
-                    <comment><![CDATA[Site number provided by CreditAgricole.]]></comment>
+                    <comment><![CDATA[Site number provided by E-Transactions.]]></comment>
                     <validate>required-entry validate-digits validate-exact-length length-7</validate>
                     <config_path>etep/merchant/site</config_path>
                 </field>
                 <field id="rank" translate="label comment" type="text" sortOrder="20" showInDefault="1"
                        showInWebsite="1" showInStore="1">
                     <label>Rank number</label>
-                    <comment><![CDATA[Rank number provided by CreditAgricole (last 2 digits).]]></comment>
+                    <comment><![CDATA[Rank number provided by E-Transactions (last 2 digits).]]></comment>
                     <validate>required-entry validate-digits validate-exact-length length-2</validate>
                     <config_path>etep/merchant/rank</config_path>
                 </field>
                 <field id="identifier" translate="label comment" type="text" sortOrder="30" showInDefault="1"
                        showInWebsite="1" showInStore="1">
                     <label>Login</label>
-                    <comment><![CDATA[Internal login provided by CreditAgricole.]]></comment>
+                    <comment><![CDATA[Internal login provided by E-Transactions.]]></comment>
                     <validate>required-entry validate-digits validate-length maximum-length-9</validate>
                     <config_path>etep/merchant/identifier</config_path>
                 </field>
                 <field id="hmackey" translate="label comment" type="obscure" sortOrder="50" showInDefault="1"
                        showInWebsite="1" showInStore="1">
                     <label>HMAC</label>
-                    <comment><![CDATA[Secrete HMAC key to create using the CreditAgricole interface.]]></comment>
+                    <comment><![CDATA[Secrete HMAC key to create using the E-Transactions interface.]]></comment>
                     <validate>required-entry</validate>
                     <config_path>etep/merchant/hmackey</config_path>
                     <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
                 </field>
                 <field id="password" translate="label comment" type="obscure" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>CreditAgricole Back Office password</label>
-                    <comment><![CDATA[Back Office password provided by CreditAgricole.]]></comment>
+                    <label>E-Transactions Back Office password</label>
+                    <comment><![CDATA[Back Office password provided by E-Transactions.]]></comment>
                     <validate>required-entry</validate>
                     <depends>
                         <field id="subscription">access</field>
@@ -102,8 +102,8 @@
                     <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
                 </field>
                 <field id="passwordplus" translate="label comment" type="obscure" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>CreditAgricole Back Office password</label>
-                    <comment><![CDATA[Back Office password provided by CreditAgricole.]]></comment>
+                    <label>E-Transactions Back Office password</label>
+                    <comment><![CDATA[Back Office password provided by E-Transactions.]]></comment>
                     <validate>required-entry</validate>
                     <depends>
                         <field id="subscription">premium</field>
@@ -119,7 +119,7 @@
                 <field id="customer_info" translate="label comment" type="select" sortOrder="10" showInDefault="1"
                        showInWebsite="1" showInStore="1">
                     <label>Show payment information to customers</label>
-                    <comment><![CDATA[CreditAgricole module can show payment information to customer. You can disable this feature here.]]></comment>
+                    <comment><![CDATA[E-Transactions module can show payment information to customer. You can disable this feature here.]]></comment>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <config_path>etep/info/show_to_customer</config_path>
                 </field>
@@ -127,13 +127,13 @@
                        showInWebsite="1" showInStore="1">
                     <label>Orders currencies</label>
                             <comment><![CDATA[If multiple currencies are active on your store you can force the payment with the base currency or the currency selected by the customer when ordering.]]></comment>
-                    <source_model>ETransactions\etransactions\Model\Config\Source\CurrencyYesNo</source_model>
+                    <source_model>creditagricole\etransactions\Model\Config\Source\CurrencyYesNo</source_model>
                     <config_path>etep/info/currency</config_path>
                 </field>
                 <field id="reponsive" translate="label comment" type="select" sortOrder="10" showInDefault="1"
                        showInWebsite="1" showInStore="1">
                     <label>Payment page type</label>
-                    <source_model>ETransactions\etransactions\Model\Config\Source\ResponsiveYesNo</source_model>
+                    <source_model>creditagricole\etransactions\Model\Config\Source\ResponsiveYesNo</source_model>
                     <config_path>etep/info/responsive</config_path>
                 </field>
                 <field id="min_amount" translate="label comment" type="text" sortOrder="10" showInDefault="1"
@@ -152,18 +152,18 @@
         </section>
         <section id="etep_payments" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
         	<label>Payment methods</label>
-        	<tab>creditagricole</tab>
-            <resource>ETransactions_etransactions::creditagricole_config</resource>
+        	<tab>etransactions</tab>
+            <resource>creditagricole_etransactions::etransactions_config</resource>
 
-            <include path="ETransactions_etransactions::system/etep_cb.xml"/>
-            <include path="ETransactions_etransactions::system/etep_threetime.xml"/>
-            <include path="ETransactions_etransactions::system/etep_private.xml"/>
-            <include path="ETransactions_etransactions::system/etep_paypal.xml"/>
-            <include path="ETransactions_etransactions::system/etep_prepaid.xml"/>
-            <include path="ETransactions_etransactions::system/etep_financial.xml"/>
-            <include path="ETransactions_etransactions::system/etep_bcmc.xml"/>
-            <include path="ETransactions_etransactions::system/etep_maestro.xml"/>
-            <include path="ETransactions_etransactions::system/etep_paybuttons.xml"/>
+            <include path="creditagricole_etransactions::system/etep_cb.xml"/>
+            <include path="creditagricole_etransactions::system/etep_threetime.xml"/>
+            <include path="creditagricole_etransactions::system/etep_private.xml"/>
+            <include path="creditagricole_etransactions::system/etep_paypal.xml"/>
+            <include path="creditagricole_etransactions::system/etep_prepaid.xml"/>
+            <include path="creditagricole_etransactions::system/etep_financial.xml"/>
+            <include path="creditagricole_etransactions::system/etep_bcmc.xml"/>
+            <include path="creditagricole_etransactions::system/etep_maestro.xml"/>
+            <include path="creditagricole_etransactions::system/etep_paybuttons.xml"/>
         </section>
     </system>
 </config>

@@ -1,6 +1,6 @@
 <?php
 /**
- * CreditAgricole etransactions module for Magento
+ * E-Transactions etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -19,20 +19,20 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace ETransactions\etransactions\Controller\Payment;
+namespace creditagricole\etransactions\Controller\Payment;
 
 use \Magento\Framework\Validator\Exception;
 
-class Success extends \ETransactions\etransactions\Controller\Payment
+class Success extends \creditagricole\etransactions\Controller\Payment
 {
     public function execute()
     {
         try {
             $session = $this->getSession();
-            $creditagricole = $this->getEtransactions();
+            $etransactions = $this->getcreditagricole();
 
             // Retrieves params
-            $params = $creditagricole->getParams(false, false);
+            $params = $etransactions->getParams(false, false);
             if ($params === false) {
                 return $this->_404();
             }
@@ -49,7 +49,7 @@ class Success extends \ETransactions\etransactions\Controller\Payment
             // Cleanup
             $session->unsCurrentEtepOrderId();
 
-            $message = sprintf('Order %s: Customer is back from CreditAgricole payment page. Payment success.', $order->getIncrementId());
+            $message = sprintf('Order %s: Customer is back from E-Transactions payment page. Payment success.', $order->getIncrementId());
             $this->logDebug($message);
 
             // Redirect to success page

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 /**
- * CreditAgricole etransactions module for Magento
+ * E-Transactions etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -26,8 +26,8 @@
     	<label>Pay by Card Three Times</label>
 
         <field id="tt_info" translate="label comment" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
-        	<label><![CDATA[Check your CreditAgricole contract before enabling this option.]]></label>
-            <frontend_model>ETransactions\etransactions\Block\Admin\Field\Info</frontend_model>
+        	<label><![CDATA[Check your E-Transactions contract before enabling this option.]]></label>
+            <frontend_model>creditagricole\etransactions\Block\Admin\Field\Info</frontend_model>
         	<depends>
                 <field id="tt_active">1</field>
             </depends>
@@ -39,9 +39,9 @@
         </field>
         <field id="tt_cctypes" translate="label comment" type="multiselect" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
             <label>Card type</label>
-            <comment><![CDATA[If you disable E-Carte Bleu, contact the CreditAgricole support]]></comment>
+            <comment><![CDATA[If you disable E-Carte Bleu, contact the E-Transactions support]]></comment>
             <config_path>payment/etep_threetime/cctypes</config_path>
-            <source_model>ETransactions\etransactions\Model\Admin\Cards\Threetime</source_model>
+            <source_model>creditagricole\etransactions\Model\Admin\Cards\Threetime</source_model>
             <depends>
                 <field id="active">1</field>
             </depends>
@@ -71,7 +71,7 @@
 	        <field id="tt_status_paid" translate="label comment" type="select" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="0">
 	        	<label>Once paid</label>
 	            <config_path>payment/etep_threetime/status_paid</config_path>
-	            <source_model>ETransactions\etransactions\Model\Admin\Order\Status\Processing</source_model>
+	            <source_model>creditagricole\etransactions\Model\Admin\Order\Status\Processing</source_model>
 	        	<depends>
 	                <field id="etep_payments/etep_threetime/tt_active">1</field>
 	            </depends>

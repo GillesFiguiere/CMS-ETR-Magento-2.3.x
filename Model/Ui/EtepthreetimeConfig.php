@@ -1,6 +1,6 @@
 <?php
 /**
- * CreditAgricole etransactions module for Magento
+ * E-Transactions etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -19,7 +19,7 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace ETransactions\etransactions\Model\Ui;
+namespace creditagricole\etransactions\Model\Ui;
 
 /**
  * Class Etepthreetime
@@ -42,12 +42,12 @@ class EtepthreetimeConfig
     /**
      * @var string
      */
-    // protected $_formBlockType = 'ETransactions\etransactions\Block\Form\Etepthreetime';
+    // protected $_formBlockType = 'creditagricole\etransactions\Block\Form\Etepthreetime';
 
     /**
      * @var string
      */
-    // protected $_infoBlockType = 'ETransactions\etransactions\Block\Info\Etepthreetime';
+    // protected $_infoBlockType = 'creditagricole\etransactions\Block\Info\Etepthreetime';
 
     /**
      * Availability option

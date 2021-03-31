@@ -1,6 +1,6 @@
 <?php
 /**
- * CreditAgricole etransactions module for Magento
+ * E-Transactions etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -19,19 +19,19 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace ETransactions\etransactions\Controller\Payment;
+namespace creditagricole\etransactions\Controller\Payment;
 
 use \Magento\Framework\Validator\Exception;
 
-class Ipn extends \ETransactions\etransactions\Controller\Payment
+class Ipn extends \creditagricole\etransactions\Controller\Payment
 {
     public function execute()
     {
         try {
-            $creditagricole = $this->getEtransactions();
+            $etransactions = $this->getcreditagricole();
 
             // Retrieves params
-            $params = $creditagricole->getParams(true);
+            $params = $etransactions->getParams(true);
             if ($params === false) {
                 return $this->_404();
             }

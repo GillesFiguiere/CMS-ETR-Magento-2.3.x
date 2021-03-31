@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 /**
- * CreditAgricole etransactions module for Magento
+ * E-Transactions etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -22,8 +22,8 @@
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
     <menu>
-<!--        <add id="ETransactions_etransactions::etransactions" title="Etransactions" module="ETransactions_etransactions" sortOrder="15" dependsOnModule="ETransactions_etransactions" resource="ETransactions_etransactions::etransactions"/>
-        <add id="ETransactions_etransactions::etransactions_capture" title="Capture" module="ETransactions_etransactions" sortOrder="10" parent="ETransactions_etransactions::etransactions" resource="ETransactions_etransactions::etransactions" />
-        <add id="ETransactions_etransactions::etransactions_capture_test" title="Test" module="ETransactions_etransactions" sortOrder="10" parent="ETransactions_etransactions::etransactions_capture" action="etransactions/capture" resource="ETransactions_etransactions::etransactions_capture_test"/>-->
+<!--        <add id="creditagricole_etransactions::creditagricole" title="creditagricole" module="creditagricole_etransactions" sortOrder="15" dependsOnModule="creditagricole_etransactions" resource="creditagricole_etransactions::creditagricole"/>
+        <add id="creditagricole_etransactions::creditagricole_capture" title="Capture" module="creditagricole_etransactions" sortOrder="10" parent="creditagricole_etransactions::creditagricole" resource="creditagricole_etransactions::creditagricole" />
+        <add id="creditagricole_etransactions::creditagricole_capture_test" title="Test" module="creditagricole_etransactions" sortOrder="10" parent="creditagricole_etransactions::creditagricole_capture" action="creditagricole/capture" resource="creditagricole_etransactions::creditagricole_capture_test"/>-->
     </menu>
 </config>

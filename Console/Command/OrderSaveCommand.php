@@ -1,6 +1,6 @@
 <?php
 /**
- * CreditAgricole etransactions module for Magento
+ * E-Transactions etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -19,7 +19,7 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace ETransactions\etransactions\Console\Command;
+namespace creditagricole\etransactions\Console\Command;
 
 use Magento\Framework\App\ObjectManager\ConfigLoader;
 use Magento\Framework\App\ObjectManagerFactory;
@@ -48,7 +48,7 @@ class OrderSaveCommand extends Command
 
     protected function configure()
     {
-        $this->setName('etransactions:saveorder')
+        $this->setName('creditagricole:saveorder')
             ->setDescription('Test : Call save method for Order')
             ->setDefinition($this->getInputList());
         parent::configure();
@@ -57,7 +57,7 @@ class OrderSaveCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->addArguments($input);
-        $output->writeln('<info>Starting ETransactions SaveOrder Test</info>');
+        $output->writeln('<info>Starting creditagricole SaveOrder Test</info>');
 
         if (!empty($this->_order)) {
             $output->writeln("Order = {$this->_order}");
@@ -68,7 +68,7 @@ class OrderSaveCommand extends Command
             $output->writeln("Order Saved");
         }
 
-        $output->writeln('<info>End ETransactions SaveOrder Test</info>');
+        $output->writeln('<info>End creditagricole SaveOrder Test</info>');
     }
 
     public function addArguments($input)

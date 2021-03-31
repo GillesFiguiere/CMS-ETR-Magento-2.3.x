@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 /**
- * CreditAgricole etransactions module for Magento
+ * E-Transactions etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -22,8 +22,8 @@
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../lib/internal/Magento/Framework/App/etc/routes.xsd">
     <router id="admin">
-        <route id="etransactions" frontName="etransactions">
-            <module name="ETransactions_etransactions" />
+        <route id="creditagricole" frontName="creditagricole">
+            <module name="creditagricole_etransactions" />
         </route>
     </router>
 </config>

@@ -1,6 +1,6 @@
 <?php
 /**
- * CreditAgricole etransactions module for Magento
+ * E-Transactions etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -19,14 +19,14 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace ETransactions\etransactions\Model\Ui;
+namespace creditagricole\etransactions\Model\Ui;
 
 use Magento\Checkout\Model\ConfigProviderInterface;
 // use Magento\Framework\App\Config\ScopeConfigInterface;
 // use Magento\Framework\View\Asset\Source;
 use \Magento\Framework\ObjectManagerInterface;
-use ETransactions\etransactions\Gateway\Http\Client\ClientMock;
-use ETransactions\etransactions\Model\Ui\EtepcbConfig;
+use creditagricole\etransactions\Gateway\Http\Client\ClientMock;
+use creditagricole\etransactions\Model\Ui\EtepcbConfig;
 
 /**
  * Class ConfigProvider
@@ -53,7 +53,7 @@ final class EtepcbConfigProvider implements ConfigProviderInterface
     public function getCards()
     {
         $object_manager = \Magento\Framework\App\ObjectManager::getInstance();
-        $etepcbConfig = $object_manager->get('ETransactions\etransactions\Model\Ui\EtepcbConfig');
+        $etepcbConfig = $object_manager->get('creditagricole\etransactions\Model\Ui\EtepcbConfig');
         $assetSource = $object_manager->get('Magento\Framework\View\Asset\Source');
         $assetRepository = $object_manager->get('Magento\Framework\View\Asset\Repository');
 
@@ -63,7 +63,7 @@ final class EtepcbConfigProvider implements ConfigProviderInterface
             $types = explode(',', $types);
         }
         foreach ($types as $code) {
-            $asset = $assetRepository->createAsset('ETransactions_etransactions::images/' . strtoupper($code) . '.svg');
+            $asset = $assetRepository->createAsset('creditagricole_etransactions::images/' . strtoupper($code) . '.svg');
             $placeholder = $assetSource->findRelativeSourceFilePath($asset);
             if ($placeholder) {
                 list($width, $height) = getimagesize($asset->getSourceFile());
