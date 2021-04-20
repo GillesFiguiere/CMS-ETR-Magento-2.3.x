@@ -19,7 +19,7 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace creditagricole\etransactions\Block\Admin\Field;
+namespace CreditAgricole\etransactions\Block\Admin\Field;
 
 class Info extends \Magento\Config\Block\System\Config\Form\Field
 {

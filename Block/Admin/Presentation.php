@@ -19,7 +19,7 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace creditagricole\etransactions\Block\Admin;
+namespace CreditAgricole\etransactions\Block\Admin;
 
 use Magento\Framework\View\Element\Template;
 
@@ -34,7 +34,7 @@ class Presentation extends Template
     public function getHtmlTemplate()
     {
         $manager = \Magento\Framework\App\ObjectManager::getInstance();
-        $config  = $manager->get('creditagricole\etransactions\Model\Config');
+        $config  = $manager->get('CreditAgricole\etransactions\Model\Config');
         $lang = $manager->get('Magento\Framework\Locale\Resolver');
         if (!empty($lang)) {
             $lang = preg_replace('#_.*$#', '', $lang->getLocale());

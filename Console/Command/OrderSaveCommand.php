@@ -19,7 +19,7 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace creditagricole\etransactions\Console\Command;
+namespace CreditAgricole\etransactions\Console\Command;
 
 use Magento\Framework\App\ObjectManager\ConfigLoader;
 use Magento\Framework\App\ObjectManagerFactory;
@@ -57,7 +57,7 @@ class OrderSaveCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->addArguments($input);
-        $output->writeln('<info>Starting creditagricole SaveOrder Test</info>');
+        $output->writeln('<info>Starting CreditAgricole SaveOrder Test</info>');
 
         if (!empty($this->_order)) {
             $output->writeln("Order = {$this->_order}");
@@ -68,7 +68,7 @@ class OrderSaveCommand extends Command
             $output->writeln("Order Saved");
         }
 
-        $output->writeln('<info>End creditagricole SaveOrder Test</info>');
+        $output->writeln('<info>End CreditAgricole SaveOrder Test</info>');
     }
 
     public function addArguments($input)

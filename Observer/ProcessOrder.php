@@ -19,7 +19,7 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace creditagricole\etransactions\Observer;
+namespace CreditAgricole\etransactions\Observer;
 
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\Event\Observer as EventObserver;
@@ -69,31 +69,31 @@ class ProcessOrder implements ObserverInterface
             return $this;
         }
 
-        // This order must be paid by creditagricole
+        // This order must be paid by Creditagricole
         $payment = $order->getPayment();
         if (empty($payment)) {
             return $this;
         }
 
         $method = $payment->getMethodInstance();
-        if (!(get_class($method) == 'creditagricole\etransactions\Model\Payment\Cb')) {
+        if (!(get_class($method) == 'CreditAgricole\etransactions\Model\Payment\Cb')) {
             return $this;
         }
 
-        // creditagricole Direct must be activated
-        $config = $method->getcreditagricoleConfig();
-        if ($config->getSubscription() != \creditagricole\etransactions\Model\Config::SUBSCRIPTION_OFFER2
-            && $config->getSubscription() != \creditagricole\etransactions\Model\Config::SUBSCRIPTION_OFFER3
+        // Creditagricole Direct must be activated
+        $config = $method->getCreditAgricoleConfig();
+        if ($config->getSubscription() != \CreditAgricole\etransactions\Model\Config::SUBSCRIPTION_OFFER2
+            && $config->getSubscription() != \CreditAgricole\etransactions\Model\Config::SUBSCRIPTION_OFFER3
         ) {
             return $this;
         }
 
         //         Action must be "Manual"
-        if ($payment->getEtepAction() != \creditagricole\etransactions\Model\Payment\AbstractPayment::ETRANSACTION_MANUAL) {
+        if ($payment->getEtepAction() != \CreditAgricole\etransactions\Model\Payment\AbstractPayment::ETRANSACTION_MANUAL) {
             return $this;
         }
 
-        if ($method->getConfigAutoCaptureMode() != \creditagricole\etransactions\Model\Payment\AbstractPayment::ETRANSACTION_MODE_SHIPMENT) {
+        if ($method->getConfigAutoCaptureMode() != \CreditAgricole\etransactions\Model\Payment\AbstractPayment::ETRANSACTION_MODE_SHIPMENT) {
             return $this;
         }
 

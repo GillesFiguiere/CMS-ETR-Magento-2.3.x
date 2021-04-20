@@ -19,11 +19,11 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace creditagricole\etransactions\Gateway\Validator;
+namespace CreditAgricole\etransactions\Gateway\Validator;
 
 use Magento\Payment\Gateway\Validator\AbstractValidator;
 use Magento\Payment\Gateway\Validator\ResultInterface;
-use creditagricole\etransactions\Gateway\Http\Client\ClientMock;
+use CreditAgricole\etransactions\Gateway\Http\Client\ClientMock;
 
 class ResponseCodeValidator extends AbstractValidator
 {

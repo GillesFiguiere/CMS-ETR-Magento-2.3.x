@@ -19,7 +19,7 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace creditagricole\etransactions\Model;
+namespace CreditAgricole\etransactions\Model;
 
 class Config extends \Magento\Payment\Model\Config
 {

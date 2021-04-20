@@ -19,7 +19,7 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace creditagricole\etransactions\Model\Admin\Payment;
+namespace CreditAgricole\etransactions\Model\Admin\Payment;
 
 class Action implements \Magento\Framework\Option\ArrayInterface
 {
@@ -39,8 +39,8 @@ class Action implements \Magento\Framework\Option\ArrayInterface
         ];
 
         $manager = \Magento\Framework\App\ObjectManager::getInstance();
-        $config  = $manager->get('creditagricole\etransactions\Model\Config');
-        if ($config->getSubscription() != \creditagricole\etransactions\Model\Config::SUBSCRIPTION_OFFER1) {
+        $config  = $manager->get('CreditAgricole\etransactions\Model\Config');
+        if ($config->getSubscription() != \CreditAgricole\etransactions\Model\Config::SUBSCRIPTION_OFFER1) {
             $manual['disabled'] = 'disabled';
         }
 

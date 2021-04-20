@@ -19,7 +19,7 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace creditagricole\etransactions\Model\Admin\Payment;
+namespace CreditAgricole\etransactions\Model\Admin\Payment;
 
 class Delays
 {

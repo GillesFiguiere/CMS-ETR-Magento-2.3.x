@@ -19,7 +19,7 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace creditagricole\etransactions\Helper;
+namespace CreditAgricole\etransactions\Helper;
 
 class Mobile extends \Magento\Framework\App\Helper\AbstractHelper
 {

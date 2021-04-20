@@ -25,7 +25,7 @@ try {
 	if ($values['PBX_TYPEPAIEMENT'] == 'KWIXO') {
 		$url = $this->escapeUrl($this->getKwixoUrl());
 	}
-	else if ($this->helper('creditagricole\etransactions\Helper\Mobile')->isMobile()) {
+	else if ($this->helper('CreditAgricole\etransactions\Helper\Mobile')->isMobile()) {
 		$url = $this->escapeUrl($this->getMobileUrl());
 	}
 	else {

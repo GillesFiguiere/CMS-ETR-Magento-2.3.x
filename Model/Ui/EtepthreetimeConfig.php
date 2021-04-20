@@ -19,7 +19,7 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace creditagricole\etransactions\Model\Ui;
+namespace CreditAgricole\etransactions\Model\Ui;
 
 /**
  * Class Etepthreetime
@@ -42,12 +42,12 @@ class EtepthreetimeConfig
     /**
      * @var string
      */
-    // protected $_formBlockType = 'creditagricole\etransactions\Block\Form\Etepthreetime';
+    // protected $_formBlockType = 'CreditAgricole\etransactions\Block\Form\Etepthreetime';
 
     /**
      * @var string
      */
-    // protected $_infoBlockType = 'creditagricole\etransactions\Block\Info\Etepthreetime';
+    // protected $_infoBlockType = 'CreditAgricole\etransactions\Block\Info\Etepthreetime';
 
     /**
      * Availability option

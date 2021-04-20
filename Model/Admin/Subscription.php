@@ -19,7 +19,7 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace creditagricole\etransactions\Model\Admin;
+namespace CreditAgricole\etransactions\Model\Admin;
 
 class Subscription implements \Magento\Framework\Option\ArrayInterface
 {

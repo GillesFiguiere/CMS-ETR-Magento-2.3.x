@@ -19,7 +19,7 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace creditagricole\etransactions\Model\Payment;
+namespace CreditAgricole\etransactions\Model\Payment;
 
 use \Magento\Sales\Model\Order;
 use \Magento\Sales\Model\Order\Payment\Transaction;
@@ -87,7 +87,7 @@ class Threetime extends AbstractPayment
 
         // Create transaction
         $type = Transaction::TYPE_CAPTURE;
-        $txn = $this->_addcreditagricoleTransaction(
+        $txn = $this->_addCreditagricoleTransaction(
             $order,
             $type,
             $data,

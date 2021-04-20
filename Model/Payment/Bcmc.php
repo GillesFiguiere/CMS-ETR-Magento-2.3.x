@@ -19,7 +19,7 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace creditagricole\etransactions\Model\Payment;
+namespace CreditAgricole\etransactions\Model\Payment;
 
 class Bcmc extends AbstractPayment
 {

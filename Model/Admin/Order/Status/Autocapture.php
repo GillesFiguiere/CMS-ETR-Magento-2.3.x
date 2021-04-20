@@ -19,9 +19,9 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace creditagricole\etransactions\Model\Admin\Order\Status;
+namespace CreditAgricole\etransactions\Model\Admin\Order\Status;
 
-class Autocapture extends \creditagricole\etransactions\Model\Admin\Order\Status
+class Autocapture extends \CreditAgricole\etransactions\Model\Admin\Order\Status
 {
     protected $_stateStatuses = [
         \Magento\Sales\Model\Order::STATE_NEW,

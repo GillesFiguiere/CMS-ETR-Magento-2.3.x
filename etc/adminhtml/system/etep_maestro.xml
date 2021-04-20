@@ -47,7 +47,7 @@
         </field>
         <field id="maestro_payment_action" translate="label comment" type="select" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
         	<label>Debit type</label>
-        	<source_model>creditagricole\etransactions\Model\Admin\Payment\Action</source_model>
+        	<source_model>CreditAgricole\etransactions\Model\Admin\Payment\Action</source_model>
         	<config_path>payment/etep_maestro/action</config_path>
         	<depends>
                 <field id="maestro_active">1</field>
@@ -56,7 +56,7 @@
         <field id="maestro_delay" translate="label comment" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
         	<label>Delay</label>
         	<config_path>payment/etep_maestro/delay</config_path>
-        	<source_model>creditagricole\etransactions\Model\Admin\Payment\Delays</source_model>
+        	<source_model>CreditAgricole\etransactions\Model\Admin\Payment\Delays</source_model>
         	<depends>
                 <field id="maestro_payment_action">deferred</field>
                 <field id="maestro_active">1</field>
@@ -72,7 +72,7 @@
 	        <field id="maestro_status_authorized" translate="label comment" type="select" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="0">
 	        	<label>Once authorized</label>
 	        	<config_path>payment/etep_maestro/status_authorized</config_path>
-	        	<source_model>creditagricole\etransactions\Model\Admin\Order\Status\Pendingpayment</source_model>
+	        	<source_model>CreditAgricole\etransactions\Model\Admin\Order\Status\Pendingpayment</source_model>
 	        	<depends>
 	                <field id="etep_payments/etep_maestro/maestro_active">1</field>
 	                <field id="etep_payments/etep_maestro/maestro_payment_action">manual</field>
@@ -81,7 +81,7 @@
 	        <field id="maestro_status_paid" translate="label comment" type="select" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="0">
 	        	<label>Once paid</label>
 	        	<config_path>payment/etep_maestro/status_paid</config_path>
-	        	<source_model>creditagricole\etransactions\Model\Admin\Order\Status\Processing</source_model>
+	        	<source_model>CreditAgricole\etransactions\Model\Admin\Order\Status\Processing</source_model>
 	        	<depends>
 	                <field id="etep_payments/etep_maestro/maestro_active">1</field>
 	            </depends>
@@ -89,7 +89,7 @@
 	        <field id="maestro_status_auto_capture" translate="label comment" type="select" sortOrder="112" showInDefault="1" showInWebsite="1" showInStore="0">
 	        	<label>Automatic capture status</label>
 	        	<config_path>payment/etep_maestro/status_auto_capture</config_path>
-	        	<source_model>creditagricole\etransactions\Model\Admin\Order\Status\Autocapture</source_model>
+	        	<source_model>CreditAgricole\etransactions\Model\Admin\Order\Status\Autocapture</source_model>
 	        	<depends>
 	                <field id="etep_payments/etep_maestro/maestro_active">1</field>
 	                <field id="etep_payments/etep_maestro/maestro_payment_action">manual</field>

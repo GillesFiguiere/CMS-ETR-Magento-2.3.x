@@ -19,7 +19,7 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace creditagricole\etransactions\Model\Admin\Cards;
+namespace CreditAgricole\etransactions\Model\Admin\Cards;
 
 class Cb extends AbstractCards
 {

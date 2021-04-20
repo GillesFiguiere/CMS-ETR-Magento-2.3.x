@@ -33,7 +33,7 @@
         <field id="pb_cctypes" translate="label comment" type="multiselect" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
             <label>Card type</label>
             <config_path>payment/etep_paybuttons/cctypes</config_path>
-            <source_model>creditagricole\etransactions\Model\Admin\Cards\Paybuttons</source_model>
+            <source_model>CreditAgricole\etransactions\Model\Admin\Cards\Paybuttons</source_model>
             <depends>
                 <field id="pb_active">1</field>
             </depends>
@@ -63,7 +63,7 @@
 	        <field id="pb_status_paid" translate="label comment" type="select" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="0">
 	        	<label>Once paid</label>
 	        	<config_path>payment/etep_paybuttons/status_paid</config_path>
-	        	<source_model>creditagricole\etransactions\Model\Admin\Order\Status\Processing</source_model>
+	        	<source_model>CreditAgricole\etransactions\Model\Admin\Order\Status\Processing</source_model>
 	        	<depends>
 	                <field id="etep_payments/etep_paybuttons/pb_active">1</field>
 	            </depends>

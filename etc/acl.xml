@@ -24,12 +24,12 @@
     <acl>
         <resources>
             <resource id="Magento_Backend::admin">
-                <resource id="creditagricole_etransactions::creditagricole" title="Index" sortOrder="20">
-                    <resource id="creditagricole_etransactions::creditagricole_capture" title="Invoice" sortOrder="10">
-                        <resource id="creditagricole_etransactions::creditagricole_capture_test" title="Test" sortOrder="10">
+                <resource id="CreditAgricole_etransactions::creditagricole" title="Index" sortOrder="20">
+                    <resource id="CreditAgricole_etransactions::creditagricole_capture" title="Invoice" sortOrder="10">
+                        <resource id="CreditAgricole_etransactions::creditagricole_capture_test" title="Test" sortOrder="10">
                         </resource>
-                        <resource id="creditagricole_etransactions::creditagricole_partial" title="InvoicePartial" sortOrder="10">
-                            <resource id="creditagricole_etransactions::creditagricole_partial_test" title="TestPartial" sortOrder="10">
+                        <resource id="CreditAgricole_etransactions::creditagricole_partial" title="InvoicePartial" sortOrder="10">
+                            <resource id="CreditAgricole_etransactions::creditagricole_partial_test" title="TestPartial" sortOrder="10">
                             </resource>
                         </resource>
                     </resource>

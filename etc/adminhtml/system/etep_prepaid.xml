@@ -33,7 +33,7 @@
         <field id="pre_cctypes" translate="label comment" type="multiselect" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
             <label>Card type</label>
             <config_path>payment/etep_prepaid/cctypes</config_path>
-            <source_model>creditagricole\etransactions\Model\Admin\Cards\Prepaid</source_model>
+            <source_model>CreditAgricole\etransactions\Model\Admin\Cards\Prepaid</source_model>
             <depends>
                 <field id="pre_active">1</field>
             </depends>
@@ -64,7 +64,7 @@
             <!-- <field id="pre_status_authorized" translate="label comment" type="select" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="0">
 	        	<label>Once authorized</label>
 	        	<config_path>payment/etep_prepaid/status_authorized</config_path>
-	        	<source_model>creditagricole\etransactions\Model\Admin\Order\Status\Pendingpayment</source_model>
+	        	<source_model>CreditAgricole\etransactions\Model\Admin\Order\Status\Pendingpayment</source_model>
 	        	<depends>
 	                <field id="etep_payments/etep_prepaid/pre_active">1</field>
 	                <field id="etep_payments/etep_prepaid/pre_payment_action">manual</field>
@@ -73,7 +73,7 @@
 	        <field id="pre_status_paid" translate="label comment" type="select" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="0">
 	        	<label>Once paid</label>
 	        	<config_path>payment/etep_prepaid/status_paid</config_path>
-	        	<source_model>creditagricole\etransactions\Model\Admin\Order\Status\Processing</source_model>
+	        	<source_model>CreditAgricole\etransactions\Model\Admin\Order\Status\Processing</source_model>
 	        	<depends>
 	                <field id="etep_payments/etep_prepaid/pre_active">1</field>
 	            </depends>
@@ -81,7 +81,7 @@
 	        <!-- <field id="pre_status_auto_capture" translate="label comment" type="select" sortOrder="112" showInDefault="1" showInWebsite="1" showInStore="0">
 	        	<label>Automatic capture status</label>
 	        	<config_path>payment/etep_prepaid/status_auto_capture</config_path>
-	        	<source_model>creditagricole\etransactions\Model\Admin\Order\Status\Autocapture</source_model>
+	        	<source_model>CreditAgricole\etransactions\Model\Admin\Order\Status\Autocapture</source_model>
 	        	<depends>
 	                <field id="etep_payments/etep_prepaid/pre_active">1</field>
 	                <field id="etep_payments/etep_prepaid/pre_payment_action">manual</field>

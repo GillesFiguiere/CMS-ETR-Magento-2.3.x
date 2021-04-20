@@ -19,7 +19,7 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace creditagricole\etransactions\Block\Checkout;
+namespace CreditAgricole\etransactions\Block\Checkout;
 
 use Magento\Framework\View\Element\Template;
 

@@ -19,7 +19,7 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace creditagricole\etransactions\Model\Config\Source;
+namespace CreditAgricole\etransactions\Model\Config\Source;
 
 class CurrencyYesNo
 {

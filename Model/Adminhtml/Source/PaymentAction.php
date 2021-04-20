@@ -19,7 +19,7 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace creditagricole\etransactions\Model\Adminhtml\Source;
+namespace CreditAgricole\etransactions\Model\Adminhtml\Source;
 
 use Magento\Payment\Model\Method\AbstractMethod;
 

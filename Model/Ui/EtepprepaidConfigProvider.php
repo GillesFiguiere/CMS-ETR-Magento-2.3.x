@@ -19,14 +19,14 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace creditagricole\etransactions\Model\Ui;
+namespace CreditAgricole\etransactions\Model\Ui;
 
 use Magento\Checkout\Model\ConfigProviderInterface;
 // use Magento\Framework\App\Config\ScopeConfigInterface;
 // use Magento\Framework\View\Asset\Source;
 use \Magento\Framework\ObjectManagerInterface;
-use creditagricole\etransactions\Gateway\Http\Client\ClientMock;
-use creditagricole\etransactions\Model\Ui\EtepprepaidConfig;
+use CreditAgricole\etransactions\Gateway\Http\Client\ClientMock;
+use CreditAgricole\etransactions\Model\Ui\EtepprepaidConfig;
 
 /**
  * Class ConfigProvider
@@ -54,7 +54,7 @@ final class EtepprepaidConfigProvider implements ConfigProviderInterface
     public function getCards()
     {
         $object_manager = \Magento\Framework\App\ObjectManager::getInstance();
-        $etepprepaidConfig = $object_manager->get('creditagricole\etransactions\Model\Ui\EtepprepaidConfig');
+        $etepprepaidConfig = $object_manager->get('CreditAgricole\etransactions\Model\Ui\EtepprepaidConfig');
         $assetSource = $object_manager->get('Magento\Framework\View\Asset\Source');
         $assetRepository = $object_manager->get('Magento\Framework\View\Asset\Repository');
 
@@ -64,7 +64,7 @@ final class EtepprepaidConfigProvider implements ConfigProviderInterface
             $types = explode(',', $types);
         }
         foreach ($types as $code) {
-            $asset = $assetRepository->createAsset('creditagricole_etransactions::images/' . strtolower($code) . '.45.png');
+            $asset = $assetRepository->createAsset('CreditAgricole_etransactions::images/' . strtolower($code) . '.45.png');
             $placeholder = $assetSource->findRelativeSourceFilePath($asset);
             if ($placeholder) {
                 list($width, $height) = getimagesize($asset->getSourceFile());

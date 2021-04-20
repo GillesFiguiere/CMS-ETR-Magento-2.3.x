@@ -32,39 +32,39 @@ define(
         rendererList.push(
             {
                 type: 'etep_cb',
-                component: 'creditagricole_etransactions/js/view/payment/method-renderer/etep_multi-method'
+                component: 'CreditAgricole_etransactions/js/view/payment/method-renderer/etep_multi-method'
             },
             {
                 type: 'etep_threetime',
-                component: 'creditagricole_etransactions/js/view/payment/method-renderer/etep_multi-method'
+                component: 'CreditAgricole_etransactions/js/view/payment/method-renderer/etep_multi-method'
             },
             {
                 type: 'etep_paypal',
-                component: 'creditagricole_etransactions/js/view/payment/method-renderer/etep_simple-method'
+                component: 'CreditAgricole_etransactions/js/view/payment/method-renderer/etep_simple-method'
             },
             {
                 type: 'etep_private',
-                component: 'creditagricole_etransactions/js/view/payment/method-renderer/etep_multi-method'
+                component: 'CreditAgricole_etransactions/js/view/payment/method-renderer/etep_multi-method'
             },
             {
                 type: 'etep_prepaid',
-                component: 'creditagricole_etransactions/js/view/payment/method-renderer/etep_multi-method'
+                component: 'CreditAgricole_etransactions/js/view/payment/method-renderer/etep_multi-method'
             },
             {
                 type: 'etep_financial',
-                component: 'creditagricole_etransactions/js/view/payment/method-renderer/etep_multi-method'
+                component: 'CreditAgricole_etransactions/js/view/payment/method-renderer/etep_multi-method'
             },
             {
                 type: 'etep_bcmc',
-                component: 'creditagricole_etransactions/js/view/payment/method-renderer/etep_simple-method'
+                component: 'CreditAgricole_etransactions/js/view/payment/method-renderer/etep_simple-method'
             },
             {
                 type: 'etep_paybuttons',
-                component: 'creditagricole_etransactions/js/view/payment/method-renderer/etep_multi-method'
+                component: 'CreditAgricole_etransactions/js/view/payment/method-renderer/etep_multi-method'
             },
             {
                 type: 'etep_maestro',
-                component: 'creditagricole_etransactions/js/view/payment/method-renderer/etep_simple-method'
+                component: 'CreditAgricole_etransactions/js/view/payment/method-renderer/etep_simple-method'
             }
         );
 

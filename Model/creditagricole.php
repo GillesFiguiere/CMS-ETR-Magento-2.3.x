@@ -19,13 +19,13 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace creditagricole\etransactions\Model;
+namespace CreditAgricole\etransactions\Model;
 
 use Magento\Sales\Model\Order;
 use Magento\Sales\Model\Order\Payment\Transaction;
-use creditagricole\etransactions\Model\Payment\AbstractPayment;
+use CreditAgricole\etransactions\Model\Payment\AbstractPayment;
 
-class creditagricole
+class Creditagricole
 {
     private $_currencyDecimals = [
         '008' => 2,
@@ -253,7 +253,7 @@ class creditagricole
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $objectManager,
         \Magento\Framework\UrlInterface $urlInterface,
-        \creditagricole\etransactions\Helper\Data $helper,
+        \CreditAgricole\etransactions\Helper\Data $helper,
         \Psr\Log\LoggerInterface $logger
     ) {
         $this->_objectManager = $objectManager;
@@ -410,7 +410,7 @@ class creditagricole
             }
         } else {
             $values['PBX_TOTAL'] = sprintf('%03d', round($orderAmount * $amountScale));
-            switch ($payment->getcreditagricoleAction()) {
+            switch ($payment->getCreditagricoleAction()) {
                 case AbstractPayment::ETRANSACTION_MANUAL:
                     $values['PBX_AUTOSEULE'] = 'O';
                     break;
@@ -444,7 +444,7 @@ class creditagricole
         $values['PBX_LANGUE'] = $lang;
 
         // Choose page format depending on browser/devise
-        if ($this->_objectManager->get('creditagricole\etransactions\Helper\Mobile')->isMobile()) {
+        if ($this->_objectManager->get('CreditAgricole\etransactions\Helper\Mobile')->isMobile()) {
             $values['PBX_SOURCE'] = 'XHTML';
         }
 
@@ -501,7 +501,7 @@ class creditagricole
         // PBX_VERSION
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
         $productMetadata = $objectManager->get('Magento\Framework\App\ProductMetadataInterface');
-        $moduleInfo = $this->_objectManager->get('Magento\Framework\Module\ModuleList')->getOne('creditagricole_etransactions');
+        $moduleInfo = $this->_objectManager->get('Magento\Framework\Module\ModuleList')->getOne('CreditAgricole_etransactions');
         $values['PBX_VERSION'] = 'Magento_' . $productMetadata->getVersion() . '-' . 'etransactions' . '_' . $moduleInfo['setup_version'];
 
         // 3DSv2 parameters
@@ -631,16 +631,16 @@ class creditagricole
     }
 
     /**
-     * @return creditagricole\etransactions\Model\Config E-Transactions configuration object
+     * @return CreditAgricole\etransactions\Model\Config E-Transactions configuration object
      */
     public function getConfig()
     {
-        return $this->_objectManager->get('creditagricole\etransactions\Model\Config');
+        return $this->_objectManager->get('CreditAgricole\etransactions\Model\Config');
     }
 
     public function getCurrency(Order $order)
     {
-        $currencyMapper = $this->_objectManager->get('creditagricole\etransactions\Model\Iso4217Currency');
+        $currencyMapper = $this->_objectManager->get('CreditAgricole\etransactions\Model\Iso4217Currency');
 
         $currencies = $this->_storeManager->getStore()->getAvailableCurrencyCodes();
         if (count($currencies) > 1 && $this->getConfig()->getCurrencyConfig() == 0) {

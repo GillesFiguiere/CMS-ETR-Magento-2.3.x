@@ -24,7 +24,7 @@
      [
      'jquery',
      'Magento_Checkout/js/view/payment/default',
-     'creditagricole_etransactions/js/action/set-payment-method',
+     'CreditAgricole_etransactions/js/action/set-payment-method',
      'Magento_Checkout/js/model/full-screen-loader',
      'mage/url',
      ],
@@ -33,7 +33,7 @@
 
         return Component.extend({
             defaults: {
-                template: 'creditagricole_etransactions/payment/etep_multi',
+                template: 'CreditAgricole_etransactions/payment/etep_multi',
                 transactionResult: ''
             },
             initObservable: function () {

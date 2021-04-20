@@ -19,7 +19,7 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace creditagricole\etransactions\Block\Admin\Field;
+namespace CreditAgricole\etransactions\Block\Admin\Field;
 
 class Presentation extends \Magento\Config\Block\System\Config\Form\Field
 {
@@ -31,7 +31,7 @@ class Presentation extends \Magento\Config\Block\System\Config\Form\Field
      */
     public function render(\Magento\Framework\Data\Form\Element\AbstractElement $element)
     {
-        $block = $this->getLayout()->createBlock('creditagricole\etransactions\Block\Admin\Presentation');
+        $block = $this->getLayout()->createBlock('CreditAgricole\etransactions\Block\Admin\Presentation');
         $template_html = $block->toHtml();
         $html = '<tr id="row_'.$element->getHtmlId().
         '"><td class="label" colspan="5" style="text-align: left;"><span id="'.$element->getHtmlId().'">';

@@ -19,11 +19,11 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace creditagricole\etransactions\Gateway\Request;
+namespace CreditAgricole\etransactions\Gateway\Request;
 
 use Magento\Payment\Gateway\Data\PaymentDataObjectInterface;
 use Magento\Payment\Gateway\Request\BuilderInterface;
-use creditagricole\etransactions\Gateway\Http\Client\ClientMock;
+use CreditAgricole\etransactions\Gateway\Http\Client\ClientMock;
 
 class MockDataRequest implements BuilderInterface
 {

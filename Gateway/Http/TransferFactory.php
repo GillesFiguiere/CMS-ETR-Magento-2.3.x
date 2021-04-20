@@ -19,12 +19,12 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace creditagricole\etransactions\Gateway\Http;
+namespace CreditAgricole\etransactions\Gateway\Http;
 
 use Magento\Payment\Gateway\Http\TransferBuilder;
 use Magento\Payment\Gateway\Http\TransferFactoryInterface;
 use Magento\Payment\Gateway\Http\TransferInterface;
-use creditagricole\etransactions\Gateway\Request\MockDataRequest;
+use CreditAgricole\etransactions\Gateway\Request\MockDataRequest;
 
 class TransferFactory implements TransferFactoryInterface
 {

@@ -19,9 +19,9 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace creditagricole\etransactions\Model\Admin\Order\Status;
+namespace CreditAgricole\etransactions\Model\Admin\Order\Status;
 
-class Mode extends \creditagricole\etransactions\Model\Admin\Order\Status
+class Mode extends \CreditAgricole\etransactions\Model\Admin\Order\Status
 {
     //	protected $_stateStatuses = array(
     //		\Magento\Sales\Model\Order::STATE_NEW,

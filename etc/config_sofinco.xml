@@ -49,7 +49,7 @@
         <payment>
             <etep_cb>
                 <active>1</active>
-                <model>creditagricole\etransactions\Model\Payment\Cb</model>
+                <model>CreditAgricole\etransactions\Model\Payment\Cb</model>
                 <title>Pay by Bank Card</title>
                 <group>etep</group>
                 <is_gateway>1</is_gateway>
@@ -92,7 +92,7 @@
             </etep_cb>
             <etep_threetime>
                 <active>0</active>
-                <model>creditagricole\etransactions\Model\Payment\Threetime</model>
+                <model>CreditAgricole\etransactions\Model\Payment\Threetime</model>
                 <title>Pay by Card Three Times</title>
                 <group>etep</group>
                 <allowspecific>0</allowspecific>

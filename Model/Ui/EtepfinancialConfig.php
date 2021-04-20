@@ -19,7 +19,7 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace creditagricole\etransactions\Model\Ui;
+namespace CreditAgricole\etransactions\Model\Ui;
 
 /**
  * Class Etepfinancial
@@ -42,12 +42,12 @@ class EtepfinancialConfig
     /**
      * @var string
      */
-    // protected $_formBlockType = 'creditagricole\etransactions\Block\Form\Etepfinancial';
+    // protected $_formBlockType = 'CreditAgricole\etransactions\Block\Form\Etepfinancial';
 
     /**
      * @var string
      */
-    // protected $_infoBlockType = 'creditagricole\etransactions\Block\Info\Etepfinancial';
+    // protected $_infoBlockType = 'CreditAgricole\etransactions\Block\Info\Etepfinancial';
 
     /**
      * Availability option

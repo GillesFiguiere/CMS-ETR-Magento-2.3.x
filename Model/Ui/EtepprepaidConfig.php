@@ -19,7 +19,7 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace creditagricole\etransactions\Model\Ui;
+namespace CreditAgricole\etransactions\Model\Ui;
 
 /**
  * Class Etepprepaid

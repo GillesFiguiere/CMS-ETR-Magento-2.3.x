@@ -19,7 +19,7 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace creditagricole\etransactions\Model\Ui;
+namespace CreditAgricole\etransactions\Model\Ui;
 
 /**
  * Class Eteppaybuttons
@@ -42,12 +42,12 @@ class EteppaybuttonsConfig
     /**
      * @var string
      */
-    // protected $_formBlockType = 'creditagricole\etransactions\Block\Form\Eteppaybuttons';
+    // protected $_formBlockType = 'CreditAgricole\etransactions\Block\Form\Eteppaybuttons';
 
     /**
      * @var string
      */
-    // protected $_infoBlockType = 'creditagricole\etransactions\Block\Info\Eteppaybuttons';
+    // protected $_infoBlockType = 'CreditAgricole\etransactions\Block\Info\Eteppaybuttons';
 
     /**
      * Availability option

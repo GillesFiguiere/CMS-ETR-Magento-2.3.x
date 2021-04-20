@@ -83,7 +83,7 @@
 
 ### Corrections
 - Observer : correction des problèmes avec "additional_data" depuis la version 2.0.1 de Magento
-- JS Redirect :  modification de la méthode de redirection vers creditagricole. Redirection après orderPlaced
+- JS Redirect :  modification de la méthode de redirection vers CreditAgricole. Redirection après orderPlaced
 
 ## [1.0.2] 2016-10-26
 

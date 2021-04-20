@@ -20,7 +20,7 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace creditagricole\etransactions\Plugin\Framework\View;
+namespace CreditAgricole\etransactions\Plugin\Framework\View;
 
 class LayoutPlugin
 {

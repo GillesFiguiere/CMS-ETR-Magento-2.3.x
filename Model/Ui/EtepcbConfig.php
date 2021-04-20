@@ -19,7 +19,7 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace creditagricole\etransactions\Model\Ui;
+namespace CreditAgricole\etransactions\Model\Ui;
 
 /**
  * Class Etepcb
@@ -42,12 +42,12 @@ class EtepcbConfig
     /**
      * @var string
      */
-    // protected $_formBlockType = 'creditagricole\etransactions\Block\Form\Etepcb';
+    // protected $_formBlockType = 'CreditAgricole\etransactions\Block\Form\Etepcb';
 
     /**
      * @var string
      */
-    // protected $_infoBlockType = 'creditagricole\etransactions\Block\Info\Etepcb';
+    // protected $_infoBlockType = 'CreditAgricole\etransactions\Block\Info\Etepcb';
 
     /**
      * Availability option

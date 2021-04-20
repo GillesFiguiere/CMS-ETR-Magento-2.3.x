@@ -19,7 +19,7 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace creditagricole\etransactions\Model\Ui;
+namespace CreditAgricole\etransactions\Model\Ui;
 
 /**
  * Class Etepprivate
@@ -42,12 +42,12 @@ class EtepprivateConfig
     /**
      * @var string
      */
-    // protected $_formBlockType = 'creditagricole\etransactions\Block\Form\Etepprivate';
+    // protected $_formBlockType = 'CreditAgricole\etransactions\Block\Form\Etepprivate';
 
     /**
      * @var string
      */
-    // protected $_infoBlockType = 'creditagricole\etransactions\Block\Info\Etepprivate';
+    // protected $_infoBlockType = 'CreditAgricole\etransactions\Block\Info\Etepprivate';
 
     /**
      * Availability option

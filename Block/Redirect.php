@@ -19,7 +19,7 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace creditagricole\etransactions\Block;
+namespace CreditAgricole\etransactions\Block;
 
 class Redirect extends \Magento\Framework\View\Element\Template
 {
@@ -29,7 +29,7 @@ class Redirect extends \Magento\Framework\View\Element\Template
     public function __construct(
         \Magento\Framework\View\Element\Template\Context $context,
         array $data = [],
-        \creditagricole\etransactions\Helper\Data $helper
+        \CreditAgricole\etransactions\Helper\Data $helper
     ) {
         parent::__construct($context, $data);
 
@@ -43,13 +43,13 @@ class Redirect extends \Magento\Framework\View\Element\Template
         $current_order_id = $this->_objectManager->get('Magento\Checkout\Model\Session')->getCurrentEtepOrderId();
         $order = $registry->registry('etep/order_'.$current_order_id);
         $payment = $order->getPayment()->getMethodInstance();
-        $cntr = $this->_objectManager->get('creditagricole\etransactions\Model\creditagricole');
+        $cntr = $this->_objectManager->get('CreditAgricole\etransactions\Model\Creditagricole');
         return $cntr->buildSystemParams($order, $payment);
     }
 
     public function getInputType()
     {
-        $config = $this->_objectManager->get('creditagricole\etransactions\Model\Config');
+        $config = $this->_objectManager->get('CreditAgricole\etransactions\Model\Config');
         if ($config->isDebug()) {
             return 'text';
         }
@@ -58,28 +58,28 @@ class Redirect extends \Magento\Framework\View\Element\Template
 
     public function getKwixoUrl()
     {
-        $etransactions = $this->_objectManager->get('creditagricole\etransactions\Model\creditagricole');
+        $etransactions = $this->_objectManager->get('CreditAgricole\etransactions\Model\Creditagricole');
         $urls = $etransactions->getConfig()->getKwixoUrls();
         return $etransactions->checkUrls($urls);
     }
 
     public function getMobileUrl()
     {
-        $etransactions = $this->_objectManager->get('creditagricole\etransactions\Model\creditagricole');
+        $etransactions = $this->_objectManager->get('CreditAgricole\etransactions\Model\Creditagricole');
         $urls = $etransactions->getConfig()->getMobileUrls();
         return $etransactions->checkUrls($urls);
     }
 
     public function getSystemUrl()
     {
-        $etransactions = $this->_objectManager->get('creditagricole\etransactions\Model\creditagricole');
+        $etransactions = $this->_objectManager->get('CreditAgricole\etransactions\Model\Creditagricole');
         $urls = $etransactions->getConfig()->getSystemUrls();
         return $etransactions->checkUrls($urls);
     }
 
     public function getResponsiveUrl()
     {
-        $etransactions = $this->_objectManager->get('creditagricole\etransactions\Model\creditagricole');
+        $etransactions = $this->_objectManager->get('CreditAgricole\etransactions\Model\Creditagricole');
         $urls = $etransactions->getConfig()->getResponsiveUrls();
         return $etransactions->checkUrls($urls);
     }

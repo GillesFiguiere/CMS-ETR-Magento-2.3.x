@@ -19,9 +19,9 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace creditagricole\etransactions\Controller\Payment;
+namespace CreditAgricole\etransactions\Controller\Payment;
 
-class Redirect extends \creditagricole\etransactions\Controller\Payment
+class Redirect extends \CreditAgricole\etransactions\Controller\Payment
 {
     public function execute()
     {
@@ -35,10 +35,10 @@ class Redirect extends \creditagricole\etransactions\Controller\Payment
         $orderId = $session->getLastRealOrderId();
 
         // If none, try previously saved
-        $this->logDebug('creditagricole - LastRealOrderId from $session: '.$orderId);
+        $this->logDebug('CreditAgricole - LastRealOrderId from $session: '.$orderId);
         if (is_null($orderId)) {
             $orderId = $session->getCurrentEtepOrderId();
-            $this->logDebug('creditagricole - CurrentEtepOrderId from $session: '.$orderId);
+            $this->logDebug('CreditAgricole - CurrentEtepOrderId from $session: '.$orderId);
         }
 
         //Try with cookies
@@ -46,11 +46,11 @@ class Redirect extends \creditagricole\etransactions\Controller\Payment
 
         // If none, 404
         if (is_null($orderId)) {
-            $this->logDebug('creditagricole - $orderId is null => 404');
+            $this->logDebug('CreditAgricole - $orderId is null => 404');
 
-            $this->logDebug('creditagricole - Try to get id from cookies');
+            $this->logDebug('CreditAgricole - Try to get id from cookies');
             if (!is_null($cookieOrderId)) {
-                $this->logDebug('creditagricole - Retrieve id from cookies : ' . $cookieOrderId);
+                $this->logDebug('CreditAgricole - Retrieve id from cookies : ' . $cookieOrderId);
                 $order = $this->_objectManager->get('Magento\Sales\Model\Order')->load($cookieOrderId);
                 if (isset($_COOKIE[$cookieName])) {
                     unset($_COOKIE[$cookieName]);
@@ -98,18 +98,18 @@ class Redirect extends \creditagricole\etransactions\Controller\Payment
 
         // check that there is products in cart
         if ($order->getTotalDue() == 0) {
-            $this->logDebug('creditagricole - Payment attempt with no amount : ' . $order->getId());
+            $this->logDebug('CreditAgricole - Payment attempt with no amount : ' . $order->getId());
             return $this->_404();
         }
 
         // check that order is not processed yet
         if (!$this->_getCheckout()->getLastSuccessQuoteId()) {
-            $this->logDebug('creditagricole - Payment attempt with a quote already processed : ' . $order->getId());
+            $this->logDebug('CreditAgricole - Payment attempt with a quote already processed : ' . $order->getId());
             return $this->_404();
         }
 
         // add history comment and save it
-        $order->addStatusHistoryComment(__('creditagricole - Client sent to E-Transactions payment page.'), false)
+        $order->addStatusHistoryComment(__('CreditAgricole - Client sent to E-Transactions payment page.'), false)
             ->setIsCustomerNotified(false)
             ->save();
 

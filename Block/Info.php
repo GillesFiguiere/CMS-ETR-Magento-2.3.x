@@ -19,11 +19,11 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace creditagricole\etransactions\Block;
+namespace CreditAgricole\etransactions\Block;
 
 use Magento\Framework\Phrase;
 use Magento\Payment\Block\ConfigurableInfo;
-use creditagricole\etransactions\Gateway\Response\FraudHandler;
+use CreditAgricole\etransactions\Gateway\Response\FraudHandler;
 
 class Info extends ConfigurableInfo
 {
@@ -76,7 +76,7 @@ class Info extends ConfigurableInfo
         return $result;
     }
 
-    public function getcreditagricoleData()
+    public function getCreditagricoleData()
     {
         return unserialize($this->getInfo()->getEtepAuthorization());
     }
@@ -86,27 +86,27 @@ class Info extends ConfigurableInfo
         return $this->_object_manager;
     }
 
-    public function getcreditagricoleConfig()
+    public function getCreditagricoleConfig()
     {
-        return $this->_object_manager->get('creditagricole\etransactions\Model\Config');
+        return $this->_object_manager->get('CreditAgricole\etransactions\Model\Config');
     }
 
     public function getCardImageUrl()
     {
-        $data = $this->getcreditagricoleData();
+        $data = $this->getCreditagricoleData();
         $cards = $this->getCreditCards();
         if (!isset($data['cardType'])) {
             return null;
         }
         return $this->getViewFileUrl(
-            'creditagricole_etransactions::' . 'images/' .strtolower($data['cardType']).'.45.png',
+            'CreditAgricole_etransactions::' . 'images/' .strtolower($data['cardType']).'.45.png',
             ['area'  => 'frontend', 'theme' => 'Magento/luma']
         );
     }
 
     public function getCardImageLabel()
     {
-        $data = $this->getcreditagricoleData();
+        $data = $this->getCreditagricoleData();
         $cards = $this->getCreditCards();
         if (!isset($data['cardType'])) {
             return null;
@@ -129,10 +129,10 @@ class Info extends ConfigurableInfo
     {
         $info = $this->getInfo();
         $capture = $info->getEtepCapture();
-        $config = $this->getcreditagricoleConfig();
-        if ($config->getSubscription() == \creditagricole\etransactions\Model\Config::SUBSCRIPTION_OFFER2 ||
-            $config->getSubscription() == \creditagricole\etransactions\Model\Config::SUBSCRIPTION_OFFER3) {
-            if ($info->getEtepAction() == \creditagricole\etransactions\Model\Payment\AbstractPayment::ETRANSACTION_MANUAL) {
+        $config = $this->getCreditagricoleConfig();
+        if ($config->getSubscription() == \CreditAgricole\etransactions\Model\Config::SUBSCRIPTION_OFFER2 ||
+            $config->getSubscription() == \CreditAgricole\etransactions\Model\Config::SUBSCRIPTION_OFFER3) {
+            if ($info->getEtepAction() == \CreditAgricole\etransactions\Model\Payment\AbstractPayment::ETRANSACTION_MANUAL) {
                 $order = $info->getOrder();
                 return empty($capture) && $order->canInvoice();
             }
@@ -144,9 +144,9 @@ class Info extends ConfigurableInfo
     {
         $info = $this->getInfo();
         $capture = $info->getEtepCapture();
-        $config = $this->getcreditagricoleConfig();
-        if ($config->getSubscription() == \creditagricole\etransactions\Model\Config::SUBSCRIPTION_OFFER2 ||
-            $config->getSubscription() == \creditagricole\etransactions\Model\Config::SUBSCRIPTION_OFFER3) {
+        $config = $this->getCreditagricoleConfig();
+        if ($config->getSubscription() == \CreditAgricole\etransactions\Model\Config::SUBSCRIPTION_OFFER2 ||
+            $config->getSubscription() == \CreditAgricole\etransactions\Model\Config::SUBSCRIPTION_OFFER3) {
             return !empty($capture);
         }
         return false;
@@ -161,7 +161,7 @@ class Info extends ConfigurableInfo
         }
 
         $action = $info->getEtepAction();
-        $action_model = new \creditagricole\etransactions\Model\Admin\Payment\Action();
+        $action_model = new \CreditAgricole\etransactions\Model\Admin\Payment\Action();
         $actions = $action_model->toOptionArray();
         $result = '';
         foreach ($actions as $act) {
@@ -169,9 +169,9 @@ class Info extends ConfigurableInfo
                 $result = $act['label'];
             }
         }
-        if (($info->getEtepAction() == \creditagricole\etransactions\Model\Payment\AbstractPayment::ETRANSACTION_DEFERRED) &&
+        if (($info->getEtepAction() == \CreditAgricole\etransactions\Model\Payment\AbstractPayment::ETRANSACTION_DEFERRED) &&
             (null !== $info->getEtepDelay())) {
-            $delays = new \creditagricole\etransactions\Model\Admin\Payment\Delays();
+            $delays = new \CreditAgricole\etransactions\Model\Admin\Payment\Delays();
             $delays = $delays->toOptionArray();
             $result .= ' (' . $delays[$info->getEtepDelay()]['label'] . ')';
         }
@@ -213,7 +213,7 @@ class Info extends ConfigurableInfo
 
     public function getPartialCaptureUrl()
     {
-        $data = $this->getcreditagricoleData();
+        $data = $this->getCreditagricoleData();
         $info = $this->getInfo();
         return $this->getUrl(
             'creditagricole/partial',
@@ -223,7 +223,7 @@ class Info extends ConfigurableInfo
 
     public function getCaptureUrl()
     {
-        $data = $this->getcreditagricoleData();
+        $data = $this->getCreditagricoleData();
         $info = $this->getInfo();
         return $this->getUrl(
             'creditagricole/capture',

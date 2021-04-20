@@ -19,7 +19,7 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace creditagricole\etransactions\Controller\Adminhtml\Capture;
+namespace CreditAgricole\etransactions\Controller\Adminhtml\Capture;
 
 class Index extends \Magento\Backend\App\Action
 {

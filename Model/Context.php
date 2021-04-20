@@ -19,7 +19,7 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace creditagricole\etransactions\Model;
+namespace CreditAgricole\etransactions\Model;
 
 class Context
 {
@@ -29,7 +29,7 @@ class Context
 
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $objectManager,
-        \creditagricole\etransactions\Helper\Data $helper
+        \CreditAgricole\etransactions\Helper\Data $helper
     ) {
         $this->_objectManager = $objectManager;
         $this->_helper = $helper;

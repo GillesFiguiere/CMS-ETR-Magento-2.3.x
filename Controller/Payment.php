@@ -19,7 +19,7 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace creditagricole\etransactions\Controller;
+namespace CreditAgricole\etransactions\Controller;
 
 use Magento\Framework\App\CsrfAwareActionInterface;
 use Magento\Framework\App\RequestInterface;
@@ -49,8 +49,8 @@ class Payment extends \Magento\Framework\App\Action\Action implements CsrfAwareA
         \Psr\Log\LoggerInterface $loggerInteface,
         \Magento\Quote\Api\CartRepositoryInterface $cartRepositoryInterface,
         \Magento\Checkout\Model\Session $checkoutSession,
-        \creditagricole\etransactions\Model\Config $etransactionsConfig,
-        \creditagricole\etransactions\Model\creditagricole $etransactions,
+        \CreditAgricole\etransactions\Model\Config $etransactionsConfig,
+        \CreditAgricole\etransactions\Model\Creditagricole $etransactions,
         \Magento\Framework\Registry $registry
     ) {
         $this->resultPageFactory = $resultPageFactory;
@@ -136,7 +136,7 @@ class Payment extends \Magento\Framework\App\Action\Action implements CsrfAwareA
     protected function _getOrderFromParams(array $params)
     {
         // Retrieves order
-        $etransactions = $this->getcreditagricole();
+        $etransactions = $this->getCreditagricole();
         $order = $etransactions->untokenizeOrder($params['reference']);
         if (is_null($order) || is_null($order->getId())) {
             return null;
@@ -149,7 +149,7 @@ class Payment extends \Magento\Framework\App\Action\Action implements CsrfAwareA
         return $this->_etransactionsConfig;
     }
 
-    public function getcreditagricole()
+    public function getCreditagricole()
     {
         return $this->_etransactions;
     }

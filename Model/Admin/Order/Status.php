@@ -19,7 +19,7 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace creditagricole\etransactions\Model\Admin\Order;
+namespace CreditAgricole\etransactions\Model\Admin\Order;
 
 class Status extends \Magento\Sales\Model\ResourceModel\Order\Status
 {

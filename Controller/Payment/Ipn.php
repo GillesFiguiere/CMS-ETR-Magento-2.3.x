@@ -19,16 +19,16 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace creditagricole\etransactions\Controller\Payment;
+namespace CreditAgricole\etransactions\Controller\Payment;
 
 use \Magento\Framework\Validator\Exception;
 
-class Ipn extends \creditagricole\etransactions\Controller\Payment
+class Ipn extends \CreditAgricole\etransactions\Controller\Payment
 {
     public function execute()
     {
         try {
-            $etransactions = $this->getcreditagricole();
+            $etransactions = $this->getCreditagricole();
 
             // Retrieves params
             $params = $etransactions->getParams(true);

@@ -15,7 +15,7 @@ En une seule intégration, offrez plusieurs méthodes de paiement, bénéficiez 
 3. Exécuter la commande suivante pour la récupération des fichiers du module via Composer (un dossier `etransactions` sera créé dans le sous-dossier `vendor`). Vous aurez besoin de votre `Public key` comme identifiant et de votre `Private key` comme mot de passe :
 
     ```sh
-	composer require etransactions/epayment
+	composer require etransactions/etransactions
     ```
 
 4. Exécuter les commandes suivantes pour l'installation, l'activation et le déploiement du module :
@@ -29,13 +29,13 @@ En une seule intégration, offrez plusieurs méthodes de paiement, bénéficiez 
     php bin/magento setup:static-content:deploy <lang> (exemple : fr_FR)
     ```
 
-5. Vous pouvez alors configurer le module dans votre Back Office via le nouvel onglet creditagricole du menu Boutiques \ Configuration. Il est important de bien rentrer vos identifants (mot de passe, clé HMAC) sans quoi il est possible qu'une erreur 500 s'affiche.
+5. Vous pouvez alors configurer le module dans votre Back Office via le nouvel onglet CreditAgricole du menu Boutiques \ Configuration. Il est important de bien rentrer vos identifants (mot de passe, clé HMAC) sans quoi il est possible qu'une erreur 500 s'affiche.
 
 ## Configuration
 
-Le paramétrage par défaut correspond à l'environnement de test creditagricole où tous les modes de paiement sont disponibles et où toutes les cartes sont activables, aucun paiement réel ne sera effectué.
+Le paramétrage par défaut correspond à l'environnement de test CreditAgricole où tous les modes de paiement sont disponibles et où toutes les cartes sont activables, aucun paiement réel ne sera effectué.
 
-Pour utiliser le module en réel en environnement de production, vous devez avoir souscrit un contrat auprès de creditagricole, disposer de vos identifiants, configurer les options, modes de paiement et cartes en fonction de votre contrat.
+Pour utiliser le module en réel en environnement de production, vous devez avoir souscrit un contrat auprès de CreditAgricole, disposer de vos identifiants, configurer les options, modes de paiement et cartes en fonction de votre contrat.
 
 ## Problèmes connus (known issues) 
 
