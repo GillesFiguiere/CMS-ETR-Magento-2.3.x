@@ -1,6 +1,6 @@
 <?php
 /**
- * E-Transactions etransactions module for Magento
+ * E-Transactions Etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -19,11 +19,11 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace CreditAgricole\etransactions\Gateway\Validator;
+namespace CreditAgricole\Etransactions\Gateway\Validator;
 
 use Magento\Payment\Gateway\Validator\AbstractValidator;
 use Magento\Payment\Gateway\Validator\ResultInterface;
-use CreditAgricole\etransactions\Gateway\Http\Client\ClientMock;
+use CreditAgricole\Etransactions\Gateway\Http\Client\ClientMock;
 
 class ResponseCodeValidator extends AbstractValidator
 {

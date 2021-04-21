@@ -1,6 +1,6 @@
 <?php
 /**
- * E-Transactions etransactions module for Magento
+ * E-Transactions Etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -19,7 +19,7 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace CreditAgricole\etransactions\Observer;
+namespace CreditAgricole\Etransactions\Observer;
 
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\Event\Observer as EventObserver;

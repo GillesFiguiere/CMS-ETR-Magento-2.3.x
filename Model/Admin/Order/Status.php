@@ -1,6 +1,6 @@
 <?php
 /**
- * E-Transactions etransactions module for Magento
+ * E-Transactions Etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -19,7 +19,7 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace CreditAgricole\etransactions\Model\Admin\Order;
+namespace CreditAgricole\Etransactions\Model\Admin\Order;
 
 class Status extends \Magento\Sales\Model\ResourceModel\Order\Status
 {

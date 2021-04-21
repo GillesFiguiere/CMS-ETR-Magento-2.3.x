@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 /**
- * E-Transactions etransactions module for Magento
+ * E-Transactions Etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -29,19 +29,19 @@
         <section id="etep_pres" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
             <label>Presentation</label>
             <tab>etransactions</tab>
-            <resource>CreditAgricole_etransactions::etransactions_config</resource>
+            <resource>CreditAgricole_Etransactions::etransactions_config</resource>
             <group id="presentation" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
             	<label>Presentation</label>
             	<attribute type="expanded">1</attribute>
                 <field id="presentation" translate="label comment" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <frontend_model>CreditAgricole\etransactions\Block\Admin\Field\Presentation</frontend_model>
+                    <frontend_model>CreditAgricole\Etransactions\Block\Admin\Field\Presentation</frontend_model>
                 </field>
         	</group>
         </section>
         <section id="etep_merchant" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
             <label>Account settings</label>
             <tab>etransactions</tab>
-            <resource>CreditAgricole_etransactions::etransactions_config</resource>
+            <resource>CreditAgricole_Etransactions::etransactions_config</resource>
             <group id="environment" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                 <attribute type="expanded">1</attribute>
                 <label>Environment</label>
@@ -49,7 +49,7 @@
                 <field id="environment" translate="label comment" type="select" sortOrder="10" showInDefault="1"
                        showInWebsite="1" showInStore="1">
                     <label>Environment</label>
-                    <source_model>CreditAgricole\etransactions\Model\Admin\Environment</source_model>
+                    <source_model>CreditAgricole\Etransactions\Model\Admin\Environment</source_model>
                     <config_path>etep/merchant/environment</config_path>
                 </field>
             </group>
@@ -59,7 +59,7 @@
                 <field id="subscription" translate="label comment" type="select" sortOrder="0" showInDefault="1"
                        showInWebsite="1" showInStore="1">
                     <label>Subscribed E-Transactions Solution</label>
-                    <source_model>CreditAgricole\etransactions\Model\Admin\Subscription</source_model>
+                    <source_model>CreditAgricole\Etransactions\Model\Admin\Subscription</source_model>
                     <config_path>etep/merchant/subscription</config_path>
                 </field>
                 <field id="site" translate="label comment" type="text" sortOrder="10" showInDefault="1"
@@ -127,13 +127,13 @@
                        showInWebsite="1" showInStore="1">
                     <label>Orders currencies</label>
                             <comment><![CDATA[If multiple currencies are active on your store you can force the payment with the base currency or the currency selected by the customer when ordering.]]></comment>
-                    <source_model>CreditAgricole\etransactions\Model\Config\Source\CurrencyYesNo</source_model>
+                    <source_model>CreditAgricole\Etransactions\Model\Config\Source\CurrencyYesNo</source_model>
                     <config_path>etep/info/currency</config_path>
                 </field>
                 <field id="reponsive" translate="label comment" type="select" sortOrder="10" showInDefault="1"
                        showInWebsite="1" showInStore="1">
                     <label>Payment page type</label>
-                    <source_model>CreditAgricole\etransactions\Model\Config\Source\ResponsiveYesNo</source_model>
+                    <source_model>CreditAgricole\Etransactions\Model\Config\Source\ResponsiveYesNo</source_model>
                     <config_path>etep/info/responsive</config_path>
                 </field>
                 <field id="min_amount" translate="label comment" type="text" sortOrder="10" showInDefault="1"
@@ -153,17 +153,17 @@
         <section id="etep_payments" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
         	<label>Payment methods</label>
         	<tab>etransactions</tab>
-            <resource>CreditAgricole_etransactions::etransactions_config</resource>
+            <resource>CreditAgricole_Etransactions::etransactions_config</resource>
 
-            <include path="CreditAgricole_etransactions::system/etep_cb.xml"/>
-            <include path="CreditAgricole_etransactions::system/etep_threetime.xml"/>
-            <include path="CreditAgricole_etransactions::system/etep_private.xml"/>
-            <include path="CreditAgricole_etransactions::system/etep_paypal.xml"/>
-            <include path="CreditAgricole_etransactions::system/etep_prepaid.xml"/>
-            <include path="CreditAgricole_etransactions::system/etep_financial.xml"/>
-            <include path="CreditAgricole_etransactions::system/etep_bcmc.xml"/>
-            <include path="CreditAgricole_etransactions::system/etep_maestro.xml"/>
-            <include path="CreditAgricole_etransactions::system/etep_paybuttons.xml"/>
+            <include path="CreditAgricole_Etransactions::system/etep_cb.xml"/>
+            <include path="CreditAgricole_Etransactions::system/etep_threetime.xml"/>
+            <include path="CreditAgricole_Etransactions::system/etep_private.xml"/>
+            <include path="CreditAgricole_Etransactions::system/etep_paypal.xml"/>
+            <include path="CreditAgricole_Etransactions::system/etep_prepaid.xml"/>
+            <include path="CreditAgricole_Etransactions::system/etep_financial.xml"/>
+            <include path="CreditAgricole_Etransactions::system/etep_bcmc.xml"/>
+            <include path="CreditAgricole_Etransactions::system/etep_maestro.xml"/>
+            <include path="CreditAgricole_Etransactions::system/etep_paybuttons.xml"/>
         </section>
     </system>
 </config>

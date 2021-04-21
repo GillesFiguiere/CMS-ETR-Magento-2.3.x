@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 /**
- * E-Transactions etransactions module for Magento
+ * E-Transactions Etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -32,7 +32,7 @@
         <field id="cctypes" translate="label comment" type="multiselect" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
             <label>Card type</label>
             <config_path>payment/etep_private/cctypes</config_path>
-            <source_model>CreditAgricole\etransactions\Model\Admin\Cards\PrivateCard</source_model>
+            <source_model>CreditAgricole\Etransactions\Model\Admin\Cards\PrivateCard</source_model>
             <depends>
                 <field id="active">1</field>
             </depends>
@@ -55,7 +55,7 @@
         <field id="pv_action" translate="label comment" type="select" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
         	<label>Debit type</label>
             <config_path>payment/etep_private/action</config_path>
-            <source_model>CreditAgricole\etransactions\Model\Admin\Payment\Action</source_model>
+            <source_model>CreditAgricole\Etransactions\Model\Admin\Payment\Action</source_model>
             <!-- <frontend_model>etep/admin_field_select</frontend_model> -->
         	<depends>
                 <field id="pv_active">1</field>
@@ -64,7 +64,7 @@
         <field id="pv_delay" translate="label comment" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
         	<label>Delay</label>
             <config_path>payment/etep_private/delay</config_path>
-            <source_model>CreditAgricole\etransactions\Model\Admin\Payment\Delays</source_model>
+            <source_model>CreditAgricole\Etransactions\Model\Admin\Payment\Delays</source_model>
         	<depends>
                 <field id="pv_active">1</field>
                 <field id="pv_action">deferred</field>
@@ -80,7 +80,7 @@
 	        <field id="pv_status_authorized" translate="label comment" type="select" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="0">
 	        	<label>Once authorized</label>
 	            <config_path>payment/etep_private/status_authorized</config_path>
-	            <source_model>CreditAgricole\etransactions\Model\Admin\Order\Status\Pendingpayment</source_model>
+	            <source_model>CreditAgricole\Etransactions\Model\Admin\Order\Status\Pendingpayment</source_model>
 	        	<depends>
 	                <field id="etep_payments/etep_private/pv_active">1</field>
 	                <field id="etep_payments/etep_private/pv_action">manual</field>
@@ -89,7 +89,7 @@
 	        <field id="pv_status_paid" translate="label comment" type="select" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="0">
 	        	<label>Once paid</label>
 	            <config_path>payment/etep_private/status_paid</config_path>
-	            <source_model>CreditAgricole\etransactions\Model\Admin\Order\Status\Processing</source_model>
+	            <source_model>CreditAgricole\Etransactions\Model\Admin\Order\Status\Processing</source_model>
 	        	<depends>
 	                <field id="etep_payments/etep_private/pv_active">1</field>
 	            </depends>
@@ -97,7 +97,7 @@
 	        <field id="pv_status_auto_capture" translate="label comment" type="select" sortOrder="112" showInDefault="1" showInWebsite="1" showInStore="0">
 	        	<label>Automatic capture status</label>
 	            <config_path>payment/etep_private/status_auto_capture</config_path>
-	            <source_model>CreditAgricole\etransactions\Model\Admin\Order\Status\Autocapture</source_model>
+	            <source_model>CreditAgricole\Etransactions\Model\Admin\Order\Status\Autocapture</source_model>
 	        	<depends>
 	                <field id="etep_payments/etep_private/pv_active">1</field>
 	                <field id="etep_payments/etep_private/pv_action">manual</field>

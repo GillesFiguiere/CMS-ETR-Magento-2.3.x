@@ -1,6 +1,6 @@
 <?php
 /**
- * E-Transactions etransactions module for Magento
+ * E-Transactions Etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -19,7 +19,7 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace CreditAgricole\etransactions\Gateway\Request;
+namespace CreditAgricole\Etransactions\Gateway\Request;
 
 use Magento\Payment\Gateway\ConfigInterface;
 use Magento\Payment\Gateway\Data\PaymentDataObjectInterface;
@@ -127,11 +127,11 @@ class AuthorizationRequest implements BuilderInterface
         } else {
             $values['PBX_TOTAL'] = sprintf('%03d', round($orderAmount * $amountScale));
             switch ($payment->getCreditagricoleAction()) {
-                case CreditAgricole_etransactions_Model_Payment_Abstract::ETRANSACTION_MANUAL:
+                case CreditAgricole_Etransactions_Model_Payment_Abstract::ETRANSACTION_MANUAL:
                     $values['PBX_AUTOSEULE'] = 'O';
                     break;
 
-                case CreditAgricole_etransactions_Model_Payment_Abstract::ETRANSACTION_DEFERRED:
+                case CreditAgricole_Etransactions_Model_Payment_Abstract::ETRANSACTION_DEFERRED:
                     $delay = (int) $payment->getConfigData('delay');
                     if ($delay < 1) {
                         $delay = 1;
@@ -160,7 +160,7 @@ class AuthorizationRequest implements BuilderInterface
         $values['PBX_LANGUE'] = $lang;
 
         // Choose page format depending on browser/devise
-        if ($this->_objectManager->get('CreditAgricole\etransactions\Helper\Mobile')->isMobile()) {
+        if ($this->_objectManager->get('CreditAgricole\Etransactions\Helper\Mobile')->isMobile()) {
             $values['PBX_SOURCE'] = 'XHTML';
         }
 

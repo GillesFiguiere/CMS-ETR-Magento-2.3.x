@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 /**
- * E-Transactions etransactions module for Magento
+ * E-Transactions Etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -22,8 +22,8 @@
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
     <menu>
-<!--        <add id="CreditAgricole_etransactions::creditagricole" title="Creditagricole" module="CreditAgricole_etransactions" sortOrder="15" dependsOnModule="CreditAgricole_etransactions" resource="CreditAgricole_etransactions::creditagricole"/>
-        <add id="CreditAgricole_etransactions::creditagricole_capture" title="Capture" module="CreditAgricole_etransactions" sortOrder="10" parent="CreditAgricole_etransactions::creditagricole" resource="CreditAgricole_etransactions::creditagricole" />
-        <add id="CreditAgricole_etransactions::creditagricole_capture_test" title="Test" module="CreditAgricole_etransactions" sortOrder="10" parent="CreditAgricole_etransactions::creditagricole_capture" action="creditagricole/capture" resource="CreditAgricole_etransactions::creditagricole_capture_test"/>-->
+<!--        <add id="CreditAgricole_Etransactions::creditagricole" title="Creditagricole" module="CreditAgricole_Etransactions" sortOrder="15" dependsOnModule="CreditAgricole_Etransactions" resource="CreditAgricole_Etransactions::creditagricole"/>
+        <add id="CreditAgricole_Etransactions::creditagricole_capture" title="Capture" module="CreditAgricole_Etransactions" sortOrder="10" parent="CreditAgricole_Etransactions::creditagricole" resource="CreditAgricole_Etransactions::creditagricole" />
+        <add id="CreditAgricole_Etransactions::creditagricole_capture_test" title="Test" module="CreditAgricole_Etransactions" sortOrder="10" parent="CreditAgricole_Etransactions::creditagricole_capture" action="creditagricole/capture" resource="CreditAgricole_Etransactions::creditagricole_capture_test"/>-->
     </menu>
 </config>

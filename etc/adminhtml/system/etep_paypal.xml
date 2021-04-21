@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 /**
- * E-Transactions etransactions module for Magento
+ * E-Transactions Etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -48,7 +48,7 @@
         <field id="pp_action" translate="label comment" type="select" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
         	<label>Debit type</label>
             <config_path>payment/etep_paypal/action</config_path>
-            <source_model>CreditAgricole\etransactions\Model\Admin\Payment\Actionpaypal</source_model>
+            <source_model>CreditAgricole\Etransactions\Model\Admin\Payment\Actionpaypal</source_model>
         	<depends>
                 <field id="pp_active">1</field>
             </depends>
@@ -64,7 +64,7 @@
 	        <field id="pp_status_authorized" translate="label comment" type="select" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="0">
 	        	<label>Once authorized</label>
 	            <config_path>payment/etep_paypal/status_authorized</config_path>
-	            <source_model>CreditAgricole\etransactions\Model\Admin\Order\Status\Pendingpayment</source_model>
+	            <source_model>CreditAgricole\Etransactions\Model\Admin\Order\Status\Pendingpayment</source_model>
 	        	<depends>
 	                <field id="etep_payments/etep_paypal/pp_active">1</field>
 	                <field id="etep_payments/etep_paypal/pp_action">manual</field>
@@ -73,7 +73,7 @@
 	        <field id="pp_status_paid" translate="label comment" type="select" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="0">
 	        	<label>Once paid</label>
 	            <config_path>payment/etep_paypal/status_paid</config_path>
-	            <source_model>CreditAgricole\etransactions\Model\Admin\Order\Status\Processing</source_model>
+	            <source_model>CreditAgricole\Etransactions\Model\Admin\Order\Status\Processing</source_model>
 	        	<depends>
 	                <field id="etep_payments/etep_paypal/pp_active">1</field>
 	            </depends>
@@ -81,7 +81,7 @@
 	        <field id="pp_status_auto_capture" translate="label comment" type="select" sortOrder="112" showInDefault="1" showInWebsite="1" showInStore="0">
 	        	<label>Automatic capture status</label>
 	            <config_path>payment/etep_paypal/status_auto_capture</config_path>
-	            <source_model>CreditAgricole\etransactions\Model\Admin\Order\Status\Autocapture</source_model>
+	            <source_model>CreditAgricole\Etransactions\Model\Admin\Order\Status\Autocapture</source_model>
 	        	<depends>
 	                <field id="etep_payments/etep_paypal/pp_active">1</field>
 	                <field id="etep_payments/etep_paypal/pp_action">manual</field>

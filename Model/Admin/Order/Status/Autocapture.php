@@ -1,6 +1,6 @@
 <?php
 /**
- * E-Transactions etransactions module for Magento
+ * E-Transactions Etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -19,9 +19,9 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace CreditAgricole\etransactions\Model\Admin\Order\Status;
+namespace CreditAgricole\Etransactions\Model\Admin\Order\Status;
 
-class Autocapture extends \CreditAgricole\etransactions\Model\Admin\Order\Status
+class Autocapture extends \CreditAgricole\Etransactions\Model\Admin\Order\Status
 {
     protected $_stateStatuses = [
         \Magento\Sales\Model\Order::STATE_NEW,

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 /**
- * E-Transactions etransactions module for Magento
+ * E-Transactions Etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -23,7 +23,7 @@
 <page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceContainer name="content">
-            <block class="CreditAgricole\etransactions\Block\Redirect" name="etep_redirect" template="payment/redirect.phtml" cacheable="false"/>
+            <block class="CreditAgricole\Etransactions\Block\Redirect" name="etep_redirect" template="payment/redirect.phtml" cacheable="false"/>
         </referenceContainer>
     </body>
 </page>

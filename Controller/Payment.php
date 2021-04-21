@@ -1,6 +1,6 @@
 <?php
 /**
- * E-Transactions etransactions module for Magento
+ * E-Transactions Etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -19,7 +19,7 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace CreditAgricole\etransactions\Controller;
+namespace CreditAgricole\Etransactions\Controller;
 
 use Magento\Framework\App\CsrfAwareActionInterface;
 use Magento\Framework\App\RequestInterface;
@@ -49,8 +49,8 @@ class Payment extends \Magento\Framework\App\Action\Action implements CsrfAwareA
         \Psr\Log\LoggerInterface $loggerInteface,
         \Magento\Quote\Api\CartRepositoryInterface $cartRepositoryInterface,
         \Magento\Checkout\Model\Session $checkoutSession,
-        \CreditAgricole\etransactions\Model\Config $etransactionsConfig,
-        \CreditAgricole\etransactions\Model\Creditagricole $etransactions,
+        \CreditAgricole\Etransactions\Model\Config $etransactionsConfig,
+        \CreditAgricole\Etransactions\Model\Creditagricole $etransactions,
         \Magento\Framework\Registry $registry
     ) {
         $this->resultPageFactory = $resultPageFactory;

@@ -1,6 +1,6 @@
 <?php
 /**
- * E-Transactions etransactions module for Magento
+ * E-Transactions Etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -18,11 +18,11 @@
  * @license   http://opensource.org/licenses/OSL-3.0
  * @link      http://www.e-transactions.fr/
  */
-namespace CreditAgricole\etransactions\Controller\Payment;
+namespace CreditAgricole\Etransactions\Controller\Payment;
 
 use \Magento\Framework\Validator\Exception;
 
-class Failed extends \CreditAgricole\etransactions\Controller\Payment
+class Failed extends \CreditAgricole\Etransactions\Controller\Payment
 {
     public function execute()
     {

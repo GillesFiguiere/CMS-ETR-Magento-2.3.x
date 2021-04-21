@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 /**
- * E-Transactions etransactions module for Magento
+ * E-Transactions Etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -55,7 +55,7 @@
 	        <field id="bcmc_status_paid" translate="label comment" type="select" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="0">
 	        	<label>Once paid</label>
 	        	<config_path>payment/etep_bcmc/status_paid</config_path>
-	        	<source_model>CreditAgricole\etransactions\Model\Admin\Order\Status\Processing</source_model>
+	        	<source_model>CreditAgricole\Etransactions\Model\Admin\Order\Status\Processing</source_model>
 	        	<depends>
 	                <field id="etep_payments/etep_bcmc/bcmc_active">1</field>
 	            </depends>

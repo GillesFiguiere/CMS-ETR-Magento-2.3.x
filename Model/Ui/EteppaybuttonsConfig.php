@@ -1,6 +1,6 @@
 <?php
 /**
- * E-Transactions etransactions module for Magento
+ * E-Transactions Etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -19,7 +19,7 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace CreditAgricole\etransactions\Model\Ui;
+namespace CreditAgricole\Etransactions\Model\Ui;
 
 /**
  * Class Eteppaybuttons
@@ -42,12 +42,12 @@ class EteppaybuttonsConfig
     /**
      * @var string
      */
-    // protected $_formBlockType = 'CreditAgricole\etransactions\Block\Form\Eteppaybuttons';
+    // protected $_formBlockType = 'CreditAgricole\Etransactions\Block\Form\Eteppaybuttons';
 
     /**
      * @var string
      */
-    // protected $_infoBlockType = 'CreditAgricole\etransactions\Block\Info\Eteppaybuttons';
+    // protected $_infoBlockType = 'CreditAgricole\Etransactions\Block\Info\Eteppaybuttons';
 
     /**
      * Availability option

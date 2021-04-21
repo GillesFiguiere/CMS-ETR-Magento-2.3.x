@@ -1,6 +1,6 @@
 <?php
 /**
- * E-Transactions etransactions module for Magento
+ * E-Transactions Etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -19,7 +19,7 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace CreditAgricole\etransactions\Model;
+namespace CreditAgricole\Etransactions\Model;
 
 class Context
 {
@@ -29,7 +29,7 @@ class Context
 
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $objectManager,
-        \CreditAgricole\etransactions\Helper\Data $helper
+        \CreditAgricole\Etransactions\Helper\Data $helper
     ) {
         $this->_objectManager = $objectManager;
         $this->_helper = $helper;

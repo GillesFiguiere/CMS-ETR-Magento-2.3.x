@@ -1,6 +1,6 @@
 <?php
 /**
- * E-Transactions etransactions module for Magento
+ * E-Transactions Etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -19,14 +19,14 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace CreditAgricole\etransactions\Model\Ui;
+namespace CreditAgricole\Etransactions\Model\Ui;
 
 use Magento\Checkout\Model\ConfigProviderInterface;
 // use Magento\Framework\App\Config\ScopeConfigInterface;
 // use Magento\Framework\View\Asset\Source;
 use \Magento\Framework\ObjectManagerInterface;
-use CreditAgricole\etransactions\Gateway\Http\Client\ClientMock;
-use CreditAgricole\etransactions\Model\Ui\EtepprepaidConfig;
+use CreditAgricole\Etransactions\Gateway\Http\Client\ClientMock;
+use CreditAgricole\Etransactions\Model\Ui\EtepprepaidConfig;
 
 /**
  * Class ConfigProvider
@@ -54,7 +54,7 @@ final class EtepprepaidConfigProvider implements ConfigProviderInterface
     public function getCards()
     {
         $object_manager = \Magento\Framework\App\ObjectManager::getInstance();
-        $etepprepaidConfig = $object_manager->get('CreditAgricole\etransactions\Model\Ui\EtepprepaidConfig');
+        $etepprepaidConfig = $object_manager->get('CreditAgricole\Etransactions\Model\Ui\EtepprepaidConfig');
         $assetSource = $object_manager->get('Magento\Framework\View\Asset\Source');
         $assetRepository = $object_manager->get('Magento\Framework\View\Asset\Repository');
 
@@ -64,7 +64,7 @@ final class EtepprepaidConfigProvider implements ConfigProviderInterface
             $types = explode(',', $types);
         }
         foreach ($types as $code) {
-            $asset = $assetRepository->createAsset('CreditAgricole_etransactions::images/' . strtolower($code) . '.45.png');
+            $asset = $assetRepository->createAsset('CreditAgricole_Etransactions::images/' . strtolower($code) . '.45.png');
             $placeholder = $assetSource->findRelativeSourceFilePath($asset);
             if ($placeholder) {
                 list($width, $height) = getimagesize($asset->getSourceFile());

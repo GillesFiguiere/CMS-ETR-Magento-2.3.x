@@ -1,6 +1,6 @@
 <?php
 /**
- * E-Transactions etransactions module for Magento
+ * E-Transactions Etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -19,7 +19,7 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace CreditAgricole\etransactions\Observer;
+namespace CreditAgricole\Etransactions\Observer;
 
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\Event\Observer as EventObserver;
@@ -76,24 +76,24 @@ class ProcessOrder implements ObserverInterface
         }
 
         $method = $payment->getMethodInstance();
-        if (!(get_class($method) == 'CreditAgricole\etransactions\Model\Payment\Cb')) {
+        if (!(get_class($method) == 'CreditAgricole\Etransactions\Model\Payment\Cb')) {
             return $this;
         }
 
         // Creditagricole Direct must be activated
         $config = $method->getCreditAgricoleConfig();
-        if ($config->getSubscription() != \CreditAgricole\etransactions\Model\Config::SUBSCRIPTION_OFFER2
-            && $config->getSubscription() != \CreditAgricole\etransactions\Model\Config::SUBSCRIPTION_OFFER3
+        if ($config->getSubscription() != \CreditAgricole\Etransactions\Model\Config::SUBSCRIPTION_OFFER2
+            && $config->getSubscription() != \CreditAgricole\Etransactions\Model\Config::SUBSCRIPTION_OFFER3
         ) {
             return $this;
         }
 
         //         Action must be "Manual"
-        if ($payment->getEtepAction() != \CreditAgricole\etransactions\Model\Payment\AbstractPayment::ETRANSACTION_MANUAL) {
+        if ($payment->getEtepAction() != \CreditAgricole\Etransactions\Model\Payment\AbstractPayment::ETRANSACTION_MANUAL) {
             return $this;
         }
 
-        if ($method->getConfigAutoCaptureMode() != \CreditAgricole\etransactions\Model\Payment\AbstractPayment::ETRANSACTION_MODE_SHIPMENT) {
+        if ($method->getConfigAutoCaptureMode() != \CreditAgricole\Etransactions\Model\Payment\AbstractPayment::ETRANSACTION_MODE_SHIPMENT) {
             return $this;
         }
 

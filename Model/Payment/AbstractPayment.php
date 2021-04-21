@@ -1,6 +1,6 @@
 <?php
 /**
- * E-Transactions etransactions module for Magento
+ * E-Transactions Etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -19,7 +19,7 @@
  * @link      http://www.e-transactions.fr/
  */
 
-namespace CreditAgricole\etransactions\Model\Payment;
+namespace CreditAgricole\Etransactions\Model\Payment;
 
 use \Magento\Sales\Model\Order;
 use \Magento\Sales\Model\Order\Invoice;
@@ -74,8 +74,8 @@ abstract class AbstractPayment extends AbstractMethod
     protected $_canFetchTransactionInfo = false;
     // Fake to avoid calling au authorize ou capture before redirect
     protected $_isInitializeNeeded = true;
-    protected $_formBlockType = 'CreditAgricole\etransactions\Block\Checkout\Payment';
-    protected $_infoBlockType = 'CreditAgricole\etransactions\Block\Info';
+    protected $_formBlockType = 'CreditAgricole\Etransactions\Block\Checkout\Payment';
+    protected $_infoBlockType = 'CreditAgricole\Etransactions\Block\Info';
 
     /**
      * E-Transactions specific options
@@ -119,7 +119,7 @@ abstract class AbstractPayment extends AbstractMethod
         // $this->_logger = $logger;
 
         $config = $this->getCreditagricoleConfig();
-        if ($config->getSubscription() == \CreditAgricole\etransactions\Model\Config::SUBSCRIPTION_OFFER2 || $config->getSubscription() == \CreditAgricole\etransactions\Model\Config::SUBSCRIPTION_OFFER3) {
+        if ($config->getSubscription() == \CreditAgricole\Etransactions\Model\Config::SUBSCRIPTION_OFFER2 || $config->getSubscription() == \CreditAgricole\Etransactions\Model\Config::SUBSCRIPTION_OFFER3) {
             $this->_canRefund = $this->getAllowRefund();
             $this->_canCapturePartial = ($this->getCreditagricoleAction() == self::ETRANSACTION_MANUAL);
             $this->_canRefundInvoicePartial = $this->_canRefund;
@@ -518,8 +518,8 @@ abstract class AbstractPayment extends AbstractMethod
                 }
                 break;
             case self::ETRANSACTION_MANUAL:
-                if ((($config->getSubscription() != \CreditAgricole\etransactions\Model\Config::SUBSCRIPTION_OFFER2)
-                && ($config->getSubscription() != \CreditAgricole\etransactions\Model\Config::SUBSCRIPTION_OFFER3))
+                if ((($config->getSubscription() != \CreditAgricole\Etransactions\Model\Config::SUBSCRIPTION_OFFER2)
+                && ($config->getSubscription() != \CreditAgricole\Etransactions\Model\Config::SUBSCRIPTION_OFFER3))
                 || !$this->getAllowManualDebit()
                     ) {
                         return self::ETRANSACTION_IMMEDIATE;
@@ -532,19 +532,19 @@ abstract class AbstractPayment extends AbstractMethod
     }
 
     /**
-     * @return CreditAgricole\etransactions\Model\Config E-Transactions configuration object
+     * @return CreditAgricole\Etransactions\Model\Config E-Transactions configuration object
      */
     public function getCreditagricoleConfig()
     {
-        return $this->_objectManager->get('CreditAgricole\etransactions\Model\Config');
+        return $this->_objectManager->get('CreditAgricole\Etransactions\Model\Config');
     }
 
     /**
-     * @return CreditAgricole\etransactions\Model\Config E-Transactions configuration object
+     * @return CreditAgricole\Etransactions\Model\Config E-Transactions configuration object
      */
     public function getCreditagricole()
     {
-        return $this->_objectManager->get('CreditAgricole\etransactions\Model\Creditagricole');
+        return $this->_objectManager->get('CreditAgricole\Etransactions\Model\Creditagricole');
     }
 
     /**
@@ -667,7 +667,7 @@ abstract class AbstractPayment extends AbstractMethod
         $addressLine2 = $this->formatTextValue($address->getStreetLine(2), 'ANS', 50);
         $zipCode = $this->formatTextValue($address->getPostcode(), 'ANS', 16);
         $city = $this->formatTextValue($address->getCity(), 'ANS', 50);
-        $countryMapper = $this->_objectManager->get('CreditAgricole\etransactions\Model\Iso3166Country');
+        $countryMapper = $this->_objectManager->get('CreditAgricole\Etransactions\Model\Iso3166Country');
         $countryCode = (int)$countryMapper->getNumericCode($address->getCountryId());
 
         $xml = sprintf(

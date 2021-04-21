@@ -12,19 +12,23 @@ En une seule intégration, offrez plusieurs méthodes de paiement, bénéficiez 
 
 2. Aller dans le dossier racine de Magento2 en ligne de commande (`<your Magento install dir>`)
 
-3. Exécuter la commande suivante pour la récupération des fichiers du module via Composer (un dossier `creditagricole` sera créé dans le sous-dossier `vendor`). Vous aurez besoin de votre `Public key` comme identifiant et de votre `Private key` comme mot de passe :
+3. Exécuter la commande suivante pour la récupération des fichiers du module via Composer (un dossier `etransactions` sera créé dans le sous-dossier `vendor`). Vous aurez besoin de votre `Public key` comme identifiant et de votre `Private key` comme mot de passe :
 
-	composer require creditagricole/etransactions
+    ```sh
+	composer require etransactions/etransactions
+    ```
 
 4. Exécuter les commandes suivantes pour l'installation, l'activation et le déploiement du module :
 
+    ```sh
     # Installation du module
     php bin/magento setup:upgrade
     # Nettoyage du cache
     php bin/magento cache:clean
     # Déploiement des ressources Front Office pour l'étape de paiement du tunnel de commande pour chaque langue du site (l'option <lang> est une liste séparée par des espaces de codes langue au format ISO-636, la liste est disponible en lançant la commande php bin/magento info:language:list)
     php bin/magento setup:static-content:deploy <lang> (exemple : fr_FR)
- 
+    ```
+
 5. Vous pouvez alors configurer le module dans votre Back Office via le nouvel onglet CreditAgricole du menu Boutiques \ Configuration. Il est important de bien rentrer vos identifants (mot de passe, clé HMAC) sans quoi il est possible qu'une erreur 500 s'affiche.
 
 ## Configuration
