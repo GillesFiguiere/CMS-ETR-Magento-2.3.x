@@ -1,5 +1,5 @@
 /**
- * ETransactions etransactions module for Magento
+ * E-Transactions Etransactions module for Magento
  *
  * Feel free to contact LicenseCompany at LicenseEmailContact for any
  * question.
