@@ -1,6 +1,6 @@
 <?php
 /**
- * E-Transactions Etransactions module for Magento
+ * ETransactions Etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -29,7 +29,7 @@ class Cancel extends \CreditAgricole\Etransactions\Controller\Payment
     {
         try {
             $session = $this->getSession();
-            $etransactions = $this->getCreditagricole();
+            $etransactions = $this->getCreditAgricole();
 
             // Retrieves params
             $params = $etransactions->getParams();
@@ -52,7 +52,7 @@ class Cancel extends \CreditAgricole\Etransactions\Controller\Payment
             // Cleanup
             $session->unsCurrentEtepOrderId();
 
-            $message = sprintf('Order %d: Payment was canceled by user on E-Transactions payment page.', $order->getIncrementId());
+            $message = sprintf('Order %d: Payment was canceled by user on ETransactions payment page.', $order->getIncrementId());
             $this->logDebug($message);
 
             $message = __('Payment canceled by user');

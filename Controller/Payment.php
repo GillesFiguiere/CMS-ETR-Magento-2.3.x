@@ -1,6 +1,6 @@
 <?php
 /**
- * E-Transactions Etransactions module for Magento
+ * ETransactions Etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -50,7 +50,7 @@ class Payment extends \Magento\Framework\App\Action\Action implements CsrfAwareA
         \Magento\Quote\Api\CartRepositoryInterface $cartRepositoryInterface,
         \Magento\Checkout\Model\Session $checkoutSession,
         \CreditAgricole\Etransactions\Model\Config $etransactionsConfig,
-        \CreditAgricole\Etransactions\Model\Creditagricole $etransactions,
+        \CreditAgricole\Etransactions\Model\CreditAgricole $etransactions,
         \Magento\Framework\Registry $registry
     ) {
         $this->resultPageFactory = $resultPageFactory;
@@ -136,7 +136,7 @@ class Payment extends \Magento\Framework\App\Action\Action implements CsrfAwareA
     protected function _getOrderFromParams(array $params)
     {
         // Retrieves order
-        $etransactions = $this->getCreditagricole();
+        $etransactions = $this->getCreditAgricole();
         $order = $etransactions->untokenizeOrder($params['reference']);
         if (is_null($order) || is_null($order->getId())) {
             return null;
@@ -149,7 +149,7 @@ class Payment extends \Magento\Framework\App\Action\Action implements CsrfAwareA
         return $this->_etransactionsConfig;
     }
 
-    public function getCreditagricole()
+    public function getCreditAgricole()
     {
         return $this->_etransactions;
     }

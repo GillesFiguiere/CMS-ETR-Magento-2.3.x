@@ -1,6 +1,6 @@
 <?php
 /**
- * E-Transactions Etransactions module for Magento
+ * ETransactions Etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -78,7 +78,7 @@ abstract class AbstractPayment extends AbstractMethod
     protected $_infoBlockType = 'CreditAgricole\Etransactions\Block\Info';
 
     /**
-     * E-Transactions specific options
+     * ETransactions specific options
      */
     protected $_allowDeferredDebit = false;
     protected $_allowImmediatDebit = true;
@@ -118,10 +118,10 @@ abstract class AbstractPayment extends AbstractMethod
         $this->_objectManager = \Magento\Framework\App\ObjectManager::getInstance();
         // $this->_logger = $logger;
 
-        $config = $this->getCreditagricoleConfig();
+        $config = $this->getCreditAgricoleConfig();
         if ($config->getSubscription() == \CreditAgricole\Etransactions\Model\Config::SUBSCRIPTION_OFFER2 || $config->getSubscription() == \CreditAgricole\Etransactions\Model\Config::SUBSCRIPTION_OFFER3) {
             $this->_canRefund = $this->getAllowRefund();
-            $this->_canCapturePartial = ($this->getCreditagricoleAction() == self::ETRANSACTION_MANUAL);
+            $this->_canCapturePartial = ($this->getCreditAgricoleAction() == self::ETRANSACTION_MANUAL);
             $this->_canRefundInvoicePartial = $this->_canRefund;
         } else {
             $this->_canRefund = false;
@@ -143,7 +143,7 @@ abstract class AbstractPayment extends AbstractMethod
      * @param array                  $infos
      * @return Mage_Sales_Model_Order_Payment_Transaction
      */
-    protected function _addCreditagricoleTransaction(Order $order, $type, array $data, $closed, array $infos = [])
+    protected function _addCreditAgricoleTransaction(Order $order, $type, array $data, $closed, array $infos = [])
     {
         $withCapture = $this->getConfigPaymentAction() != AbstractMethod::ACTION_AUTHORIZE;
 
@@ -187,7 +187,7 @@ abstract class AbstractPayment extends AbstractMethod
      * @param array                  $infos
      * @return Mage_Sales_Model_Order_Payment_Transaction
      */
-    protected function _addCreditagricoleDirectTransaction(Order $order, $type, array $data, $closed, array $infos, Transaction $parent)
+    protected function _addCreditAgricoleDirectTransaction(Order $order, $type, array $data, $closed, array $infos, Transaction $parent)
     {
         $withCapture = $this->getConfigPaymentAction() != AbstractMethod::ACTION_AUTHORIZE;
 
@@ -220,7 +220,7 @@ abstract class AbstractPayment extends AbstractMethod
         return $call;
     }
 
-    public function getCreditagricoleTransaction(InfoInterface $payment, $type, $openedOnly = false)
+    public function getCreditAgricoleTransaction(InfoInterface $payment, $type, $openedOnly = false)
     {
         $order = $payment->getOrder();
 
@@ -329,9 +329,9 @@ abstract class AbstractPayment extends AbstractMethod
         } // Otherwise, find the good transaction
         else {
             // Find capture transaction
-            $txn = $this->getCreditagricoleTransaction($payment, Transaction::TYPE_CAPTURE);
+            $txn = $this->getCreditAgricoleTransaction($payment, Transaction::TYPE_CAPTURE);
             if (!is_null($txn)) {
-                // Find E-Transactions data
+                // Find ETransactions data
                 $trxData = $txn->getAdditionalInformation(Transaction::RAW_DETAILS);
                 if (!is_array($trxData)) {
                     throw new \LogicException('No transaction found.');
@@ -345,7 +345,7 @@ abstract class AbstractPayment extends AbstractMethod
             }
 
             // Find authorization transaction
-            $txn = $this->getCreditagricoleTransaction($payment, Transaction::TYPE_AUTH, true);
+            $txn = $this->getCreditAgricoleTransaction($payment, Transaction::TYPE_AUTH, true);
             if (is_null($txn)) {
                 throw new \LogicException('Payment never authorized.');
             }
@@ -353,8 +353,8 @@ abstract class AbstractPayment extends AbstractMethod
 
         $this->logDebug(sprintf('Order %s: Capture - transaction %d', $order->getIncrementId(), $txn->getTransactionId()));
 
-        // Call E-Transactions Direct
-        $etransactions = $this->getCreditagricole();
+        // Call ETransactions Direct
+        $etransactions = $this->getCreditAgricole();
         $this->logDebug(sprintf('Order %s: Capture - calling directCapture with amount of %f', $order->getIncrementId(), $amount));
         $data = $etransactions->directCapture($amount, $order, $txn);
         $this->logDebug(sprintf('Order %s: Capture - response code %s', $order->getIncrementId(), $data['CODEREPONSE']));
@@ -364,10 +364,10 @@ abstract class AbstractPayment extends AbstractMethod
 
         // Message
         if ($data['CODEREPONSE'] == '00000') {
-            $message = 'Payment was captured by E-Transactions.';
+            $message = 'Payment was captured by ETransactions.';
             $close = true;
         } else {
-            $message = 'E-Transactions direct error (' . $data['CODEREPONSE'] . ': ' . $data['COMMENTAIRE'] . ')';
+            $message = 'ETransactions direct error (' . $data['CODEREPONSE'] . ': ' . $data['COMMENTAIRE'] . ')';
             $close = false;
         }
         $data['status'] = $message;
@@ -375,7 +375,7 @@ abstract class AbstractPayment extends AbstractMethod
 
         // Transaction
         $type = Transaction::TYPE_CAPTURE;
-        $captureTxn = $this->_addCreditagricoleDirectTransaction(
+        $captureTxn = $this->_addCreditAgricoleDirectTransaction(
             $order,
             $type,
             $data,
@@ -397,7 +397,7 @@ abstract class AbstractPayment extends AbstractMethod
         $payment->setIsTransactionClosed(0);
         $payment->save();
 
-        // If E-Transactions returned an error, throw an exception
+        // If ETransactions returned an error, throw an exception
         if ($data['CODEREPONSE'] != '00000') {
             throw new \Exception($message);
         }
@@ -413,7 +413,7 @@ abstract class AbstractPayment extends AbstractMethod
     }
 
     /**
-     * Checks parameter send by E-Transactions to IPN.
+     * Checks parameter send by ETransactions to IPN.
      *
      * @param Mage_Sales_Model_Order $order  Order
      * @param array                  $params Parsed call parameters
@@ -424,7 +424,7 @@ abstract class AbstractPayment extends AbstractMethod
         $requiredParams = ['amount', 'transaction', 'error', 'reference', 'sign', 'date', 'time'];
         foreach ($requiredParams as $requiredParam) {
             if (!isset($params[$requiredParam])) {
-                $message = __('Missing ' . $requiredParam . ' parameter in E-Transactions call');
+                $message = __('Missing ' . $requiredParam . ' parameter in ETransactions call');
                 $this->logFatal(sprintf('Order %s: (IPN) %s', $order->getIncrementId(), $message));
                 throw new \Exception($message);
             }
@@ -458,7 +458,7 @@ abstract class AbstractPayment extends AbstractMethod
 
     public function getConfigPaymentAction()
     {
-        if ($this->getCreditagricoleAction() == self::ETRANSACTION_MANUAL) {
+        if ($this->getCreditAgricoleAction() == self::ETRANSACTION_MANUAL) {
             return AbstractMethod::ACTION_AUTHORIZE;
         }
         return AbstractMethod::ACTION_AUTHORIZE_CAPTURE;
@@ -501,9 +501,9 @@ abstract class AbstractPayment extends AbstractMethod
         // return false;
     }
 
-    public function getCreditagricoleAction()
+    public function getCreditAgricoleAction()
     {
-        $config = $this->getCreditagricoleConfig();
+        $config = $this->getCreditAgricoleConfig();
         $action = $this->getConfigData('action');
         switch ($action) {
             case self::ETRANSACTION_DEFERRED:
@@ -514,7 +514,7 @@ abstract class AbstractPayment extends AbstractMethod
             case self::ETRANSACTION_IMMEDIATE:
                 if (!$this->getAllowImmediatDebit()) {
                     // Not possible
-                    throw new \LogicException('Unexpected condition in getCreditagricoleAction');
+                    throw new \LogicException('Unexpected condition in getCreditAgricoleAction');
                 }
                 break;
             case self::ETRANSACTION_MANUAL:
@@ -532,19 +532,19 @@ abstract class AbstractPayment extends AbstractMethod
     }
 
     /**
-     * @return CreditAgricole\Etransactions\Model\Config E-Transactions configuration object
+     * @return CreditAgricole\Etransactions\Model\Config ETransactions configuration object
      */
-    public function getCreditagricoleConfig()
+    public function getCreditAgricoleConfig()
     {
         return $this->_objectManager->get('CreditAgricole\Etransactions\Model\Config');
     }
 
     /**
-     * @return CreditAgricole\Etransactions\Model\Config E-Transactions configuration object
+     * @return CreditAgricole\Etransactions\Model\Config ETransactions configuration object
      */
-    public function getCreditagricole()
+    public function getCreditAgricole()
     {
-        return $this->_objectManager->get('CreditAgricole\Etransactions\Model\Creditagricole');
+        return $this->_objectManager->get('CreditAgricole\Etransactions\Model\CreditAgricole');
     }
 
     /**
@@ -724,7 +724,7 @@ abstract class AbstractPayment extends AbstractMethod
     public function makeCapture(Order $order)
     {
         $payment = $order->getPayment();
-        $txn = $this->getCreditagricoleTransaction($payment, Transaction::TYPE_AUTH, true);
+        $txn = $this->getCreditAgricoleTransaction($payment, Transaction::TYPE_AUTH, true);
 
         if (empty($txn)) {
             return false;
@@ -780,8 +780,8 @@ abstract class AbstractPayment extends AbstractMethod
             throw new \LogicException('Payment was not fully captured. Unable to refund.');
         }
 
-        // Call E-Transactions Direct
-        $connector = $this->getCreditagricole();
+        // Call ETransactions Direct
+        $connector = $this->getCreditAgricole();
         $data = $connector->directRefund((float) $amount, $order, $txn);
 
         // Fix possible invalid utf-8 chars
@@ -789,21 +789,21 @@ abstract class AbstractPayment extends AbstractMethod
 
         // Message
         if ($data['CODEREPONSE'] == '00000') {
-            $message = 'Payment was refund by E-Transactions.';
+            $message = 'Payment was refund by ETransactions.';
         } else {
-            $message = 'E-Transactions direct error (' . $data['CODEREPONSE'] . ': ' . $data['COMMENTAIRE'] . ')';
+            $message = 'ETransactions direct error (' . $data['CODEREPONSE'] . ': ' . $data['COMMENTAIRE'] . ')';
         }
         $data['status'] = $message;
 
         // Transaction
-        $transaction = $this->_addCreditagricoleDirectTransaction($order, Transaction::TYPE_REFUND, $data, true, [], $txn);
+        $transaction = $this->_addCreditAgricoleDirectTransaction($order, Transaction::TYPE_REFUND, $data, true, [], $txn);
         $transaction->save();
 
         // Avoid automatic transaction creation
         // $payment->setSkipTransactionCreation(true);
         $payment->setIsTransactionClosed(0);
 
-        // If E-Transactions returned an error, throw an exception
+        // If ETransactions returned an error, throw an exception
         if ($data['CODEREPONSE'] != '00000') {
             throw new \Exception($message);
         }
@@ -849,7 +849,7 @@ abstract class AbstractPayment extends AbstractMethod
     }
 
     /**
-     * When the visitor come back from E-Transactions using the cancel URL
+     * When the visitor come back from ETransactions using the cancel URL
      */
     public function onPaymentCanceled(Order $order)
     {
@@ -857,7 +857,7 @@ abstract class AbstractPayment extends AbstractMethod
         $order->cancel();
 
         // Add a message
-        $message = 'Payment was canceled by user on E-Transactions payment page.';
+        $message = 'Payment was canceled by user on ETransactions payment page.';
         $message = __($message);
         $status = $order->addStatusHistoryComment($message);
 
@@ -867,12 +867,12 @@ abstract class AbstractPayment extends AbstractMethod
     }
 
     /**
-     * When the visitor come back from E-Transactions using the failure URL
+     * When the visitor come back from ETransactions using the failure URL
      */
     public function onPaymentFailed(Order $order)
     {
         // Message
-        $message = 'Customer is back from E-Transactions payment page.';
+        $message = 'Customer is back from ETransactions payment page.';
         $message = __($message);
         $status = $order->addStatusHistoryComment($message);
 
@@ -880,16 +880,16 @@ abstract class AbstractPayment extends AbstractMethod
     }
 
     /**
-     * When the visitor is redirected to E-Transactions
+     * When the visitor is redirected to ETransactions
      */
     public function onPaymentRedirect(Order $order)
     {
         $info = $this->getInfoInstance();
         $info->setEtepPaymentAction($this->getConfigPaymentAction());
-        $info->setEtepCreditagricoleAction($this->getCreditagricoleAction());
+        $info->setEtepCreditAgricoleAction($this->getCreditAgricoleAction());
         $info->save();
         // Keep track of this redirection in order history
-        $message = 'Redirecting customer to E-Transactions payment page.';
+        $message = 'Redirecting customer to ETransactions payment page.';
         $status = $order->addStatusHistoryComment(__($message));
 
         $this->logDebug(sprintf('Order %s: %s', $order->getIncrementId(), $message));
@@ -898,12 +898,12 @@ abstract class AbstractPayment extends AbstractMethod
     }
 
     /**
-     * When the visitor come back from E-Transactions using the success URL
+     * When the visitor come back from ETransactions using the success URL
      */
     public function onPaymentSuccess(Order $order, array $data)
     {
         // Message
-        $message = 'Customer is back from E-Transactions payment page.';
+        $message = 'Customer is back from ETransactions payment page.';
         $message = __($message);
         $status = $order->addStatusHistoryComment($message);
 
@@ -953,7 +953,7 @@ abstract class AbstractPayment extends AbstractMethod
         $withCapture = $this->getConfigPaymentAction() != AbstractMethod::ACTION_AUTHORIZE;
 
         // Message
-        $message = 'An unexpected error have occured while processing E-Transactions payment (%s).';
+        $message = 'An unexpected error have occured while processing ETransactions payment (%s).';
         $error = is_null($e) ? 'unknown error' : $e->getMessage();
         $error = __($error);
         $message = $this->__($message, $error);
@@ -968,7 +968,7 @@ abstract class AbstractPayment extends AbstractMethod
             //         Transaction::TYPE_CAPTURE :
             //         Transaction::TYPE_AUTH;
             $type = Transaction::TYPE_VOID;
-            $this->_addCreditagricoleTransaction($order, $type, $data, true);
+            $this->_addCreditAgricoleTransaction($order, $type, $data, true);
         } else {
             $this->_processingTransaction->setAdditionalInformation(Transaction::RAW_DETAILS, $data);
         }
@@ -984,8 +984,8 @@ abstract class AbstractPayment extends AbstractMethod
         $withCapture = $this->getConfigPaymentAction() != AbstractMethod::ACTION_AUTHORIZE;
 
         // Message
-        $message = 'Payment was refused by E-Transactions (%s).';
-        $error = $this->getCreditagricole()->toErrorMessage($data['error']);
+        $message = 'Payment was refused by ETransactions (%s).';
+        $error = $this->getCreditAgricole()->toErrorMessage($data['error']);
         $message = __($message, $error);
         $data['status'] = $message;
         $order->addStatusHistoryComment($message);
@@ -996,7 +996,7 @@ abstract class AbstractPayment extends AbstractMethod
         //         Transaction::TYPE_CAPTURE :
         //         Transaction::TYPE_AUTH;
         $type = Transaction::TYPE_VOID;
-        $this->_addCreditagricoleTransaction($order, $type, $data, true);
+        $this->_addCreditAgricoleTransaction($order, $type, $data, true);
 
         $order->save();
     }
@@ -1014,7 +1014,7 @@ abstract class AbstractPayment extends AbstractMethod
 
         // Message
         if ($withCapture) {
-            $message = 'Payment was authorized and captured by E-Transactions.';
+            $message = 'Payment was authorized and captured by ETransactions.';
             $status = $this->getConfigPaidStatus();
             $state = Order::STATE_PROCESSING;
             $allowedStates = [
@@ -1023,7 +1023,7 @@ abstract class AbstractPayment extends AbstractMethod
                 Order::STATE_PROCESSING,
             ];
         } else {
-            $message = 'Payment was authorized by E-Transactions.';
+            $message = 'Payment was authorized by ETransactions.';
             $status = $this->getConfigAuthorizedStatus();
             $state = Order::STATE_PENDING_PAYMENT;
             $allowedStates = [
@@ -1041,7 +1041,7 @@ abstract class AbstractPayment extends AbstractMethod
         $type = $withCapture ?
                 Transaction::TYPE_CAPTURE :
                 Transaction::TYPE_AUTH;
-        $txn = $this->_addCreditagricoleTransaction(
+        $txn = $this->_addCreditAgricoleTransaction(
             $order,
             $type,
             $data,
@@ -1053,7 +1053,7 @@ abstract class AbstractPayment extends AbstractMethod
         );
 
         // Associate data to payment
-        $payment->setEtepAction($this->getCreditagricoleAction());
+        $payment->setEtepAction($this->getCreditAgricoleAction());
         $payment->setEtepDelay((int) $this->getConfigData('delay'));
         $payment->setEtepAuthorization(serialize($data));
         if ($withCapture) {

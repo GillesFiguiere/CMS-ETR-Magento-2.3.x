@@ -1,6 +1,6 @@
 <?php
 /**
- * E-Transactions Etransactions module for Magento
+ * ETransactions Etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -126,7 +126,7 @@ class AuthorizationRequest implements BuilderInterface
             }
         } else {
             $values['PBX_TOTAL'] = sprintf('%03d', round($orderAmount * $amountScale));
-            switch ($payment->getCreditagricoleAction()) {
+            switch ($payment->getCreditAgricoleAction()) {
                 case CreditAgricole_Etransactions_Model_Payment_Abstract::ETRANSACTION_MANUAL:
                     $values['PBX_AUTOSEULE'] = 'O';
                     break;
@@ -143,7 +143,7 @@ class AuthorizationRequest implements BuilderInterface
             }
         }
 
-        // E-Transactions => Magento
+        // ETransactions => Magento
         $values['PBX_RETOUR'] = 'M:M;R:R;T:T;A:A;B:B;C:C;D:D;E:E;F:F;G:G;H:H;I:I;J:J;N:N;O:O;P:P;Q:Q;S:S;W:W;Y:Y;v:v;K:K';
         $values['PBX_RUF1'] = 'POST';
 

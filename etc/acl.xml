@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 /**
- * E-Transactions Etransactions module for Magento
+ * ETransactions Etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -24,12 +24,12 @@
     <acl>
         <resources>
             <resource id="Magento_Backend::admin">
-                <resource id="CreditAgricole_Etransactions::creditagricole" title="Index" sortOrder="20">
-                    <resource id="CreditAgricole_Etransactions::creditagricole_capture" title="Invoice" sortOrder="10">
-                        <resource id="CreditAgricole_Etransactions::creditagricole_capture_test" title="Test" sortOrder="10">
+                <resource id="CreditAgricole_Etransactions::CreditAgricole" title="Index" sortOrder="20">
+                    <resource id="CreditAgricole_Etransactions::CreditAgricole_capture" title="Invoice" sortOrder="10">
+                        <resource id="CreditAgricole_Etransactions::CreditAgricole_capture_test" title="Test" sortOrder="10">
                         </resource>
-                        <resource id="CreditAgricole_Etransactions::creditagricole_partial" title="InvoicePartial" sortOrder="10">
-                            <resource id="CreditAgricole_Etransactions::creditagricole_partial_test" title="TestPartial" sortOrder="10">
+                        <resource id="CreditAgricole_Etransactions::CreditAgricole_partial" title="InvoicePartial" sortOrder="10">
+                            <resource id="CreditAgricole_Etransactions::CreditAgricole_partial_test" title="TestPartial" sortOrder="10">
                             </resource>
                         </resource>
                     </resource>

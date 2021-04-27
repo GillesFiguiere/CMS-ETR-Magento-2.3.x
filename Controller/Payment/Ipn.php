@@ -1,6 +1,6 @@
 <?php
 /**
- * E-Transactions Etransactions module for Magento
+ * ETransactions Etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -28,7 +28,7 @@ class Ipn extends \CreditAgricole\Etransactions\Controller\Payment
     public function execute()
     {
         try {
-            $etransactions = $this->getCreditagricole();
+            $etransactions = $this->getCreditAgricole();
 
             // Retrieves params
             $params = $etransactions->getParams(true);

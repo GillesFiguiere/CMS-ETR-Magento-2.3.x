@@ -1,6 +1,6 @@
 <?php
 /**
- * E-Transactions Etransactions module for Magento
+ * ETransactions Etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -28,7 +28,7 @@ class Failed extends \CreditAgricole\Etransactions\Controller\Payment
     {
         try {
             $session = $this->getSession();
-            $etransactions = $this->getCreditagricole();
+            $etransactions = $this->getCreditAgricole();
 
             // Retrieves params
             $params = $etransactions->getParams(false, false);
@@ -51,10 +51,10 @@ class Failed extends \CreditAgricole\Etransactions\Controller\Payment
             // Cleanup
             $session->unsCurrentEtepOrderId();
 
-            $message = sprintf('Order %d: Customer is back from E-Transactions payment page. Payment refused by E-Transactions (%d).', $order->getIncrementId(), $params['error']);
+            $message = sprintf('Order %d: Customer is back from ETransactions payment page. Payment refused by ETransactions (%d).', $order->getIncrementId(), $params['error']);
             $this->logDebug($message);
 
-            $message = __('Payment refused by E-Transactions.');
+            $message = __('Payment refused by ETransactions.');
             $this->_messageManager->addError($message);
 
             // redirect

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 /**
- * E-Transactions Etransactions module for Magento
+ * ETransactions Etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -26,7 +26,7 @@
     	<label>Pay by Card Three Times</label>
 
         <field id="tt_info" translate="label comment" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
-        	<label><![CDATA[Check your E-Transactions contract before enabling this option.]]></label>
+        	<label><![CDATA[Check your ETransactions contract before enabling this option.]]></label>
             <frontend_model>CreditAgricole\Etransactions\Block\Admin\Field\Info</frontend_model>
         	<depends>
                 <field id="tt_active">1</field>
@@ -39,7 +39,7 @@
         </field>
         <field id="tt_cctypes" translate="label comment" type="multiselect" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
             <label>Card type</label>
-            <comment><![CDATA[If you disable E-Carte Bleu, contact the E-Transactions support]]></comment>
+            <comment><![CDATA[If you disable E-Carte Bleu, contact the ETransactions support]]></comment>
             <config_path>payment/etep_threetime/cctypes</config_path>
             <source_model>CreditAgricole\Etransactions\Model\Admin\Cards\Threetime</source_model>
             <depends>

@@ -1,5 +1,5 @@
 /**
- * E-Transactions Etransactions module for Magento
+ * ETransactions Etransactions module for Magento
  *
  * Feel free to contact LicenseCompany at LicenseEmailContact for any
  * question.
@@ -60,7 +60,7 @@
             getCreditCardType: function () {
                 return jQuery('input[name="payment[cc_type]"]:checked').val();
             },
-            continueToE-Transactions: function () {
+            continueToETransactions: function () {
                 this.redirectAfterPlaceOrder = false;
                     this.selectPaymentMethod(); // save selected payment method in Quote
                     setPaymentMethodAction(this.messageContainer);

@@ -1,6 +1,6 @@
 <?php
 /**
- * E-Transactions Etransactions module for Magento
+ * ETransactions Etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -87,7 +87,7 @@ class Threetime extends AbstractPayment
 
         // Create transaction
         $type = Transaction::TYPE_CAPTURE;
-        $txn = $this->_addCreditagricoleTransaction(
+        $txn = $this->_addCreditAgricoleTransaction(
             $order,
             $type,
             $data,
@@ -102,7 +102,7 @@ class Threetime extends AbstractPayment
             $this->logDebug(sprintf('Order %s: First payment', $order->getIncrementId()));
 
             // Message
-            $message = 'Payment was authorized and captured by E-Transactions.';
+            $message = 'Payment was authorized and captured by ETransactions.';
 
             // Status
             $status = $this->getConfigPaidStatus();
@@ -130,7 +130,7 @@ class Threetime extends AbstractPayment
             $invoice = $this->_createInvoice($payment, $order, $txn);
         } elseif (is_null($payment->getEtepSecondPayment())) {
             // Message
-            $message = 'Second payment was captured by E-Transactions.';
+            $message = 'Second payment was captured by ETransactions.';
             $order->addStatusHistoryComment($message);
 
             // Additional informations
@@ -138,7 +138,7 @@ class Threetime extends AbstractPayment
             $this->logDebug(sprintf('Order %s: %s', $order->getIncrementId(), $message));
         } elseif (is_null($payment->getEtepThirdPayment())) {
             // Message
-            $message = 'Third payment was captured by E-Transactions.';
+            $message = 'Third payment was captured by ETransactions.';
             $order->addStatusHistoryComment($message);
 
             // Additional informations

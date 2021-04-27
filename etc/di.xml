@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 /**
- * E-Transactions Etransactions module for Magento
+ * ETransactions Etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -24,7 +24,7 @@
 <!--    <type name="Magento\Framework\Console\CommandList">
         <arguments>
             <argument name="commands" xsi:type="array">
-                <item name="creditagricole_test_save_order" xsi:type="object">CreditAgricole\Etransactions\Console\Command\OrderSaveCommand</item>
+                <item name="CreditAgricole_test_save_order" xsi:type="object">CreditAgricole\Etransactions\Console\Command\OrderSaveCommand</item>
 
             </argument>
         </arguments>

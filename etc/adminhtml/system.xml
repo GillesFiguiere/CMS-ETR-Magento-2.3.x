@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 /**
- * E-Transactions Etransactions module for Magento
+ * ETransactions Etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -24,7 +24,7 @@
         xsi:noNamespaceSchemaLocation="../../../../Magento/Config/etc/system_file.xsd">
     <system>
         <tab id="etransactions" translate="label" sortOrder="400">
-            <label>E-Transactions</label>
+            <label>ETransactions</label>
         </tab>
         <section id="etep_pres" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
             <label>Presentation</label>
@@ -58,42 +58,42 @@
                 <label>Account settings</label>
                 <field id="subscription" translate="label comment" type="select" sortOrder="0" showInDefault="1"
                        showInWebsite="1" showInStore="1">
-                    <label>Subscribed E-Transactions Solution</label>
+                    <label>Subscribed ETransactions Solution</label>
                     <source_model>CreditAgricole\Etransactions\Model\Admin\Subscription</source_model>
                     <config_path>etep/merchant/subscription</config_path>
                 </field>
                 <field id="site" translate="label comment" type="text" sortOrder="10" showInDefault="1"
                        showInWebsite="1" showInStore="1">
                     <label>Site number</label>
-                    <comment><![CDATA[Site number provided by E-Transactions.]]></comment>
+                    <comment><![CDATA[Site number provided by ETransactions.]]></comment>
                     <validate>required-entry validate-digits validate-exact-length length-7</validate>
                     <config_path>etep/merchant/site</config_path>
                 </field>
                 <field id="rank" translate="label comment" type="text" sortOrder="20" showInDefault="1"
                        showInWebsite="1" showInStore="1">
                     <label>Rank number</label>
-                    <comment><![CDATA[Rank number provided by E-Transactions (last 2 digits).]]></comment>
+                    <comment><![CDATA[Rank number provided by ETransactions (last 2 digits).]]></comment>
                     <validate>required-entry validate-digits validate-exact-length length-2</validate>
                     <config_path>etep/merchant/rank</config_path>
                 </field>
                 <field id="identifier" translate="label comment" type="text" sortOrder="30" showInDefault="1"
                        showInWebsite="1" showInStore="1">
                     <label>Login</label>
-                    <comment><![CDATA[Internal login provided by E-Transactions.]]></comment>
+                    <comment><![CDATA[Internal login provided by ETransactions.]]></comment>
                     <validate>required-entry validate-digits validate-length maximum-length-9</validate>
                     <config_path>etep/merchant/identifier</config_path>
                 </field>
                 <field id="hmackey" translate="label comment" type="obscure" sortOrder="50" showInDefault="1"
                        showInWebsite="1" showInStore="1">
                     <label>HMAC</label>
-                    <comment><![CDATA[Secrete HMAC key to create using the E-Transactions interface.]]></comment>
+                    <comment><![CDATA[Secrete HMAC key to create using the ETransactions interface.]]></comment>
                     <validate>required-entry</validate>
                     <config_path>etep/merchant/hmackey</config_path>
                     <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
                 </field>
                 <field id="password" translate="label comment" type="obscure" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>E-Transactions Back Office password</label>
-                    <comment><![CDATA[Back Office password provided by E-Transactions.]]></comment>
+                    <label>ETransactions Back Office password</label>
+                    <comment><![CDATA[Back Office password provided by ETransactions.]]></comment>
                     <validate>required-entry</validate>
                     <depends>
                         <field id="subscription">access</field>
@@ -102,8 +102,8 @@
                     <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
                 </field>
                 <field id="passwordplus" translate="label comment" type="obscure" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>E-Transactions Back Office password</label>
-                    <comment><![CDATA[Back Office password provided by E-Transactions.]]></comment>
+                    <label>ETransactions Back Office password</label>
+                    <comment><![CDATA[Back Office password provided by ETransactions.]]></comment>
                     <validate>required-entry</validate>
                     <depends>
                         <field id="subscription">premium</field>
@@ -119,7 +119,7 @@
                 <field id="customer_info" translate="label comment" type="select" sortOrder="10" showInDefault="1"
                        showInWebsite="1" showInStore="1">
                     <label>Show payment information to customers</label>
-                    <comment><![CDATA[E-Transactions module can show payment information to customer. You can disable this feature here.]]></comment>
+                    <comment><![CDATA[ETransactions module can show payment information to customer. You can disable this feature here.]]></comment>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <config_path>etep/info/show_to_customer</config_path>
                 </field>

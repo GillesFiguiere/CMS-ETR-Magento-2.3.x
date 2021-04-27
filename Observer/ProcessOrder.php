@@ -1,6 +1,6 @@
 <?php
 /**
- * E-Transactions Etransactions module for Magento
+ * ETransactions Etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -69,7 +69,7 @@ class ProcessOrder implements ObserverInterface
             return $this;
         }
 
-        // This order must be paid by Creditagricole
+        // This order must be paid by CreditAgricole
         $payment = $order->getPayment();
         if (empty($payment)) {
             return $this;
@@ -80,7 +80,7 @@ class ProcessOrder implements ObserverInterface
             return $this;
         }
 
-        // Creditagricole Direct must be activated
+        // CreditAgricole Direct must be activated
         $config = $method->getCreditAgricoleConfig();
         if ($config->getSubscription() != \CreditAgricole\Etransactions\Model\Config::SUBSCRIPTION_OFFER2
             && $config->getSubscription() != \CreditAgricole\Etransactions\Model\Config::SUBSCRIPTION_OFFER3

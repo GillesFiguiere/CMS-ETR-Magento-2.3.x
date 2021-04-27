@@ -1,6 +1,6 @@
 <?php
 /**
- * E-Transactions Etransactions module for Magento
+ * ETransactions Etransactions module for Magento
  *
  * Feel free to contact E-Transactions at support@e-transactions.fr for any
  * question.
@@ -48,7 +48,7 @@ class OrderSaveCommand extends Command
 
     protected function configure()
     {
-        $this->setName('creditagricole:saveorder')
+        $this->setName('CreditAgricole:saveorder')
             ->setDescription('Test : Call save method for Order')
             ->setDefinition($this->getInputList());
         parent::configure();
