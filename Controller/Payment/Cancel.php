@@ -1,8 +1,8 @@
 <?php
 /**
- * ETransactions Etransactions module for Magento
+ * Up2pay e-Transactions Etransactions module for Magento
  *
- * Feel free to contact E-Transactions at support@e-transactions.fr for any
+ * Feel free to contact Credit Agricole at support@e-transactions.fr for any
  * question.
  *
  * LICENSE: This source file is subject to the version 3.0 of the Open
@@ -14,7 +14,7 @@
  *
  * @version   1.0.7-psr
  * @author    E-Transactions <support@e-transactions.fr>
- * @copyright 2012-2017 E-Transactions
+ * @copyright 2012-2021 E-Transactions
  * @license   http://opensource.org/licenses/OSL-3.0
  * @link      http://www.e-transactions.fr/
  */
@@ -29,10 +29,10 @@ class Cancel extends \CreditAgricole\Etransactions\Controller\Payment
     {
         try {
             $session = $this->getSession();
-            $etransactions = $this->getCreditAgricole();
+            $creditagricole = $this->getCreditagricole();
 
             // Retrieves params
-            $params = $etransactions->getParams();
+            $params = $creditagricole->getParams();
             if ($params === false) {
                 return $this->_404();
             }
@@ -52,7 +52,7 @@ class Cancel extends \CreditAgricole\Etransactions\Controller\Payment
             // Cleanup
             $session->unsCurrentEtepOrderId();
 
-            $message = sprintf('Order %d: Payment was canceled by user on ETransactions payment page.', $order->getIncrementId());
+            $message = sprintf('Order %d: Payment was canceled by user on Up2pay e-Transactions payment page.', $order->getIncrementId());
             $this->logDebug($message);
 
             $message = __('Payment canceled by user');

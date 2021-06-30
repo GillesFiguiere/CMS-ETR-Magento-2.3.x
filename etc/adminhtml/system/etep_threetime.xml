@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!--
 /**
- * ETransactions Etransactions module for Magento
+ * Up2pay e-Transactions Etransactions module for Magento
  *
- * Feel free to contact E-Transactions at support@e-transactions.fr for any
+ * Feel free to contact Credit Agricole at support@e-transactions.fr for any
  * question.
  *
  * LICENSE: This source file is subject to the version 3.0 of the Open
@@ -15,7 +15,7 @@
  *
  * @version   1.0.0
  * @author    E-Transactions <support@e-transactions.fr>
- * @copyright 2012-2017 E-Transactions
+ * @copyright 2012-2021 E-Transactions
  * @license   http://opensource.org/licenses/OSL-3.0
  * @link      http://www.e-transactions.fr/
  */
@@ -26,7 +26,7 @@
     	<label>Pay by Card Three Times</label>
 
         <field id="tt_info" translate="label comment" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
-        	<label><![CDATA[Check your ETransactions contract before enabling this option.]]></label>
+        	<label><![CDATA[Check your Up2pay e-Transactions contract before enabling this option.]]></label>
             <frontend_model>CreditAgricole\Etransactions\Block\Admin\Field\Info</frontend_model>
         	<depends>
                 <field id="tt_active">1</field>
@@ -39,7 +39,7 @@
         </field>
         <field id="tt_cctypes" translate="label comment" type="multiselect" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
             <label>Card type</label>
-            <comment><![CDATA[If you disable E-Carte Bleu, contact the ETransactions support]]></comment>
+            <comment><![CDATA[If you disable E-Carte Bleu, contact the Up2pay e-Transactions support]]></comment>
             <config_path>payment/etep_threetime/cctypes</config_path>
             <source_model>CreditAgricole\Etransactions\Model\Admin\Cards\Threetime</source_model>
             <depends>

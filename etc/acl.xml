@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!--
 /**
- * ETransactions Etransactions module for Magento
+ * Up2pay e-Transactions Etransactions module for Magento
  *
- * Feel free to contact E-Transactions at support@e-transactions.fr for any
+ * Feel free to contact Credit Agricole at support@e-transactions.fr for any
  * question.
  *
  * LICENSE: This source file is subject to the version 3.0 of the Open
@@ -15,7 +15,7 @@
  *
  * @version   1.0.2
  * @author    E-Transactions <support@e-transactions.fr>
- * @copyright 2012-2017 E-Transactions
+ * @copyright 2012-2021 E-Transactions
  * @license   http://opensource.org/licenses/OSL-3.0
  * @link      http://www.e-transactions.fr/
  */
@@ -24,12 +24,12 @@
     <acl>
         <resources>
             <resource id="Magento_Backend::admin">
-                <resource id="CreditAgricole_Etransactions::CreditAgricole" title="Index" sortOrder="20">
-                    <resource id="CreditAgricole_Etransactions::CreditAgricole_capture" title="Invoice" sortOrder="10">
-                        <resource id="CreditAgricole_Etransactions::CreditAgricole_capture_test" title="Test" sortOrder="10">
+                <resource id="CreditAgricole_Etransactions::creditagricole" title="Index" sortOrder="20">
+                    <resource id="CreditAgricole_Etransactions::creditagricole_capture" title="Invoice" sortOrder="10">
+                        <resource id="CreditAgricole_Etransactions::creditagricole_capture_test" title="Test" sortOrder="10">
                         </resource>
-                        <resource id="CreditAgricole_Etransactions::CreditAgricole_partial" title="InvoicePartial" sortOrder="10">
-                            <resource id="CreditAgricole_Etransactions::CreditAgricole_partial_test" title="TestPartial" sortOrder="10">
+                        <resource id="CreditAgricole_Etransactions::creditagricole_partial" title="InvoicePartial" sortOrder="10">
+                            <resource id="CreditAgricole_Etransactions::creditagricole_partial_test" title="TestPartial" sortOrder="10">
                             </resource>
                         </resource>
                     </resource>

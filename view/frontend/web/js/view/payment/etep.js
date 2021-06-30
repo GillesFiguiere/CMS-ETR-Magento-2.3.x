@@ -1,5 +1,5 @@
 /**
- * ETransactions Etransactions module for Magento
+ * CreditAgricole Etransactions module for Magento
  *
  * Feel free to contact LicenseCompany at LicenseEmailContact for any
  * question.

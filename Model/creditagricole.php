@@ -1,8 +1,8 @@
 <?php
 /**
- * ETransactions Etransactions module for Magento
+ * Up2pay e-Transactions Etransactions module for Magento
  *
- * Feel free to contact E-Transactions at support@e-transactions.fr for any
+ * Feel free to contact Credit Agricole at support@e-transactions.fr for any
  * question.
  *
  * LICENSE: This source file is subject to the version 3.0 of the Open
@@ -14,7 +14,7 @@
  *
  * @version   1.0.8-meqp
  * @author    E-Transactions <support@e-transactions.fr>
- * @copyright 2012-2017 E-Transactions
+ * @copyright 2012-2021 E-Transactions
  * @license   http://opensource.org/licenses/OSL-3.0
  * @link      http://www.e-transactions.fr/
  */
@@ -25,7 +25,7 @@ use Magento\Sales\Model\Order;
 use Magento\Sales\Model\Order\Payment\Transaction;
 use CreditAgricole\Etransactions\Model\Payment\AbstractPayment;
 
-class CreditAgricole
+class Creditagricole
 {
     private $_currencyDecimals = [
         '008' => 2,
@@ -332,7 +332,7 @@ class CreditAgricole
             $url,
             [
             'maxredirects' => 0,
-            'useragent' => 'Magento ETransactions module',
+            'useragent' => 'Magento Up2pay e-Transactions module',
             'timeout' => 5,
             ]
         );
@@ -350,7 +350,7 @@ class CreditAgricole
         }
 
         // Here, there's a problem
-        throw new \LogicException(__('ETransactions not available. Please try again later.'));
+        throw new \LogicException(__('Up2pay e-Transactions not available. Please try again later.'));
     }
 
     public function buildSystemParams(Order $order, AbstractPayment $payment)
@@ -410,7 +410,7 @@ class CreditAgricole
             }
         } else {
             $values['PBX_TOTAL'] = sprintf('%03d', round($orderAmount * $amountScale));
-            switch ($payment->getCreditAgricoleAction()) {
+            switch ($payment->getCreditagricoleAction()) {
                 case AbstractPayment::ETRANSACTION_MANUAL:
                     $values['PBX_AUTOSEULE'] = 'O';
                     break;
@@ -427,7 +427,7 @@ class CreditAgricole
             }
         }
 
-        // ETransactions => Magento
+        // Up2pay e-Transactions => Magento
         $values['PBX_RETOUR'] = 'M:M;R:R;T:T;A:A;B:B;C:C;D:D;E:E;F:F;G:G;H:H;I:I;J:J;N:N;O:O;P:P;Q:Q;S:S;W:W;Y:Y;v:v;K:K';
         $values['PBX_RUF1'] = 'POST';
 
@@ -502,7 +502,7 @@ class CreditAgricole
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
         $productMetadata = $objectManager->get('Magento\Framework\App\ProductMetadataInterface');
         $moduleInfo = $this->_objectManager->get('Magento\Framework\Module\ModuleList')->getOne('CreditAgricole_Etransactions');
-        $values['PBX_VERSION'] = 'Magento_' . $productMetadata->getVersion() . '-' . 'etransactions' . '_' . $moduleInfo['setup_version'];
+        $values['PBX_VERSION'] = 'Magento_' . $productMetadata->getVersion() . '-' . 'creditagricole' . '_' . $moduleInfo['setup_version'];
 
         // 3DSv2 parameters
         $values['PBX_SHOPPINGCART'] = $payment->getXmlShoppingCartInformation($order);
@@ -540,7 +540,7 @@ class CreditAgricole
             null,
             [
             'maxredirects' => 0,
-            'useragent' => 'Magento ETransactions module',
+            'useragent' => 'Magento Up2pay e-Transactions module',
             'timeout' => 5,
             ]
         );
@@ -562,7 +562,7 @@ class CreditAgricole
         }
 
         // Here, there's a problem
-        throw new \LogicException(__('ETransactions not available. Please try again later.'));
+        throw new \LogicException(__('Up2pay e-Transactions not available. Please try again later.'));
     }
 
     public function computeThreetimePayments($orderAmount, $amountScale)
@@ -601,11 +601,11 @@ class CreditAgricole
     }
 
     /**
-     * Create transaction ID from ETransactions data
+     * Create transaction ID from Up2pay e-Transactions data
      */
-    protected function createTransactionId(array $etransactionsData)
+    protected function createTransactionId(array $creditagricoleData)
     {
-        $transaction = (int) (isset($etransactionsData['transaction']) ? $etransactionsData['transaction'] : $etransactionsData['NUMTRANS']);
+        $transaction = (int) (isset($creditagricoleData['transaction']) ? $creditagricoleData['transaction'] : $creditagricoleData['NUMTRANS']);
         $now = new DateTime('now', new DateTimeZone('Europe/Paris'));
         return $transaction . '/' . $now->format('U');
     }
@@ -631,7 +631,7 @@ class CreditAgricole
     }
 
     /**
-     * @return CreditAgricole\Etransactions\Model\Config ETransactions configuration object
+     * @return CreditAgricole\Etransactions\Model\Config Up2pay e-Transactions configuration object
      */
     public function getConfig()
     {
@@ -670,7 +670,7 @@ class CreditAgricole
         }
         if (empty($data)) {
             throw new \LogicException("Error Processing Request");
-            (__('An unexpected error in ETransactions call has occured: no parameters.'));
+            (__('An unexpected error in Up2pay e-Transactions call has occured: no parameters.'));
         }
 
         // Log params if needed
@@ -684,7 +684,7 @@ class CreditAgricole
             $matches = [];
             if (!preg_match('#^(.*)&K=(.*)$#', $data, $matches)) {
                 throw new \LogicException("Error Processing Request");
-                (__('An unexpected error in ETransactions call has occured: missing signature.'));
+                (__('An unexpected error in Up2pay e-Transactions call has occured: missing signature.'));
             }
 
             // Check signature
@@ -700,7 +700,7 @@ class CreditAgricole
 
                 if (!$res) {
                     throw new \LogicException("Error Processing Request");
-                    (__('An unexpected error in ETransactions call has occured: invalid signature.'));
+                    (__('An unexpected error in Up2pay e-Transactions call has occured: invalid signature.'));
                 }
             }
         }
@@ -711,7 +711,7 @@ class CreditAgricole
         // Decrypt params
         $params = $this->convertParams($rawParams);
         if (empty($params)) {
-            throw new \LogicException(__('An unexpected error in ETransactions call has occured.'));
+            throw new \LogicException(__('An unexpected error in Up2pay e-Transactions call has occured.'));
         }
 
         return $params;
@@ -722,7 +722,7 @@ class CreditAgricole
         $config = $this->getConfig();
         $urls = $config->getSystemUrls();
         if (empty($urls)) {
-            $message = 'Missing URL for ETransactions system in configuration';
+            $message = 'Missing URL for Up2pay e-Transactions system in configuration';
             throw new \LogicException(__($message));
         }
 
@@ -736,7 +736,7 @@ class CreditAgricole
         $config = $this->getConfig();
         $urls = $config->getResponsiveUrls();
         if (empty($urls)) {
-            $message = 'Missing URL for ETransactions responsive in configuration';
+            $message = 'Missing URL for Up2pay e-Transactions responsive in configuration';
             throw new \LogicException(__($message));
         }
 
@@ -750,7 +750,7 @@ class CreditAgricole
         $config = $this->getConfig();
         $urls = $config->getKwixoUrls();
         if (empty($urls)) {
-            $message = 'Missing URL for ETransactions system in configuration';
+            $message = 'Missing URL for Up2pay e-Transactions system in configuration';
             throw new \LogicException(__($message));
         }
 

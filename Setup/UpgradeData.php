@@ -1,8 +1,8 @@
 <?php
 /**
- * ETransactions Etransactions module for Magento
+ * Up2pay e-Transactions Etransactions module for Magento
  *
- * Feel free to contact E-Transactions at support@e-transactions.fr for any
+ * Feel free to contact Credit Agricole at support@e-transactions.fr for any
  * question.
  *
  * LICENSE: This source file is subject to the version 3.0 of the Open
@@ -14,7 +14,7 @@
  *
  * @version   1.0.7-psr
  * @author    E-Transactions <support@e-transactions.fr>
- * @copyright 2012-2017 E-Transactions
+ * @copyright 2012-2021 E-Transactions
  * @license   http://opensource.org/licenses/OSL-3.0
  * @link      http://www.e-transactions.fr/
  */
@@ -45,7 +45,7 @@ class UpgradeData implements UpgradeDataInterface
         $setup->startSetup();
 
         // Merge CB/VISA/MC/ECB into one method
-        if (!empty($context->getVersion()) && version_compare($context->getVersion(), '2.0.2', '<=')) {
+        if (!empty($context->getVersion()) && version_compare($context->getVersion(), '2.0.3', '<=')) {
             $this->writerInterface->save('payment/etep_cb/cctypes', 'CB', 'default', 0);
             $this->writerInterface->save('payment/etep_threetime/cctypes', 'CB', 'default', 0);
         }

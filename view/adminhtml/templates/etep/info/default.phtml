@@ -1,8 +1,8 @@
 <?php
 /**
- * ETransactions Etransactions module for Magento
+ * Up2pay e-Transactions Etransactions module for Magento
  *
- * Feel free to contact E-Transactions at support@e-transactions.fr for any
+ * Feel free to contact Credit Agricole at support@e-transactions.fr for any
  * question.
  *
  * LICENSE: This source file is subject to the version 3.0 of the Open
@@ -15,7 +15,7 @@
  *
  * @version   1.0.0
  * @author    E-Transactions <support@e-transactions.fr>
- * @copyright 2012-2017 E-Transactions
+ * @copyright 2012-2021 E-Transactions
  * @license   http://opensource.org/licenses/OSL-3.0
  * @link      http://www.e-transactions.fr/
  */
@@ -26,7 +26,7 @@
 $requestOb = $this->getObjectManager()->get('Magento\Framework\App\Request\Http');
 $controllerName = $requestOb->getControllerName();
 $method = $this->getMethod();
-$data = $this->getCreditAgricoleData();
+$data = $this->getCreditagricoleData();
 $debitType = $this->getDebitTypeLabel();
 $threeTime = $this->getThreeTimeLabels();
 ?>
@@ -38,7 +38,7 @@ $threeTime = $this->getThreeTimeLabels();
         <td><?php echo $this->escapeHtml($data['transaction']); ?></td>
     </tr>
     <tr>
-        <td><?php echo __('ETransactions Back Office Reference'); ?></td>
+        <td><?php echo __('Up2pay e-Transactions Back Office Reference'); ?></td>
         <td><?php echo $this->escapeHtml($data['reference']); ?></td>
     </tr>
     <tr>

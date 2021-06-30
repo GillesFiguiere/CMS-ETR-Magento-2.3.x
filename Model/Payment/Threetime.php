@@ -1,8 +1,8 @@
 <?php
 /**
- * ETransactions Etransactions module for Magento
+ * Up2pay e-Transactions Etransactions module for Magento
  *
- * Feel free to contact E-Transactions at support@e-transactions.fr for any
+ * Feel free to contact Credit Agricole at support@e-transactions.fr for any
  * question.
  *
  * LICENSE: This source file is subject to the version 3.0 of the Open
@@ -14,7 +14,7 @@
  *
  * @version   1.0.8-meqp
  * @author    E-Transactions <support@e-transactions.fr>
- * @copyright 2012-2017 E-Transactions
+ * @copyright 2012-2021 E-Transactions
  * @license   http://opensource.org/licenses/OSL-3.0
  * @link      http://www.e-transactions.fr/
  */
@@ -87,7 +87,7 @@ class Threetime extends AbstractPayment
 
         // Create transaction
         $type = Transaction::TYPE_CAPTURE;
-        $txn = $this->_addCreditAgricoleTransaction(
+        $txn = $this->_addCreditagricoleTransaction(
             $order,
             $type,
             $data,
@@ -102,7 +102,7 @@ class Threetime extends AbstractPayment
             $this->logDebug(sprintf('Order %s: First payment', $order->getIncrementId()));
 
             // Message
-            $message = 'Payment was authorized and captured by ETransactions.';
+            $message = 'Payment was authorized and captured by Up2pay e-Transactions.';
 
             // Status
             $status = $this->getConfigPaidStatus();
@@ -130,7 +130,7 @@ class Threetime extends AbstractPayment
             $invoice = $this->_createInvoice($payment, $order, $txn);
         } elseif (is_null($payment->getEtepSecondPayment())) {
             // Message
-            $message = 'Second payment was captured by ETransactions.';
+            $message = 'Second payment was captured by Up2pay e-Transactions.';
             $order->addStatusHistoryComment($message);
 
             // Additional informations
@@ -138,7 +138,7 @@ class Threetime extends AbstractPayment
             $this->logDebug(sprintf('Order %s: %s', $order->getIncrementId(), $message));
         } elseif (is_null($payment->getEtepThirdPayment())) {
             // Message
-            $message = 'Third payment was captured by ETransactions.';
+            $message = 'Third payment was captured by Up2pay e-Transactions.';
             $order->addStatusHistoryComment($message);
 
             // Additional informations

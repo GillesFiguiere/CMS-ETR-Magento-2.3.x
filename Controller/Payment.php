@@ -1,8 +1,8 @@
 <?php
 /**
- * ETransactions Etransactions module for Magento
+ * Up2pay e-Transactions Etransactions module for Magento
  *
- * Feel free to contact E-Transactions at support@e-transactions.fr for any
+ * Feel free to contact Credit Agricole at support@e-transactions.fr for any
  * question.
  *
  * LICENSE: This source file is subject to the version 3.0 of the Open
@@ -14,7 +14,7 @@
  *
  * @version   2.0.0
  * @author    E-Transactions <support@e-transactions.fr>
- * @copyright 2012-2017 E-Transactions
+ * @copyright 2012-2021 E-Transactions
  * @license   http://opensource.org/licenses/OSL-3.0
  * @link      http://www.e-transactions.fr/
  */
@@ -35,8 +35,8 @@ class Payment extends \Magento\Framework\App\Action\Action implements CsrfAwareA
     protected $_quoteRepository;
     protected $_logger;
     protected $_checkoutSession;
-    protected $_etransactionsConfig;
-    protected $_etransactions;
+    protected $_creditagricoleConfig;
+    protected $_creditagricole;
     protected $_registry;
 
     /**
@@ -49,8 +49,8 @@ class Payment extends \Magento\Framework\App\Action\Action implements CsrfAwareA
         \Psr\Log\LoggerInterface $loggerInteface,
         \Magento\Quote\Api\CartRepositoryInterface $cartRepositoryInterface,
         \Magento\Checkout\Model\Session $checkoutSession,
-        \CreditAgricole\Etransactions\Model\Config $etransactionsConfig,
-        \CreditAgricole\Etransactions\Model\CreditAgricole $etransactions,
+        \CreditAgricole\Etransactions\Model\Config $creditagricoleConfig,
+        \CreditAgricole\Etransactions\Model\Creditagricole $creditagricole,
         \Magento\Framework\Registry $registry
     ) {
         $this->resultPageFactory = $resultPageFactory;
@@ -60,8 +60,8 @@ class Payment extends \Magento\Framework\App\Action\Action implements CsrfAwareA
         $this->_messageManager = $context->getMessageManager();
         $this->_quoteRepository = $cartRepositoryInterface;
         $this->_checkoutSession = $checkoutSession;
-        $this->_etransactionsConfig = $etransactionsConfig;
-        $this->_etransactions = $etransactions;
+        $this->_creditagricoleConfig = $creditagricoleConfig;
+        $this->_creditagricole = $creditagricole;
         $this->_registry = $registry;
     }
 
@@ -136,8 +136,8 @@ class Payment extends \Magento\Framework\App\Action\Action implements CsrfAwareA
     protected function _getOrderFromParams(array $params)
     {
         // Retrieves order
-        $etransactions = $this->getCreditAgricole();
-        $order = $etransactions->untokenizeOrder($params['reference']);
+        $creditagricole = $this->getCreditagricole();
+        $order = $creditagricole->untokenizeOrder($params['reference']);
         if (is_null($order) || is_null($order->getId())) {
             return null;
         }
@@ -146,12 +146,12 @@ class Payment extends \Magento\Framework\App\Action\Action implements CsrfAwareA
 
     public function getConfig()
     {
-        return $this->_etransactionsConfig;
+        return $this->_creditagricoleConfig;
     }
 
-    public function getCreditAgricole()
+    public function getCreditagricole()
     {
-        return $this->_etransactions;
+        return $this->_creditagricole;
     }
 
     public function getSession()

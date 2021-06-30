@@ -1,4 +1,6 @@
 # Change Log
+## [2.0.3] 2021-03-16
+- minor colorising changes
 
 ## [2.0.2] 2021-03-16
 
@@ -71,7 +73,7 @@
 ## [1.0.5] 2016-11-15
 
 ### Ajouts
-- Paiement : possibilité d'utiliser la page de paiement ETransactions RWD
+- Paiement : possibilité d'utiliser la page de paiement Up2pay e-Transactions RWD
 - PayPal : paramétrage spécifique lors de l'appel à la plateforme de paiement
 
 ## [1.0.4] 2016-11-15
@@ -94,7 +96,7 @@
 ## [1.0.1] 2016-10-25
 
 ### Ajouts
-- Paiement : ajout du paramètre de version pour suivi des transactions par ETransactions
+- Paiement : ajout du paramètre de version pour suivi des transactions par Up2pay e-Transactions
 - Configuration : gestion du multi-devise pour le paiement avec possibilité de forcer le paiement avec la devise par défaut ou de laisser le choix au client parmi les devises disponibles
 
 ### Modifications

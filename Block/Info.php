@@ -1,8 +1,8 @@
 <?php
 /**
- * ETransactions Etransactions module for Magento
+ * Up2pay e-Transactions Etransactions module for Magento
  *
- * Feel free to contact E-Transactions at support@e-transactions.fr for any
+ * Feel free to contact Credit Agricole at support@e-transactions.fr for any
  * question.
  *
  * LICENSE: This source file is subject to the version 3.0 of the Open
@@ -14,7 +14,7 @@
  *
  * @version   1.0.10
  * @author    E-Transactions <support@e-transactions.fr>
- * @copyright 2012-2017 E-Transactions
+ * @copyright 2012-2021 E-Transactions
  * @license   http://opensource.org/licenses/OSL-3.0
  * @link      http://www.e-transactions.fr/
  */
@@ -76,7 +76,7 @@ class Info extends ConfigurableInfo
         return $result;
     }
 
-    public function getCreditAgricoleData()
+    public function getCreditagricoleData()
     {
         return unserialize($this->getInfo()->getEtepAuthorization());
     }
@@ -86,14 +86,14 @@ class Info extends ConfigurableInfo
         return $this->_object_manager;
     }
 
-    public function getCreditAgricoleConfig()
+    public function getCreditagricoleConfig()
     {
         return $this->_object_manager->get('CreditAgricole\Etransactions\Model\Config');
     }
 
     public function getCardImageUrl()
     {
-        $data = $this->getCreditAgricoleData();
+        $data = $this->getCreditagricoleData();
         $cards = $this->getCreditCards();
         if (!isset($data['cardType'])) {
             return null;
@@ -106,7 +106,7 @@ class Info extends ConfigurableInfo
 
     public function getCardImageLabel()
     {
-        $data = $this->getCreditAgricoleData();
+        $data = $this->getCreditagricoleData();
         $cards = $this->getCreditCards();
         if (!isset($data['cardType'])) {
             return null;
@@ -129,10 +129,10 @@ class Info extends ConfigurableInfo
     {
         $info = $this->getInfo();
         $capture = $info->getEtepCapture();
-        $config = $this->getCreditAgricoleConfig();
+        $config = $this->getCreditagricoleConfig();
         if ($config->getSubscription() == \CreditAgricole\Etransactions\Model\Config::SUBSCRIPTION_OFFER2 ||
             $config->getSubscription() == \CreditAgricole\Etransactions\Model\Config::SUBSCRIPTION_OFFER3) {
-            if ($info->getEtepAction() == \CreditAgricole\ETransactions\Model\Payment\AbstractPayment::ETRANSACTION_MANUAL) {
+            if ($info->getEtepAction() == \CreditAgricole\Etransactions\Model\Payment\AbstractPayment::ETRANSACTION_MANUAL) {
                 $order = $info->getOrder();
                 return empty($capture) && $order->canInvoice();
             }
@@ -144,7 +144,7 @@ class Info extends ConfigurableInfo
     {
         $info = $this->getInfo();
         $capture = $info->getEtepCapture();
-        $config = $this->getCreditAgricoleConfig();
+        $config = $this->getCreditagricoleConfig();
         if ($config->getSubscription() == \CreditAgricole\Etransactions\Model\Config::SUBSCRIPTION_OFFER2 ||
             $config->getSubscription() == \CreditAgricole\Etransactions\Model\Config::SUBSCRIPTION_OFFER3) {
             return !empty($capture);
@@ -213,20 +213,20 @@ class Info extends ConfigurableInfo
 
     public function getPartialCaptureUrl()
     {
-        $data = $this->getCreditAgricoleData();
+        $data = $this->getCreditagricoleData();
         $info = $this->getInfo();
         return $this->getUrl(
-            'CreditAgricole/partial',
+            'creditagricole/partial',
             ['order_id' => $info->getOrder()->getId(), 'transaction' => $data['transaction']]
         );
     }
 
     public function getCaptureUrl()
     {
-        $data = $this->getCreditAgricoleData();
+        $data = $this->getCreditagricoleData();
         $info = $this->getInfo();
         return $this->getUrl(
-            'CreditAgricole/capture',
+            'creditagricole/capture',
             ['order_id' => $info->getOrder()->getId(), 'transaction' => $data['transaction']]
         );
     }

@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!--
 /**
- * ETransactions Etransactions module for Magento
+ * Up2pay e-Transactions Etransactions module for Magento
  *
- * Feel free to contact E-Transactions at support@e-transactions.fr for any
+ * Feel free to contact Credit Agricole at support@e-transactions.fr for any
  * question.
  *
  * LICENSE: This source file is subject to the version 3.0 of the Open
@@ -15,7 +15,7 @@
  *
  * @version   1.0.11-hmac
  * @author    E-Transactions <support@e-transactions.fr>
- * @copyright 2012-2017 E-Transactions
+ * @copyright 2012-2021 E-Transactions
  * @license   http://opensource.org/licenses/OSL-3.0
  * @link      http://www.e-transactions.fr/
  */
@@ -23,13 +23,13 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="../../../../Magento/Config/etc/system_file.xsd">
     <system>
-        <tab id="etransactions" translate="label" sortOrder="400">
-            <label>ETransactions</label>
+        <tab id="creditagricole" translate="label" sortOrder="400">
+            <label>Up2pay e-Transactions</label>
         </tab>
         <section id="etep_pres" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
             <label>Presentation</label>
-            <tab>etransactions</tab>
-            <resource>CreditAgricole_Etransactions::etransactions_config</resource>
+            <tab>creditagricole</tab>
+            <resource>CreditAgricole_Etransactions::creditagricole_config</resource>
             <group id="presentation" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
             	<label>Presentation</label>
             	<attribute type="expanded">1</attribute>
@@ -40,8 +40,8 @@
         </section>
         <section id="etep_merchant" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
             <label>Account settings</label>
-            <tab>etransactions</tab>
-            <resource>CreditAgricole_Etransactions::etransactions_config</resource>
+            <tab>creditagricole</tab>
+            <resource>CreditAgricole_Etransactions::creditagricole_config</resource>
             <group id="environment" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                 <attribute type="expanded">1</attribute>
                 <label>Environment</label>
@@ -58,42 +58,42 @@
                 <label>Account settings</label>
                 <field id="subscription" translate="label comment" type="select" sortOrder="0" showInDefault="1"
                        showInWebsite="1" showInStore="1">
-                    <label>Subscribed ETransactions Solution</label>
+                    <label>Subscribed Up2pay e-Transactions Solution</label>
                     <source_model>CreditAgricole\Etransactions\Model\Admin\Subscription</source_model>
                     <config_path>etep/merchant/subscription</config_path>
                 </field>
                 <field id="site" translate="label comment" type="text" sortOrder="10" showInDefault="1"
                        showInWebsite="1" showInStore="1">
                     <label>Site number</label>
-                    <comment><![CDATA[Site number provided by ETransactions.]]></comment>
+                    <comment><![CDATA[Site number provided by Up2pay e-Transactions.]]></comment>
                     <validate>required-entry validate-digits validate-exact-length length-7</validate>
                     <config_path>etep/merchant/site</config_path>
                 </field>
                 <field id="rank" translate="label comment" type="text" sortOrder="20" showInDefault="1"
                        showInWebsite="1" showInStore="1">
                     <label>Rank number</label>
-                    <comment><![CDATA[Rank number provided by ETransactions (last 2 digits).]]></comment>
+                    <comment><![CDATA[Rank number provided by Up2pay e-Transactions (last 2 digits).]]></comment>
                     <validate>required-entry validate-digits validate-exact-length length-2</validate>
                     <config_path>etep/merchant/rank</config_path>
                 </field>
                 <field id="identifier" translate="label comment" type="text" sortOrder="30" showInDefault="1"
                        showInWebsite="1" showInStore="1">
                     <label>Login</label>
-                    <comment><![CDATA[Internal login provided by ETransactions.]]></comment>
+                    <comment><![CDATA[Internal login provided by Up2pay e-Transactions.]]></comment>
                     <validate>required-entry validate-digits validate-length maximum-length-9</validate>
                     <config_path>etep/merchant/identifier</config_path>
                 </field>
                 <field id="hmackey" translate="label comment" type="obscure" sortOrder="50" showInDefault="1"
                        showInWebsite="1" showInStore="1">
                     <label>HMAC</label>
-                    <comment><![CDATA[Secrete HMAC key to create using the ETransactions interface.]]></comment>
+                    <comment><![CDATA[Secrete HMAC key to create using the Up2pay e-Transactions interface.]]></comment>
                     <validate>required-entry</validate>
                     <config_path>etep/merchant/hmackey</config_path>
                     <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
                 </field>
                 <field id="password" translate="label comment" type="obscure" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>ETransactions Back Office password</label>
-                    <comment><![CDATA[Back Office password provided by ETransactions.]]></comment>
+                    <label>Up2pay e-Transactions Back Office password</label>
+                    <comment><![CDATA[Back Office password provided by Up2pay e-Transactions.]]></comment>
                     <validate>required-entry</validate>
                     <depends>
                         <field id="subscription">access</field>
@@ -102,8 +102,8 @@
                     <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
                 </field>
                 <field id="passwordplus" translate="label comment" type="obscure" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>ETransactions Back Office password</label>
-                    <comment><![CDATA[Back Office password provided by ETransactions.]]></comment>
+                    <label>Up2pay e-Transactions Back Office password</label>
+                    <comment><![CDATA[Back Office password provided by Up2pay e-Transactions.]]></comment>
                     <validate>required-entry</validate>
                     <depends>
                         <field id="subscription">premium</field>
@@ -119,7 +119,7 @@
                 <field id="customer_info" translate="label comment" type="select" sortOrder="10" showInDefault="1"
                        showInWebsite="1" showInStore="1">
                     <label>Show payment information to customers</label>
-                    <comment><![CDATA[ETransactions module can show payment information to customer. You can disable this feature here.]]></comment>
+                    <comment><![CDATA[Up2pay e-Transactions module can show payment information to customer. You can disable this feature here.]]></comment>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <config_path>etep/info/show_to_customer</config_path>
                 </field>
@@ -152,8 +152,8 @@
         </section>
         <section id="etep_payments" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
         	<label>Payment methods</label>
-        	<tab>etransactions</tab>
-            <resource>CreditAgricole_Etransactions::etransactions_config</resource>
+        	<tab>creditagricole</tab>
+            <resource>CreditAgricole_Etransactions::creditagricole_config</resource>
 
             <include path="CreditAgricole_Etransactions::system/etep_cb.xml"/>
             <include path="CreditAgricole_Etransactions::system/etep_threetime.xml"/>
