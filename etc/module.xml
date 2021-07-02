@@ -13,7 +13,7 @@
  * to obtain it through the web, please send a note to
  * support@e-transactions.fr so we can mail you a copy immediately.
  *
- * @version   2.0.3
+ * @version   2.0.4
  * @author    E-Transactions <support@e-transactions.fr>
  * @copyright 2012-2021 E-Transactions
  * @license   http://opensource.org/licenses/OSL-3.0
@@ -21,7 +21,7 @@
  */
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/Module/etc/module.xsd">
-    <module name="CreditAgricole_Etransactions" setup_version="2.0.3">
+    <module name="CreditAgricole_Etransactions" setup_version="2.0.4">
     	<sequence>
             <module name="Magento_Sales"/>
             <module name="Magento_Quote"/>
