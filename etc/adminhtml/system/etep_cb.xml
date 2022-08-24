@@ -100,6 +100,7 @@
                 <label>Once paid</label>
                 <config_path>payment/etep_cb/status_paid</config_path>
                 <source_model>CreditAgricole\Etransactions\Model\Admin\Order\Status\Processing</source_model>
+                <source_model>CreditAgricole\Etransactions\Model\Admin\Order\Status\Pending</source_model>
                 <depends>
                     <field id="etep_payments/etep_cb/active">1</field>
                 </depends>
